@@ -19,7 +19,13 @@ h5 {
 }
 
 // TODO: This may go away with Bootstrap forms.
-form label {
-  color: $labels;
+
+.text-label {
+  color: $label;
   font-weight: bold;
 }
+
+form label {
+  @extend .text-label;
+}
+

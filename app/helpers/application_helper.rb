@@ -38,8 +38,8 @@ module ApplicationHelper
     end
     tr =
       "
-<div class=\"row\">
-  <div class=\"col-sm-3\"><label for=\"#{id}\">#{
+<div class=\"row mb-3 mb-sm-auto\">
+  <div class=\"col-sm-3 text-label\"><label for=\"#{id}\">#{
         escape(desc)
       }</label></div>
   <div class=\"col\" id=\"#{id}\">#{
