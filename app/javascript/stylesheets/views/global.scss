@@ -1,0 +1,38 @@
+/* * * * * * * * * * * *
+ * General site settings
+ */
+
+@import '../variables';
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  text-align: center;
+  color: $headers;
+}
+
+// TODO: Use Bootstrap colors.
+p.page-notice {
+  color: green;
+}
+
+p.page-alert {
+  color: red;
+}
+
+#nav-bar {
+  background-color: $nav-bar;
+
+  // TODO: Use .d-none.
+  .forbidden {
+    display: none;
+  }
+}
+
+// TODO: This may go away with Bootstrap forms.
+form label {
+  color: $labels;
+  font-weight: bold;
+}

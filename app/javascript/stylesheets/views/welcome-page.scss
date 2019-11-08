@@ -1,0 +1,9 @@
+// views/welcome/index
+
+@import '../variables';
+
+.welcome-page {
+  p {
+    color: $blue;
+  }
+}

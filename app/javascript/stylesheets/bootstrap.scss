@@ -1,0 +1,5 @@
+// Import the site variables, including bootstrap variable overrides.
+@import 'variables';
+
+// Compile bootstrap with the overrides.
+@import '~bootstrap/scss/bootstrap';
