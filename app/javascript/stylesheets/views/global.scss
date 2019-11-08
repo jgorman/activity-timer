@@ -13,22 +13,9 @@ h5 {
   color: $headers;
 }
 
-// TODO: Use Bootstrap colors.
-p.page-notice {
-  color: green;
-}
-
-p.page-alert {
-  color: red;
-}
-
+// TODO: Full Bootstrap nav with dropdowns.
 #nav-bar {
   background-color: $nav-bar;
-
-  // TODO: Use .d-none.
-  .forbidden {
-    display: none;
-  }
 }
 
 // TODO: This may go away with Bootstrap forms.
