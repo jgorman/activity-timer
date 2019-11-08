@@ -1,2 +1,1 @@
-class ProjectsController < ApplicationController
-end
+class ProjectsController < ApplicationController; end

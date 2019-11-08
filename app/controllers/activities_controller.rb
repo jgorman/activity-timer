@@ -1,2 +1,1 @@
-class ActivitiesController < ApplicationController
-end
+class ActivitiesController < ApplicationController; end

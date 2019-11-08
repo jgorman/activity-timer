@@ -1,2 +1,1 @@
-class ClientsController < ApplicationController
-end
+class ClientsController < ApplicationController; end

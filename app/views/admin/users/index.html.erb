@@ -1,0 +1,21 @@
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>Email</th>
+      <th>First</th>
+      <th>Last</th>
+      <th>Roles</th>
+    </tr>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= link_to(user.email, admin_user_path(user)) %>
+        </td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.roles %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
