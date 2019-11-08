@@ -1,15 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <title>ActivityTimer</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="<%= image_path("jg-logo-50x50.png") %>">
+
+    <title><%= page_title %></title>
+    <meta name="description" content="<%= page_title %>"/>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
-    <%= yield %>
-  </body>
+
+    <div class="container-fluid font-weight-light">
+
+      <div class="top-banner">
+        <div id="particles-js"
+        data-controller="particles"
+        data-particles-config="<%= {
+        particles: {
+          number: {
+            value: 20,
+            density: {
+              value_area: 200,
+            },
+          },
+          shape: {
+            type: 'image',
+            image: {
+              src: image_path('jg-logo-50x50.png')
+            },
+          },
+          size: {
+            value: 10,
+            random: true,
+          },
+          move: {
+            speed: 1,
+          },
+        },
+        interactivity: {
+          events: {
+            onhover: {
+              mode: 'repulse',
+            },
+          },
+          modes: {
+            repulse: {
+              distance: 50,
+            },
+          },
+        },
+      }.to_json %>"
+    >
+
+    <div id="logo-jgio">
+      <a href="/">
+        <%= image_pack_tag "jg-logo.svg", id: 'logo' %>
+        <span class="hostname">johngorman</span
+        ><span class="dot">.</span
+        ><span class="cc">io</span>
+      </a>
+    </div>
+
+    <div id="user-info">
+      <%# current_user && current_user.email %>
+    </div>
+
+    <div id="banner-title">
+      Activity Timer
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-3">
+      <%= render "layouts/nav" %>
+    </div>
+
+    <div class="col-sm-9 content">
+      <% if !@hide_title %>
+        <h1 class="centered"><%= page_title %></h1>
+      <% end %>
+
+      <% if notice %>
+        <p class="page-notice">NOTICE!!! <%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="page-alert">ALERT!!! <%= alert %></p>
+      <% end %>
+
+      <br />
+        <%= yield %>
+        <br />
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
 </html>

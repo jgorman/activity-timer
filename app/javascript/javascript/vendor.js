@@ -11,9 +11,8 @@ document.addEventListener('turbolinks:before-cache', () => {
     $('.modal')
       .hide()
       .removeAttr('aria-modal')
-      .attr('aria-hidden', 'true');
-    $('.modal-backdrop').remove();
-    $('body').removeClass('modal-open');
+      .attr('aria-hidden', 'true')
+    $('.modal-backdrop').remove()
+    $('body').removeClass('modal-open')
   }
-});
-
+})

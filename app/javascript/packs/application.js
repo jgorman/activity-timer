@@ -2,10 +2,10 @@
  * Rails startup.
  */
 
-require("@rails/ujs").start()
-require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
+require('@rails/ujs').start()
+require('turbolinks').start()
+require('@rails/activestorage').start()
+require('channels')
 
 /*
  * npm libraries.
@@ -15,6 +15,17 @@ require("channels")
 window.jQuery = window.$ = require('jquery')
 
 require('bootstrap')
+
+// Stimulus setup.
+import { Application } from 'stimulus'
+import { definitionsFromContext } from 'stimulus/webpack-helpers'
+const application = Application.start()
+// const controllers = require.context('../controllers', true, /\.js$/)
+// application.load(definitionsFromContext(controllers))
+
+// See https://github.com/jgorman/stimulus-particles.js
+import Particles from 'stimulus-particles.js'
+application.register('particles', Particles)
 
 /*
  * App setup.
