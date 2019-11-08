@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  desc: Working hard
+  start: 2019-11-08 12:50:54
+  duration: 600
+
+two:
+  project: two
+  desc: Or hardly working
+  start: 2019-11-08 12:60:54
+  duration: 3600
