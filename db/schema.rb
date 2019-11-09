@@ -16,29 +16,35 @@ ActiveRecord::Schema.define(version: 2019_11_08_174336) do
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "client_id", null: false
     t.bigint "project_id", null: false
-    t.string "desc"
     t.datetime "start"
     t.integer "duration"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_activities_on_project_id"
+    t.string "desc"
+    t.index ["client_id", "start"], name: "index_activities_on_client_id_and_start"
+    t.index ["project_id", "start"], name: "index_activities_on_project_id_and_start"
+    t.index ["user_id", "start"], name: "index_activities_on_user_id_and_start"
   end
 
   create_table "clients", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
+    t.boolean "no_client", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.bigint "client_id", null: false
     t.string "name"
+    t.boolean "no_project", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_projects_on_client_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,7 +76,4 @@ ActiveRecord::Schema.define(version: 2019_11_08_174336) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "activities", "projects"
-  add_foreign_key "clients", "users"
-  add_foreign_key "projects", "clients"
 end
