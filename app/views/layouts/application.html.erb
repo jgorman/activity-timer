@@ -22,74 +22,15 @@
 
     <div class="container-fluid font-weight-light">
 
-      <div class="top-banner">
-        <div id="particles-js"
-        data-controller="particles"
-        data-particles-config="<%= {
-        particles: {
-          number: {
-            value: 20,
-            density: {
-              value_area: 200,
-            },
-          },
-          shape: {
-            type: 'image',
-            image: {
-              src: image_path('jg-logo-50x50.png')
-            },
-          },
-          size: {
-            value: 10,
-            random: true,
-          },
-          move: {
-            speed: 1,
-          },
-        },
-        interactivity: {
-          events: {
-            onhover: {
-              mode: 'repulse',
-            },
-          },
-          modes: {
-            repulse: {
-              distance: 50,
-            },
-          },
-        },
-      }.to_json %>"
-    >
+      <%= render "layouts/banner" %>
 
-    <div id="logo-jgio">
-      <a href="/">
-        <%= image_pack_tag "jg-logo.svg", id: 'logo' %>
-        <span class="hostname">johngorman</span
-        ><span class="dot">.</span
-        ><span class="cc">io</span>
-      </a>
-    </div>
-
-    <div id="user-info">
-      <%# current_user && current_user.email %>
-    </div>
-
-    <div id="banner-title">
-      Activity Timer
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-sm-3">
       <%= render "layouts/nav" %>
-    </div>
 
-    <div class="col-sm-9 content">
-      <% if !@hide_title %>
-        <h1 class="centered"><%= page_title %></h1>
-      <% end %>
+      <div class="my-3">
+        <% if @page_title %>
+          <h2><%= page_title %></h2>
+        <% end %>
+      </div>
 
       <% if notice %>
         <p class="text-info"><%= notice %></p>
@@ -98,14 +39,8 @@
         <p class="text-danger"><%= alert %></p>
       <% end %>
 
-      <br />
-        <%= yield %>
-        <br />
+      <%= yield %>
 
-      </div>
     </div>
-  </div>
-
-</div>
-</body>
+  </body>
 </html>

@@ -1,28 +1,47 @@
-<div id="nav-bar">
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
 
-  <%= link_to('Home', root_path,
-              class: "nav-link") %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  <%= link_to('Welcome', '/welcome/index',
-              class: "nav-link") %>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-  <%= link_to('Users', admin_users_path,
-              class: "nav-link") %>
+    <div class="navbar-nav">
 
-  <% if user_signed_in? %>
+    <%= link_to('Home', root_path,
+                class: "nav-item nav-link") %>
+    <%= link_to('Welcome', '/welcome/index',
+                class: "nav-item nav-link") %>
+    <%= link_to('Users', admin_users_path,
+                class: "nav-item nav-link") %>
 
-    <%= link_to('Account', edit_user_registration_path,
-                class: "nav-link") %>
-    <%= link_to("Logout", destroy_user_session_path,
-                method: :delete, class: "nav-link") %>
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-  <% else %>
 
-    <%= link_to("Login", new_user_session_path,
-                class: "nav-link") %>
-    <%= link_to('Register', new_user_registration_path,
-                class: "nav-link") %>
+    <% if user_signed_in? %>
+      <%= link_to('Account', edit_user_registration_path,
+                  class: "dropdown-item") %>
+      <%= link_to("Logout", destroy_user_session_path,
+                  method: :delete, class: "dropdown-item") %>
+    <% else %>
+      <%= link_to("Login", new_user_session_path,
+                  class: "dropdown-item") %>
+      <%= link_to('Register', new_user_registration_path,
+                  class: "dropdown-item") %>
+    <% end %>
 
-  <% end %>
 
-</div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
