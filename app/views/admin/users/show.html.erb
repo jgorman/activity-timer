@@ -1,11 +1,12 @@
 <div class="container-fluid mt-3">
-  <%= tr_show :user, :email %>
   <%= tr_show :user, :first_name %>
   <%= tr_show :user, :last_name %>
+  <%= tr_show :user, :email %>
   <%= tr_show :user, :roles %>
+
+  <%= link_to "Edit", edit_admin_user_path(@user) %> |
+  <%= link_to "Back", admin_users_path %>
+
+  <p><%= button_to "Delete User", admin_user_path(@user), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
 </div>
-
-<%= link_to "Edit", edit_admin_user_path(@user) %> |
-<%= link_to "Back", admin_users_path %>
-
-<p><%= button_to "Delete User", admin_user_path(@user), data: { confirm: "Are you sure?" }, method: :delete %></p>
