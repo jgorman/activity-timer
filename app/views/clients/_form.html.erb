@@ -1,0 +1,11 @@
+<%= form_with(model: @client, data: {controller: 'form'}) do |form| %>
+
+  <p class="field">
+    <%= form.label :name %><br>
+    <%= form.text_field :name, required: true %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

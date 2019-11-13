@@ -25,6 +25,10 @@ h5 {
   font-weight: bold;
 }
 
+p.error {
+  color: $danger;
+}
+
 form label {
   @extend .text-label;
 }

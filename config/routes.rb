@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  resources :activities
-  resources :projects
   resources :clients
+  resources :projects
+  resources :activities
 end

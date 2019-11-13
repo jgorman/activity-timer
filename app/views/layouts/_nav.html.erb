@@ -13,6 +13,9 @@
       <%= link_to('Welcome', '/welcome/index',
                   class: "nav-item nav-link") %>
 
+      <%= link_to('Clients', clients_path,
+                  class: "nav-item nav-link") %>
+
       <% if is_admin? %>
 
         <div class="nav-item dropdown">

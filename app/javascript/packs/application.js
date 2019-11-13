@@ -20,8 +20,8 @@ require('bootstrap')
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 const application = Application.start()
-// const controllers = require.context('../controllers', true, /\.js$/)
-// application.load(definitionsFromContext(controllers))
+const controllers = require.context('../controllers', true, /\.js$/)
+application.load(definitionsFromContext(controllers))
 
 // See https://github.com/jgorman/stimulus-particles.js
 import Particles from 'stimulus-particles.js'
