@@ -7,6 +7,14 @@ module ApplicationHelper
     @page_title || 'Activity Timer'
   end
 
+  def is_admin?
+    current_user && current_user.is_admin?
+  end
+
+  def account_name
+    current_user ? current_user.display_name : 'Login'
+  end
+
   def image_path(name)
     asset_pack_path("media/images/#{name}")
   end

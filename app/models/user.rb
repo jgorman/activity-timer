@@ -9,4 +9,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :lockable, :timeoutable, :trackable, :omniauthable
+
+  def is_admin?
+    roles == 'admin'
+  end
+
+  def display_name
+    first_name.empty? ? email.sub(/@.*/, '') : first_name
+  end
+
 end
