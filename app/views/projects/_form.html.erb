@@ -1,0 +1,19 @@
+<%= form_with(model: @project, data: {controller: 'form'}) do |form| %>
+  <%= form.hidden_field :client_id, value: @project.client_id %>
+
+  <p class="field">
+    <%= form.label :name %><br>
+    <%= form.text_field :name, required: true %>
+  </p>
+
+  <% if @project.id %>
+    <p>
+      <input class="btn btn-secondary" type="submit" value="Update project">
+      <%= link_to 'Cancel', project_path(@project), class: 'btn btn-secondary' %>
+    </p>
+  <% else %>
+    <input class="btn btn-secondary" type="submit" value="Add project">
+    <%= link_to 'Cancel', client_path(@project.client_id), class: 'btn btn-secondary' %>
+  <% end %>
+
+<% end %>

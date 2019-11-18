@@ -15,6 +15,17 @@ module ApplicationHelper
     current_user ? current_user.display_name : 'Login'
   end
 
+  def datetime_to_s(datetime)
+    datetime.strftime('%Y-%m-%d %I:%M %p')
+  end
+
+  def seconds_to_hm(seconds)
+    return '' unless seconds
+    hours = seconds / (60 * 60)
+    minutes = (seconds / 60) % 60
+    sprintf('%2d:%02d', hours, minutes)
+  end
+
   def image_path(name)
     asset_pack_path("media/images/#{name}")
   end
@@ -47,9 +58,9 @@ module ApplicationHelper
     tr =
       "
 <div class=\"row mb-3 mb-sm-auto\">
-  <div class=\"col-sm-3 text-label\"><label for=\"#{id}\">#{
-        escape(desc)
-      }</label></div>
+  <div class=\"col-sm-3 text-label\"><label for=\"#{
+        id
+      }\">#{escape(desc)}</label></div>
   <div class=\"col\" id=\"#{id}\">#{
         escape(value)
       }</div>

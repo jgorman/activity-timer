@@ -2,22 +2,18 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @page_title = 'Users'
-    @users = User.all
+    @users = User.all.order(:email)
   end
 
   def show
-    @page_title = 'User'
     @user = User.find(params[:id])
   end
 
   def new
-    @page_title = 'New User'
     @user = User.new
   end
 
   def edit
-    @page_title = 'Edit User'
     @user = User.find(params[:id])
   end
 

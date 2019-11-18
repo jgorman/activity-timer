@@ -1,0 +1,42 @@
+<p>
+  <%= link_to 'Client', client_path(@activity.project.client) %> |
+  <%= link_to 'Project', project_path(@activity.project) %>
+
+  <% if @activity.id %>
+    | <%= link_to 'Delete activity', activity_path(@activity),
+        method: :delete, data: { confirm: "Delete activity?" } %> |
+    <%= link_to 'New activity', new_project_activity_path(@activity.project) %>
+  <% end %>
+</p>
+
+<%= form_with(model: @activity, data: {controller: 'form'}) do |form| %>
+  <%= form.hidden_field :project_id, value: @activity.project_id %>
+
+  <p class="field">
+    <%= form.label :start, 'Start time' %><br>
+    <%= form.datetime_field :start, required: true %>
+  </p>
+
+  <p class="field">
+    <%= form.label :duration_s, 'Length' %><br>
+    <%= form.text_field :duration,
+      value: seconds_to_hm(@activity.duration),
+      placeholder: 'H:MM'
+    %>
+  </p>
+
+  <p class="field">
+    <%= form.label :desc, 'Description' %><br>
+    <%= form.text_field :desc, class: 'w-75' %>
+  </p>
+
+  <p>
+    <% if @activity.id %>
+      <input class="btn btn-secondary" type="submit" value="Update activity">
+    <% else %>
+      <input class="btn btn-secondary" type="submit" value="Add activity">
+    <% end %>
+    <%= link_to 'Cancel', project_path(@activity.project), class: 'btn btn-secondary' %>
+  </p>
+
+<% end %>

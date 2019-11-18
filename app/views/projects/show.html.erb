@@ -1,0 +1,30 @@
+<% @page_title = "Project #{@project.client.name} - #{@project.name}" %>
+
+<p>
+  <%= link_to 'Client', client_path(@project.client) %> |
+  <%= link_to 'Edit project', edit_project_path(@project) %> |
+  <%= link_to 'Delete project', project_path(@project),
+      method: :delete,
+      data: { confirm: "Delete project #{@project.client.name} - #{@project.name}?" } %> |
+  <%= link_to 'New activity', new_project_activity_path(@project) %>
+</p>
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>Date</th>
+      <th class="text-right">Length</th>
+      <th>Description</th>
+    </tr>
+
+    <% @project.activities.order('start desc').each do |activity| %>
+      <tr>
+        <td>
+          <%= link_to(datetime_to_s(activity.start), edit_activity_path(activity)) %>
+        </td>
+        <td class="text-right"><%= seconds_to_hm(activity.duration) %></td>
+        <td><%= activity.desc %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

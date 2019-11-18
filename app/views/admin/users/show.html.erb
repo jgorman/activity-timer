@@ -1,4 +1,5 @@
-<div class="container-fluid mt-3">
+<% @page_title = 'User' %>
+
   <%= tr_show :user, :first_name %>
   <%= tr_show :user, :last_name %>
   <%= tr_show :user, :email %>
@@ -8,5 +9,3 @@
   <%= link_to "Back", admin_users_path %>
 
   <p><%= button_to "Delete User", admin_user_path(@user), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-</div>

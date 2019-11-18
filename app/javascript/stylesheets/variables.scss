@@ -1,5 +1,13 @@
+// Site variables.
+
+$headers: #aaaaaa;
+$label: $headers;
+
 // Customize Bootstrap variables.
-// $cyan: #ff00ff;
+$secondary: $headers;
+$link-color: #555555;
+$navbar-light-color: $link-color;
+$navbar-light-hover-color: #000000;
 
 // Recompile Bootstrap using the customized variables.
 @import '~bootstrap/scss/functions';
@@ -9,8 +17,3 @@
 // @import '../../../node_modules/bootstrap/scss/functions';
 // @import '../../../node_modules/bootstrap/scss/variables';
 // @debug 'color("body") is #{color("body")}';
-
-// Non-bootstrap site variables.
-$headers: #aaaaaa;
-$label: #aaaaaa;
-$nav-bar: #dddddd;

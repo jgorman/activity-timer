@@ -5,5 +5,7 @@ class Project < ApplicationRecord
 
   validates :user, presence: true
   validates :client, presence: true
-  validates :name, presence: true
+  validates :name,
+            presence: true,
+            uniqueness: { scope: :client, message: '%{value} has been used.' }
 end

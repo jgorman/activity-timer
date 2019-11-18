@@ -4,14 +4,14 @@ class ApplicationController < ActionController::Base
 
   def oops_page
     if flash[:notice]
-      redirect_to '/user_session/oops', :notice => flash[:notice]
+      redirect_to '/user_session/oops', notice: flash[:notice]
     else
       redirect_to '/user_session/oops'
     end
     return false
   end
 
-  protected
+  private
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |u|
@@ -23,11 +23,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
-
   def with_timezone
     timezone = Time.find_zone(cookies[:timezone])
     Time.use_zone(timezone) { yield }
   end
 
+  def hm_to_seconds(hhmm)
+    hhmm ||= ''
+    if hhmm.include?(':')
+      hh, mm = hhmm.split(':')
+    else
+      hh, mm = 0, hhmm
+    end
+    ((hh.to_i * 60) + mm.to_i) * 60
+  end
 end

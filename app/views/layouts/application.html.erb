@@ -5,7 +5,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="<%= image_path("jg-logo-50x50.png") %>">
+    <link rel="shortcut icon" href="<%= image_path('jg-logo-50x50.png') %>">
 
     <title><%= page_title %></title>
     <meta name="description" content="<%= page_title %>"/>
@@ -22,13 +22,13 @@
 
     <div class="container-fluid font-weight-light">
 
-      <%= render "layouts/banner" %>
+      <%= render 'layouts/banner' %>
 
-      <%= render "layouts/nav" %>
+      <%= render 'layouts/nav' %>
 
       <div class="my-3">
         <% if @page_title %>
-          <h2><%= page_title %></h2>
+          <h2 class="text-center"><%= page_title %></h2>
         <% end %>
       </div>
 
@@ -39,7 +39,9 @@
         <p class="text-danger"><%= alert %></p>
       <% end %>
 
-      <%= yield %>
+      <div class="container-fluid mt-3">
+        <%= yield %>
+      </div>
 
     </div>
   </body>

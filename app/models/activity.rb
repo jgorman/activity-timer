@@ -7,5 +7,4 @@ class Activity < ApplicationRecord
   validates :client, presence: true
   validates :project, presence: true
   validates :start, presence: true
-  validates :duration, presence: true
 end

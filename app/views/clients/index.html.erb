@@ -1,19 +1,9 @@
-<div class="table-responsive">
-  <p>
-    <%= link_to "New client", new_client_path %>
-  </p>
+<% @page_title = 'Clients' %>
 
-  <table class="table">
-    <tr>
-      <th>Name</th>
-    </tr>
+<div class="container-fluid">
+  <%= link_to 'New client', new_client_path, class: 'row mb-3' %>
 
-    <% @clients.each do |client| %>
-      <tr>
-        <td>
-          <%= link_to(client.name, client_path(client)) %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+  <% @clients.each do |client| %>
+    <%= link_to client.name, client_path(client), class: 'row mb-2' %>
+  <% end %>
 </div>

@@ -1,0 +1,19 @@
+<% @page_title = 'All Projects' %>
+
+<div class="table-responsive">
+
+  <table class="table">
+    <tr>
+      <th>Name</th>
+    </tr>
+
+    <% @projects.each do |project| %>
+      <tr>
+        <td>
+          <%= link_to(project.client.name, client_path(project.client)) %> -
+          <%= link_to(project.name, project_path(project)) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
   root 'welcome#index'
 
   devise_for :users
@@ -8,7 +7,13 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  resources :clients
-  resources :projects
+  resources :clients do
+    resources :projects, only: %i[new]
+  end
+
+  resources :projects do
+    resources :activities, only: %i[new]
+  end
+
   resources :activities
 end

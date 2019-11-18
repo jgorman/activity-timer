@@ -1,6 +1,16 @@
-<div class="container-fluid mt-3">
-  <%= tr_show :client, :name %>
+<% @page_title = "Client #{@client.name}" %>
 
-  <%= link_to "Edit", edit_client_path(@client) %> |
-  <%= link_to "Back", clients_path %>
-</div>
+<p>
+  <%= link_to 'All clients', clients_path %> |
+  <%= link_to 'Edit client', edit_client_path(@client) %> |
+  <%= link_to 'Delete client', client_path(@client),
+      method: :delete,
+      data: { confirm: "Delete client #{@client.name}?" } %> |
+  <%= link_to 'New project', new_client_project_path(@client) %>
+</p>
+
+<h5 class="mb-3"><%= (@client.projects.count == 0) ? 'No ' : '' %>Projects</h5>
+
+<% @client.projects.order(:name).each do |project| %>
+  <p><%= link_to project.name, project_path(project) %></p>
+<% end %>

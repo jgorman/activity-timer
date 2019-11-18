@@ -5,7 +5,14 @@
     <%= form.text_field :name, required: true %>
   </p>
 
-  <p>
-    <%= form.submit %>
-  </p>
+  <% if @client.id %>
+    <p>
+      <input class="btn btn-secondary" type="submit" value="Update client">
+      <%= link_to 'Cancel', client_path(@client), class: 'btn btn-secondary' %>
+    </p>
+  <% else %>
+    <input class="btn btn-secondary" type="submit" value="Add client">
+    <%= link_to 'Cancel', clients_path, class: 'btn btn-secondary' %>
+  <% end %>
+
 <% end %>

@@ -1,23 +1,18 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: %i[show edit update destroy]
 
   def index
-    @page_title = 'Clients'
-    @clients = current_user.clients
+    @clients = current_user.clients.order(:name)
   end
 
-  def show
-    @page_title = 'Client'
-  end
+  def show; end
 
   def new
-    @page_title = 'New Client'
     @client = Client.new
+    @client.user = current_user
   end
 
-  def edit
-    @page_title = 'Edit Client'
-  end
+  def edit; end
 
   def create
     @client = Client.new(client_params)

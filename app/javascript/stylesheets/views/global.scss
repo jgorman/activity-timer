@@ -9,17 +9,10 @@ h2,
 h3,
 h4,
 h5 {
-  text-align: center;
   color: $headers;
 }
 
-// TODO: Full Bootstrap nav with dropdowns.
-#nav-bar {
-  background-color: $nav-bar;
-}
-
 // TODO: This may go away with Bootstrap forms.
-
 .text-label {
   color: $label;
   font-weight: bold;
@@ -32,4 +25,3 @@ p.error {
 form label {
   @extend .text-label;
 }
-
