@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'devise'
-gem 'omniauth'
+# gem 'omniauth' # https://github.com/advisories/GHSA-ww4x-rwq6-qpgf
 gem 'turbolinks_render'
 
 group :development, :test do
