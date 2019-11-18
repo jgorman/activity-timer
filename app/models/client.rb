@@ -5,6 +5,9 @@ class Client < ApplicationRecord
 
   validates :user, presence: true
   validates :name,
-            presence: true,
-            uniqueness: { scope: :user, message: '%{value} has been used.' }
+            uniqueness: { scope: :user, message: '"%{value}" has been used.' }
+
+  def display_name
+    name.empty? ? '(No client)' : name
+  end
 end

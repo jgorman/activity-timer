@@ -4,6 +4,6 @@
   <%= link_to 'New client', new_client_path, class: 'row mb-3' %>
 
   <% @clients.each do |client| %>
-    <%= link_to client.name, client_path(client), class: 'row mb-2' %>
+    <%= link_to client.display_name, client_path(client), class: 'row mb-2' %>
   <% end %>
 </div>

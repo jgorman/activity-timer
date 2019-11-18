@@ -6,6 +6,14 @@ class Project < ApplicationRecord
   validates :user, presence: true
   validates :client, presence: true
   validates :name,
-            presence: true,
-            uniqueness: { scope: :client, message: '%{value} has been used.' }
+            uniqueness: { scope: :client, message: '"%{value}" has been used.' }
+
+  def display_name
+    name.empty? ? '(No project)' : name
+  end
+
+  def display_title
+    "#{client.display_name} - #{display_name}"
+  end
+
 end

@@ -19,13 +19,6 @@ module ApplicationHelper
     datetime.strftime('%Y-%m-%d %I:%M %p')
   end
 
-  def seconds_to_hm(seconds)
-    return '' unless seconds
-    hours = seconds / (60 * 60)
-    minutes = (seconds / 60) % 60
-    sprintf('%2d:%02d', hours, minutes)
-  end
-
   def image_path(name)
     asset_pack_path("media/images/#{name}")
   end

@@ -1,4 +1,4 @@
-<% @page_title = "Activity #{@activity.project.client.name} - #{@activity.project.name}" %>
+<% @page_title = @activity.project.display_title %>
 
 <p>
   <%= link_to 'Client', client_path(@activity.project.client) %> |
