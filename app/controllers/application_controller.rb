@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :seconds_to_hm
   def seconds_to_hm(seconds)
-    return '' unless seconds
+    seconds ||= 0
     hours = seconds / (60 * 60)
     minutes = (seconds / 60) % 60
     sprintf('%2d:%02d', hours, minutes)

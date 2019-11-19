@@ -1,4 +1,4 @@
-<% @page_title = 'All Projects' %>
+<% @page_title = 'Projects' %>
 
 <div class="table-responsive">
 
@@ -7,11 +7,10 @@
       <th>Name</th>
     </tr>
 
-    <% @projects.each do |project| %>
+    <% @projects.order('updated_at desc').each do |project| %>
       <tr>
         <td>
-          <%= link_to(project.client.name, client_path(project.client)) %> -
-          <%= link_to(project.name, project_path(project)) %>
+          <%= link_to(project.display_title, project_path(project)) %>
         </td>
       </tr>
     <% end %>

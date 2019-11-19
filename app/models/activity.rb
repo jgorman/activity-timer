@@ -7,4 +7,11 @@ class Activity < ApplicationRecord
   validates :client, presence: true
   validates :project, presence: true
   validates :start, presence: true
+
+  private
+
+  # Sort projects by latest activity.
+  after_save do
+    project.touch
+  end
 end

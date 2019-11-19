@@ -3,7 +3,7 @@
   <%= link_to 'Project', project_path(@activity.project) %>
   <% if @activity.id %>
     | <%= link_to 'Delete activity', activity_path(@activity),
-      method: :delete, data: { confirm: "Delete #{@activity.desc}?" } %> |
+      method: :delete, data: { confirm: "Delete #{@activity.description}?" } %> |
     <%= link_to 'New activity', new_project_activity_path(@activity.project) %>
   <% end %>
 </p>
@@ -17,16 +17,16 @@
   </p>
 
   <p class="field">
-    <%= form.label :duration_s, 'Length' %><br>
-    <%= form.text_field :duration,
-      value: seconds_to_hm(@activity.duration),
+    <%= form.label :length, 'Length' %><br>
+    <%= form.text_field :length,
+      value: (@activity.length.to_i > 0) ? seconds_to_hm(@activity.length) : '',
       placeholder: 'H:MM'
     %>
   </p>
 
   <p class="field">
-    <%= form.label :desc, 'Description' %><br>
-    <%= form.text_field :desc, class: 'w-75' %>
+    <%= form.label :description, 'Description' %><br>
+    <%= form.text_field :description, class: 'w-75' %>
   </p>
 
   <p>

@@ -1,12 +1,10 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: %i[show edit update destroy]
+  before_action :set_activity, only: %i[edit update destroy]
 
   # activities_path: GET /activities
   def index
     @activities = current_user.activities
   end
-
-  def show; end
 
   # new_project_activity_path: GET /projects/12/activities/new
   def new
@@ -63,8 +61,8 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params[:activity][:duration] = hm_to_seconds(params[:activity][:duration])
-    perms = params.require(:activity).permit(:start, :duration, :desc)
+    params[:activity][:length] = hm_to_seconds(params[:activity][:length])
+    perms = params.require(:activity).permit(:start, :length, :description)
     perms
   end
 end
