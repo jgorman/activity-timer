@@ -7,6 +7,10 @@ module ApplicationHelper
     @page_title || 'Activity Timer'
   end
 
+  def page_header
+    @page_header || page_title
+  end
+
   def is_admin?
     current_user && current_user.is_admin?
   end
@@ -21,6 +25,17 @@ module ApplicationHelper
 
   def image_path(name)
     asset_pack_path("media/images/#{name}")
+  end
+
+  def project_links(project)
+    links =
+      "<a href=\"#{client_path(project.client)}\">#{
+        escape(project.client.display_name)
+      }</a> - " +
+        "<a href=\"#{project_path(project)}\">#{
+          escape(project.display_name)
+        }</a>"
+    links.html_safe
   end
 
   module NoArgument; end

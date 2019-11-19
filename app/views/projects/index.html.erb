@@ -10,7 +10,7 @@
     <% @projects.order('updated_at desc').each do |project| %>
       <tr>
         <td>
-          <%= link_to(project.display_title, project_path(project)) %>
+          <%= project_links(project) %>
         </td>
       </tr>
     <% end %>

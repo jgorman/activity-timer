@@ -26,11 +26,9 @@
 
       <%= render 'layouts/nav' %>
 
-      <div class="my-3">
-        <% if @page_title %>
-          <h2 class="text-center"><%= page_title %></h2>
-        <% end %>
-      </div>
+      <% unless @custom_title %>
+        <h3 class="text-center my-3"><%= page_header %></h3>
+      <% end %>
 
       <% if notice %>
         <p class="text-info"><%= notice %></p>
