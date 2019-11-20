@@ -1,83 +1,151 @@
 import { Controller } from 'stimulus'
 
+const template = '<p class="{error}">{message}</p>'
+
 export default class extends Controller {
-  connect () {
+  initialize() {
+    this.invalid = this.data.get('invalid') || 'invalid'
+    this.error = this.data.get('error') || 'error'
+    this.template = this.data.get('template') || template
+    this.debug = this.data.has('debug')
+    this.log('=== initialize', {
+      form: this.element,
+      invalid: this.invalid,
+      error: this.error,
+      template: this.template,
+      debug: this.debug,
+    })
+  }
+
+  connect() {
+    this.log('=== connect', { form: this.element })
     this.element.setAttribute('novalidate', true)
     this.element.addEventListener('blur', this.onBlur, true)
     this.element.addEventListener('submit', this.onSubmit)
-    this.element.addEventListener('ajax:beforeSend', this.onSubmit)
+    this.element.addEventListener('ajax:beforeSend', this.onAjax)
   }
 
-  disconnect () {
+  disconnect() {
+    this.log('=== disconnect', { form: this.element })
     this.element.removeEventListener('blur', this.onBlur)
     this.element.removeEventListener('submit', this.onSubmit)
-    this.element.removeEventListener('ajax:beforeSend', this.onSubmit)
+    this.element.removeEventListener('ajax:beforeSend', this.onAjax)
   }
 
-  onBlur = (event) => {
+  log = (msg, info) => {
+    if (!this.debug) return
+    if (info) {
+      const field = info.field
+      if (field) {
+        if (field.type === 'hidden') {
+          msg += ' hidden'
+        }
+        if (!field.id && field.name) {
+          msg += ' ' + field.name
+        }
+      }
+      console.log(msg, info)
+    } else {
+      console.log(msg)
+    }
+  }
+
+  onBlur = event => {
+    this.log('^^^ onBlur', { field: event.target })
     this.validateField(event.target)
   }
 
-  onSubmit = (event) => {
-    if (!this.validateForm()) {
+  // onSubmit gets called first to validate the form.
+  onSubmit = event => {
+    this.formIsValid = this.validateForm()
+    if (this.formIsValid) {
+      this.log('^^^ onSubmit Okay', { event })
+    } else {
+      this.log('^^^ onSubmit Skip', { event })
       event.preventDefault()
       this.firstInvalidField.focus()
     }
   }
 
-  validateForm () {
+  // onAjax gets called second and we disable the ajax for invalid forms.
+  onAjax = event => {
+    if (this.formIsValid) {
+      this.log('^^^ onAjax Okay', { event })
+    } else {
+      this.log('^^^ onAjax Skip', { event })
+      event.preventDefault()
+    }
+  }
+
+  validateForm = () => {
+    this.log('<<< Form', { form: this.element })
     let isValid = true
-    // Not using `find` because we want to validate all the fields
-    this.formFields.forEach((field) => {
-      if (this.shouldValidateField(field) && !this.validateField(field)) isValid = false
+    this.formFields.forEach(field => {
+      if (this.shouldValidateField(field) && !this.validateField(field))
+        isValid = false
+    })
+    this.log(`>>> Form ${isValid ? 'Valid' : 'Invalid!'}`, {
+      form: this.element,
     })
     return isValid
   }
 
-  validateField (field) {
-    if (!this.shouldValidateField(field))
+  validateField = field => {
+    if (!this.shouldValidateField(field)) {
       return true
+    }
     const isValid = field.checkValidity()
-    field.classList.toggle('invalid', !isValid)
+    field.classList.toggle(this.invalid, !isValid)
     this.refreshErrorForInvalidField(field, isValid)
+    if (isValid) {
+      this.log('___ Valid', { field })
+    }
     return isValid
   }
 
-  shouldValidateField (field) {
-    return !field.disabled &&
-      !['file', 'reset', 'submit', 'button'].includes(field.type) &&
-      field.checkValidity
+  shouldValidateField = field => {
+    const shouldValidate =
+      field.checkValidity &&
+      !field.disabled &&
+      !['file', 'reset', 'submit', 'button'].includes(field.type)
+    if (!shouldValidate) {
+      this.log('___ Skip', { field })
+    }
+    return shouldValidate
   }
 
-  refreshErrorForInvalidField (field, isValid) {
+  refreshErrorForInvalidField = (field, isValid) => {
     this.removeExistingErrorMessage(field)
-    if (!isValid)
-      this.showErrorForInvalidField(field)
+    if (!isValid) this.showErrorForInvalidField(field)
   }
 
-  removeExistingErrorMessage (field) {
-    const fieldContainer = field.closest('.field')
-    if(!fieldContainer)
-      return;
-    const existingErrorMessageElement = fieldContainer.querySelector('.error')
+  removeExistingErrorMessage = field => {
+    const existingErrorMessageElement = field.parentNode.querySelector(
+      '.' + this.error
+    )
     if (existingErrorMessageElement)
-      existingErrorMessageElement.parentNode.removeChild(existingErrorMessageElement)
+      existingErrorMessageElement.parentNode.removeChild(
+        existingErrorMessageElement
+      )
   }
 
-  showErrorForInvalidField (field) {
+  showErrorForInvalidField = field => {
     field.insertAdjacentHTML('afterend', this.buildFieldErrorHtml(field))
   }
 
-  buildFieldErrorHtml (field) {
-    return `<p class="error">${field.validationMessage}</p>`
+  buildFieldErrorHtml = field => {
+    let errorHtml = this.template
+    errorHtml = errorHtml.replace(/{error}/g, this.error)
+    errorHtml = errorHtml.replace(/{message}/g, field.validationMessage)
+    this.log('___ Invalid!', { field, errorHtml })
+    return errorHtml
   }
 
-  get formFields () {
+  get formFields() {
     return Array.from(this.element.elements)
   }
 
-  get firstInvalidField () {
+  get firstInvalidField() {
     return this.formFields.find(field => !field.checkValidity())
   }
-
 }

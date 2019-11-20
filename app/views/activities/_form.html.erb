@@ -1,41 +1,68 @@
 <p>
   <%= link_to 'Client', client_path(@activity.project.client) %> |
   <%= link_to 'Project', project_path(@activity.project) %>
-  <% if @activity.id %>
-    | <%= link_to 'Delete activity', activity_path(@activity),
-      method: :delete, data: { confirm: "Delete #{@activity.description}?" } %> |
+  <% if @activity.id %> |
     <%= link_to 'New activity', new_project_activity_path(@activity.project) %>
   <% end %>
 </p>
 
-<%= form_with(model: @activity, data: {controller: 'form'}) do |form| %>
+<%= form_with(model: @activity, data: { controller: 'form' }) do |form| %>
   <%= form.hidden_field :project_id, value: @activity.project_id %>
 
-  <p class="field">
-    <%= form.label :start, 'Start time' %><br>
-    <%= form.datetime_field :start, required: true %>
-  </p>
+  <div class="row my-2">
+    <div class="col-sm">
+      <%= form.label :start, 'Start time' %><br />
+    </div>
+    <div class="col-sm-9">
+      <%= form.datetime_field :start, required: true %>
+    </div>
+  </div>
 
-  <p class="field">
-    <%= form.label :length, 'Length' %><br>
-    <%= form.text_field :length,
-      value: (@activity.length.to_i > 0) ? seconds_to_hm(@activity.length) : '',
-      placeholder: 'H:MM'
-    %>
-  </p>
+  <div class="row my-2">
+    <div class="col-sm-3">
+      <%= form.label :length, 'Length' %>
+    </div>
+    <div class="col col-sm-9">
+      <%= form.text_field :length,
+        value: (@activity.length.to_i > 0) ? seconds_to_hm(@activity.length) : '',
+        placeholder: 'H:MM'
+      %>
+    </div>
 
-  <p class="field">
-    <%= form.label :description, 'Description' %><br>
-    <%= form.text_field :description, class: 'w-75' %>
-  </p>
+  </div>
 
-  <p>
-    <% if @activity.id %>
-      <input class="btn btn-secondary" type="submit" value="Update activity">
-    <% else %>
-      <input class="btn btn-secondary" type="submit" value="Add activity">
-    <% end %>
-    <%= link_to 'Cancel', project_path(@activity.project), class: 'btn btn-secondary' %>
-  </p>
+  <div class="row my-2">
+    <div class="col-sm-3">
+      <%= form.label :description, 'Description' %><br />
+    </div>
+    <div class="col-sm-9">
+      <%= form.text_field :description, class: 'w-75' %>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col">
+      <% if @activity.id %>
+
+        <input class="btn btn-secondary my-1 mr-1" type="submit" value="Update activity">
+
+        <%= link_to 'Delete activity', activity_path(@activity),
+          method: :delete,
+          data: { confirm: "Delete #{@activity.description}?" },
+          class: 'btn btn-secondary my-1 mr-1'
+        %>
+
+      <% else %>
+
+        <input class="btn btn-secondary my-1 mr-1" type="submit" value="Add activity">
+
+      <% end %>
+
+      <%= link_to 'Cancel', project_path(@activity.project),
+        class: 'btn btn-secondary my-1 mr-1'
+      %>
+
+    </div>
+  </div>
 
 <% end %>

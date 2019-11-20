@@ -1,18 +1,36 @@
 <%= form_with(model: @client, data: {controller: 'form'}) do |form| %>
 
-  <p class="field">
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </p>
+  <div class="row my-2">
+    <div class="col-sm-auto">
+      <%= form.label :name %>
+    </div>
+    <div class="col-sm">
+      <%= form.text_field :name %>
+    </div>
+  </div>
 
   <% if @client.id %>
-    <p>
-      <input class="btn btn-secondary" type="submit" value="Update client">
-      <%= link_to 'Cancel', client_path(@client), class: 'btn btn-secondary' %>
-    </p>
+
+    <input type="submit" value="Update client"
+                         class="btn btn-secondary my-1 mr-1" >
+
+    <%= link_to 'Delete client', client_path(@client),
+      method: :delete,
+      data: { confirm: "Delete client #{@client.display_name}?" },
+      class: "btn btn-secondary my-1 mr-1"
+    %>
+
+    <%= link_to 'Cancel', client_path(@client),
+      class: 'btn btn-secondary my-1 mr-1' %>
+
   <% else %>
-    <input class="btn btn-secondary" type="submit" value="Add client">
-    <%= link_to 'Cancel', clients_path, class: 'btn btn-secondary' %>
+
+    <input type="submit" value="Add client"
+
+        class="btn btn-secondary my-1 mr-1" >
+
+    <%= link_to 'Cancel', clients_path, class: 'btn btn-secondary my-1 mr-1' %>
+
   <% end %>
 
 <% end %>

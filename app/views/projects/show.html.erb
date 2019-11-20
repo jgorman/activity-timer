@@ -4,9 +4,6 @@
 <p>
   <%= link_to 'Client', client_path(@project.client) %> |
   <%= link_to 'Edit project', edit_project_path(@project) %> |
-  <%= link_to 'Delete project', project_path(@project),
-      method: :delete,
-      data: { confirm: "Delete project #{@project.display_title}?" } %> |
   <%= link_to 'New activity', new_project_activity_path(@project) %>
 </p>
 
