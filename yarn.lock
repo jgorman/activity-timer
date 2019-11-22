@@ -6703,6 +6703,13 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
+stimulus-form-validation@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/stimulus-form-validation/-/stimulus-form-validation-1.0.0.tgz#b76bc29a53d5d3a0984c45824b0e8bd69a0bc234"
+  integrity sha512-mZx4U/xaXVJ20vLznRlSpWhdGxrcCpQQZJ3mNdOegD1o5MlSIPDYJViCBh46AytuTYdZTT9f0iQxXUTueIPOxQ==
+  dependencies:
+    stimulus "^1.1.1"
+
 stimulus-particles.js@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/stimulus-particles.js/-/stimulus-particles.js-1.0.5.tgz#ee868e124137bb83b082de548f78ef6d54fe9cd9"

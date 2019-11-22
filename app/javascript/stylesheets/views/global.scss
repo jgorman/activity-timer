@@ -22,18 +22,18 @@ h5 {
  * Forms
  */
 
-form label {
-  @extend .text-label;
-}
+form {
+  label {
+    @extend .text-label;
+  }
 
-// Invalid inputs.
-input.invalid,
-select.invalid,
-textarea.invalid {
-  border-color: red;
-}
+  // Invalid inputs.
+  .invalid {
+    border-color: red;
+  }
 
-// Validation errors.
-p.error {
-  color: $danger;
+  // Validation errors.
+  .error {
+    color: $danger;
+  }
 }

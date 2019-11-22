@@ -16,6 +16,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "stimulus-form-validation": "^1.0.0",
     "stimulus-particles.js": "^1.0.5",
     "turbolinks": "^5.2.0"
   },
