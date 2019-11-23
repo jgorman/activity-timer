@@ -25,7 +25,8 @@
     <div class="col col-sm-9">
       <%= form.text_field :length,
         value: (@activity.length.to_i > 0) ? seconds_to_hm(@activity.length) : '',
-        placeholder: 'H:MM'
+        placeholder: 'H:MM',
+        autofocus: true
       %>
     </div>
 
