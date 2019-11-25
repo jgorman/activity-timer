@@ -14,10 +14,10 @@
     "jstimezonedetect": "^1.0.7",
     "popper.js": "^1.16.0",
     "prop-types": "^15.7.2",
+    "rails-form-validation": "^1.0.1",
+    "rails-particles.js": "^1.0.6",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "stimulus-form-validation": "^1.0.0",
-    "stimulus-particles.js": "^1.0.5",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
