@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :clients, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_one :timer, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
