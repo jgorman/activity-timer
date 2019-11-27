@@ -15,10 +15,6 @@ module ApplicationHelper
     current_user && current_user.is_admin?
   end
 
-  def account_name
-    current_user ? current_user.display_name : 'Login'
-  end
-
   def datetime_to_s(datetime)
     datetime.strftime('%Y-%m-%d %I:%M %p')
   end

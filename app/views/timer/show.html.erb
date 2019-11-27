@@ -1,10 +1,15 @@
 <% @page_title = 'Timer' %>
 
-<div class="container-fluid">
+<div class="timer-page">
 
-  <p>This is the timer app.</p>
+  <div class="timer-spacer">
+    <div class="timer-face">
+      <%= render 'timer' %>
+    </div>
+  </div>
 
-  <%= render 'timer' %>
+  <div class="timer-container">
+  </div>
 
   <%= render 'report' %>
 

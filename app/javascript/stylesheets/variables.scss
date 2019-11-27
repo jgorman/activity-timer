@@ -3,11 +3,13 @@
 $headers: #aaaaaa;
 $label: $headers;
 
+$left-nav-width: 90px;
+$top-nav-height: 90px;
+$page-margins: 0.5rem;
+
 // Customize Bootstrap variables.
 $secondary: $headers;
 $link-color: #555555;
-$navbar-light-color: $link-color;
-$navbar-light-hover-color: #000000;
 
 // Recompile Bootstrap using the customized variables.
 @import '~bootstrap/scss/functions';

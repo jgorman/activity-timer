@@ -15,27 +15,18 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   </head>
 
   <body>
+    <div class="page-layout">
 
-    <div class="container-fluid font-weight-light">
+      <div class="nav-outer">
+        <div class="nav-panel">
+          <%= render 'layouts/nav' %>
+        </div>
+      </div>
 
-      <%= render 'layouts/banner' %>
-
-      <%= render 'layouts/nav' %>
-
-      <h3 class="text-center my-3"><%= page_header %></h3>
-
-      <% if notice %>
-        <p class="text-info"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="text-danger"><%= alert %></p>
-      <% end %>
-
-      <div class="container-fluid mt-3">
+      <div class="pl-3 w-100">
         <%= yield %>
       </div>
 

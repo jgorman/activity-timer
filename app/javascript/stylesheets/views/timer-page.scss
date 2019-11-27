@@ -1,0 +1,23 @@
+/* * * * * *
+ * Variables
+ */
+
+@import '../variables';
+
+.timer-page {
+
+  .timer-spacer {
+    height: $top-nav-height;
+
+    .timer-face {
+      position: fixed;
+      top: 0;
+      left: calc(#{$page-margins} + #{$left-nav-width});
+
+      width: 100%;
+      height: $top-nav-height;
+      background-color: white;
+    }
+  }
+
+}

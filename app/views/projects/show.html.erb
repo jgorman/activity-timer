@@ -1,5 +1,6 @@
 <% @page_title = @project.display_title %>
 <% @page_header = project_links(@project) %>
+<%= render 'layouts/page-top' %>
 
 <p>
   <%= link_to 'Client', client_path(@project.client) %> |

@@ -23,10 +23,6 @@ const application = Application.start()
 // const controllers = require.context('../controllers', true, /\.js$/)
 // application.load(definitionsFromContext(controllers))
 
-// See https://github.com/jgorman/rails-particles.js
-import Particles from 'rails-particles.js'
-application.register('particles', Particles)
-
 // See https://github.com/jgorman/rails-form-validation
 import Form from 'rails-form-validation'
 application.register('form', Form)
