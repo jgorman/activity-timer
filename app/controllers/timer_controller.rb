@@ -4,13 +4,7 @@ class TimerController < ApplicationController
 
   # timer_path: GET /timer
   def index
-    @timer = current_user.timer
-    unless @timer
-      @timer = Timer.new
-      @timer.start = Time.now
-      @timer.user = current_user
-    end
-
+    @timer = current_user.timer || Timer.new
     @activities = current_user.activities
   end
 
@@ -20,6 +14,7 @@ class TimerController < ApplicationController
 
     @timer = Timer.new(timer_params)
     @timer.user = current_user
+    @timer.start = Time.now
     @timer.save!
 
     respond_to do |format|
@@ -61,8 +56,6 @@ class TimerController < ApplicationController
     current_user.timer.destroy!
 
     @timer = Timer.new
-    @timer.start = Time.now
-    @timer.user = current_user
     respond_to do |format|
       format.js { render 'timer_clock' }
     end
@@ -71,7 +64,7 @@ class TimerController < ApplicationController
   private
 
   def timer_params
-    perms = params.require(:timer).permit(:start, :description, :project_id)
+    perms = params.require(:timer).permit(:description, :project_id)
     perms
   end
 end

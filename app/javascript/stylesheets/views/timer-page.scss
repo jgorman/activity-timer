@@ -14,10 +14,27 @@
       top: 0;
       left: calc(#{$page-margins} + #{$left-nav-width});
 
+      display: flex;
+      align-items: center;
+
       width: 100%;
       height: $top-nav-height;
       background-color: white;
+      box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.13);
+
+      #clock-works {
+
+        display: flex;
+
+        #ticker {
+          margin-left: 10px;
+        }
+
+        a, button {
+          margin-left: 10px;
+        }
+      }
+
     }
   }
-
 }

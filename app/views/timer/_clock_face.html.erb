@@ -1,10 +1,13 @@
-<div class="d-flex">
+<div
+  id="clock-works"
+  data-controller="clock"
+  data-clock-debug="on"
+>
 
   <%= form_with(model: @timer, url: timer_path, data: {controller: 'form'}) do |form| %>
 
     <%= form.text_field :description %>
     <%= form.number_field :project_id %>
-    <%= form.datetime_field :start %>
 
     <% if @timer.persisted? %>
 
@@ -21,6 +24,9 @@
     <% end %>
 
   <% end %>
+
+  <div id="timer_start" class="d-none"><%= @timer.start %></div>
+  <div id="ticker"></div>
 
   <% if @timer.persisted? %>
 
