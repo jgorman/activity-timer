@@ -3,9 +3,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get '/timer', to: 'timer#show'
-  post '/timer', to: 'timer#update'
+  get '/timer', to: 'timer#index'
+  post '/timer', to: 'timer#create'
   patch '/timer', to: 'timer#update'
+  delete '/timer', to: 'timer#destroy'
+
+  post '/timer/finish', to: 'timer#finish', as: 'timer_finish'
 
   namespace :admin do
     resources :users

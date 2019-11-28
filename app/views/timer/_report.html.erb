@@ -1,17 +1,19 @@
-<p>This is the report!!!</p>
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>Start</th>
+      <th class="text-right">Length</th>
+      <th>Description</th>
+    </tr>
 
-<% @projects.order('updated_at desc').each do |project| %>
-  <p><%= project.display_title %></p>
-<% end %>
-<% @projects.order('updated_at desc').each do |project| %>
-  <p><%= project.display_title %></p>
-<% end %>
-<% @projects.order('updated_at desc').each do |project| %>
-  <p><%= project.display_title %></p>
-<% end %>
-<% @projects.order('updated_at desc').each do |project| %>
-  <p><%= project.display_title %></p>
-<% end %>
-<% @projects.order('updated_at desc').each do |project| %>
-  <p><%= project.display_title %></p>
-<% end %>
+    <% @activities.order('start desc').each do |activity| %>
+      <tr>
+        <td>
+          <%= link_to(datetime_to_s(activity.start), edit_activity_path(activity)) %>
+        </td>
+        <td class="text-right"><%= seconds_to_hm(activity.length) %></td>
+        <td><%= activity.description %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

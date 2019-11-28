@@ -750,6 +750,13 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@primer/octicons@^9.3.1":
+  version "9.3.1"
+  resolved "https://registry.yarnpkg.com/@primer/octicons/-/octicons-9.3.1.tgz#adc2673d9d4f5dae2e829679df3e2d1078a10ed8"
+  integrity sha512-E0Knv/hUfwpfJOVh7cPXXJf6gfNiIMBtMbhnqjkWHnpT/+bPJk4Q3l/YG6sCWELZ05KYpHBunpHNOlTyw3mbwg==
+  dependencies:
+    object-assign "^4.1.1"
+
 "@rails/actioncable@^6.0.0":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.0.1.tgz#43adf86c2ad6e6a076259b7ea02ba747e4f8bb6f"

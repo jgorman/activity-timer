@@ -1,0 +1,35 @@
+<div class="d-flex">
+
+  <%= form_with(model: @timer, url: timer_path, data: {controller: 'form'}) do |form| %>
+
+    <%= form.text_field :description %>
+    <%= form.number_field :project_id %>
+    <%= form.datetime_field :start %>
+
+    <% if @timer.persisted? %>
+
+      <button type="submit">
+          <%= octicon 'pin' %>
+      </button>
+
+    <% else %>
+
+      <button type="submit">
+          <%= octicon 'play' %>
+      </button>
+
+    <% end %>
+
+  <% end %>
+
+  <% if @timer.persisted? %>
+
+    <%= link_to octicon('check'),
+      timer_finish_path, method: :post, remote: true %>
+
+    <%= link_to octicon('trashcan'),
+      timer_path, method: :delete, remote: true %>
+
+  <% end %>
+
+</div>

@@ -6,10 +6,10 @@
 
 .timer-page {
 
-  .timer-spacer {
+  .clock-space {
     height: $top-nav-height;
 
-    .timer-face {
+    .clock-face {
       position: fixed;
       top: 0;
       left: calc(#{$page-margins} + #{$left-nav-width});
