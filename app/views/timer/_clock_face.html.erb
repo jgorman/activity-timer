@@ -6,8 +6,13 @@
 
   <%= form_with(model: @timer, url: timer_path, data: {controller: 'form'}) do |form| %>
 
-    <%= form.text_field :description %>
-    <%= form.number_field :project_id %>
+    <%= form.text_field :description,
+      data: { target: 'clock.desc' },
+      placeholder: 'Activity description' %>
+
+    <%= form.number_field :project_id,
+      data: { target: 'clock.project' },
+      placeholder: 'Project' %>
 
     <% if @timer.persisted? %>
 

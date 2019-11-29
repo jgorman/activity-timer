@@ -5,16 +5,27 @@ class TimerController < ApplicationController
   # timer_path: GET /timer
   def index
     @timer = current_user.timer || Timer.new
-    @activities = current_user.activities
+    @activities = get_activities
   end
 
   # timer_path: POST /timer
   def create
-    # TODO: check that project.user == current_user
+    fields = timer_params
+    project_id = fields[:project_id].to_i
+    description = fields[:description]
 
-    @timer = Timer.new(timer_params)
+    if project_id == 0
+      project = Project.no_project(current_user)
+    else
+      project = Projects.find(project_id)
+      # TODO: check that project.user == current_user
+    end
+
+    @timer = Timer.new
     @timer.user = current_user
+    @timer.project = project
     @timer.start = Time.now
+    @timer.description = description
     @timer.save!
 
     respond_to do |format|
@@ -38,7 +49,6 @@ class TimerController < ApplicationController
     # TODO: check that project.user == current_user
     timer = current_user.timer
     project = timer.project
-
     activity = Activity.new({
       user: current_user,
       client: project.client,
@@ -48,7 +58,19 @@ class TimerController < ApplicationController
       description: timer.description
     })
     activity.save!
-    destroy
+    timer.destroy
+
+    # Redisplay the page with the updated report.
+    @timer = Timer.new
+    @activities = get_activities
+    render 'index'
+  end
+
+  # timer_description_path: POST /timer/description
+  def description
+    timer = current_user.timer
+    timer.description = params[:description] || ''
+    timer.save!
   end
 
   # timer_path: DELETE /timer
@@ -63,8 +85,15 @@ class TimerController < ApplicationController
 
   private
 
+  def get_activities
+    current_user.activities
+      .select('activities.*, projects.name as project_name, clients.name as client_name')
+      .where('start >= ?', 10.days.ago.midnight)
+      .order(start: :desc)
+      .joins(:project, :client)
+  end
+
   def timer_params
-    perms = params.require(:timer).permit(:description, :project_id)
-    perms
+    params.require(:timer).permit(:description, :project_id)
   end
 end

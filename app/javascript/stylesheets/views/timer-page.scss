@@ -12,7 +12,7 @@
     .clock-face {
       position: fixed;
       top: 0;
-      left: calc(#{$page-margins} + #{$left-nav-width});
+      left: calc(#{$page-margin} + #{$left-nav-width});
 
       display: flex;
       align-items: center;
@@ -25,13 +25,18 @@
       #clock-works {
 
         display: flex;
+        margin-left: $content-margin;
 
         #ticker {
-          margin-left: 10px;
+          margin-left: $sep;
         }
 
         a, button {
-          margin-left: 10px;
+          margin-left: $sep;
+        }
+
+        input {
+          border-style: none;
         }
       }
 

@@ -4,15 +4,19 @@
       <th>Start</th>
       <th class="text-right">Length</th>
       <th>Description</th>
+      <th>Client</th>
+      <th>Project</th>
     </tr>
 
-    <% @activities.order('start desc').each do |activity| %>
+    <% @activities.each do |activity| %>
       <tr>
         <td>
           <%= link_to(datetime_to_s(activity.start), edit_activity_path(activity)) %>
         </td>
         <td class="text-right"><%= seconds_to_hm(activity.length) %></td>
         <td><%= activity.description %></td>
+        <td><%= activity.client_name %></td>
+        <td><%= activity.project_name %></td>
       </tr>
     <% end %>
   </table>

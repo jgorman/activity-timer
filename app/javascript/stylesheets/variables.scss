@@ -3,9 +3,12 @@
 $headers: #aaaaaa;
 $label: $headers;
 
+$sep: 10px;
+$sep5: 5px;
 $left-nav-width: 90px;
 $top-nav-height: 70px;
-$page-margins: 0.5rem;
+$page-margin: $sep;
+$content-margin: $sep;
 
 // Customize Bootstrap variables.
 $secondary: $headers;

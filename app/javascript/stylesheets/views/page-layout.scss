@@ -7,28 +7,32 @@
 .page-layout {
 
   display: flex;
-  margin-right: $page-margins;
-  margin-left: $page-margins;
+  margin-right: $page-margin;
+  margin-left: $page-margin;
   position: relative;
 
-  .nav-outer {
+  .nav-space {
     width: $left-nav-width;
-  }
 
-  .nav-panel {
-    background-color: #222;
-    height: 100vh;
-    position: fixed;
-    top: 0;
+    .nav-panel {
+      background-color: #222;
+      height: 100vh;
+      position: fixed;
+      top: 0;
 
-    .nav-link {
-      color: #ddd;
+      .nav-link {
+        color: #ddd;
 
-      &:hover {
-        color: #fff;
+        &:hover {
+          color: #fff;
+        }
       }
     }
+  }
 
+  .content-panel {
+    margin-left: $content-margin;
+    width: 100%;
   }
 
 }
