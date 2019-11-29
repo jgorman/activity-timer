@@ -30,8 +30,11 @@
 
   <% end %>
 
-  <div id="timer_start" class="d-none"><%= @timer.start %></div>
-  <div id="ticker"></div>
+  <div id="timer_start" class="d-none" data-target="clock.start">
+    <%= @timer.start %>
+  </div>
+
+  <div id="ticker" data-target="clock.ticker"></div>
 
   <% if @timer.persisted? %>
 

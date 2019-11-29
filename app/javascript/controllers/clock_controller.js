@@ -4,8 +4,8 @@ import Rails from '@rails/ujs'
 
 var sc_id = 0
 
-class StimulusDebug extends Controller {
-  static targets = [ 'name', 'project' ]
+class Clock extends Controller {
+  static targets = [ 'name', 'project', 'start', 'ticker' ]
 
   initialize() {
     this.sc_id = ++sc_id
@@ -41,9 +41,8 @@ class StimulusDebug extends Controller {
   saveName = event => {
     // const value = event.target.value
     const name = this.nameTarget.value
-    const project = this.projectTarget.value
-    this.debug('^^^ saveName', { name, project_name: project.value })
-    if (project) {
+    const started = this.startTarget.innerHTML.trim()
+    if (started) {
       Rails.ajax({
         url: "/timer/name",
         type: "POST",
@@ -56,19 +55,14 @@ class StimulusDebug extends Controller {
     this.debug('^^^ saveProject', { field: event.target })
   }
 
-  // TODO: remove jQuery.
   get_start_time = () => {
-    const timer_start = $('#timer_start')[0]
-    return (
-      timer_start &&
-      timer_start.textContent &&
-      Date.parse(timer_start.textContent)
-    )
+    const start = this.startTarget.innerHTML
+    return start && Date.parse(start)
   }
 
   show_elapsed = () => {
     const elapsed = Date.now() - this.start_time
-    $('#ticker').html(this.format_elapsed(elapsed))
+    this.tickerTarget.innerHTML = this.format_elapsed(elapsed)
   }
 
   format_elapsed = elapsed => {
@@ -76,7 +70,7 @@ class StimulusDebug extends Controller {
     const hh = seconds / (60 * 60)
     const mm = (seconds / 60) % 60
     const ss = seconds % 60
-    return sprintf('%2d:%02d:%02d', hh, mm, ss)
+    return sprintf('%d:%02d:%02d', hh, mm, ss)
   }
 
   debug = (msg, extra = '') => {
@@ -92,4 +86,4 @@ class StimulusDebug extends Controller {
 
 }
 
-export default StimulusDebug
+export default Clock
