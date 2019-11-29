@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_26_125256) do
+ActiveRecord::Schema.define(version: 2019_11_29_192647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_125256) do
     t.bigint "project_id", null: false
     t.datetime "start", null: false
     t.integer "length", default: 0, null: false
-    t.string "description", default: "", null: false
+    t.string "name", default: "", null: false
     t.index ["client_id", "start"], name: "index_activities_on_client_id_and_start"
     t.index ["project_id", "start"], name: "index_activities_on_project_id_and_start"
     t.index ["user_id", "start"], name: "index_activities_on_user_id_and_start"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_125256) do
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
     t.datetime "start", null: false
-    t.string "description", default: "", null: false
+    t.string "name", default: "", null: false
     t.index ["user_id"], name: "index_timers_on_user_id", unique: true
   end
 

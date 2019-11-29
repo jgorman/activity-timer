@@ -13,16 +13,16 @@
     <tr>
       <th>Start</th>
       <th class="text-right">Length</th>
-      <th>Description</th>
+      <th>Activity</th>
     </tr>
 
-    <% @project.activities.order('start desc').each do |activity| %>
+    <% @project.activities.order(start: :desc).each do |activity| %>
       <tr>
         <td>
           <%= link_to(datetime_to_s(activity.start), edit_activity_path(activity)) %>
         </td>
         <td class="text-right"><%= seconds_to_hm(activity.length) %></td>
-        <td><%= activity.description %></td>
+        <td><%= activity.name %></td>
       </tr>
     <% end %>
   </table>

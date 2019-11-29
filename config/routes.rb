@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   patch '/timer', to: 'timer#update'
   delete '/timer', to: 'timer#destroy'
   post '/timer/finish', to: 'timer#finish', as: 'timer_finish'
-  post '/timer/description', to: 'timer#description', as: 'timer_description'
+  post '/timer/name', to: 'timer#name', as: 'timer_name'
 
   namespace :admin do
     resources :users

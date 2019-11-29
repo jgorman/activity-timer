@@ -62,7 +62,7 @@ class ActivitiesController < ApplicationController
 
   def activity_params
     params[:activity][:length] = hm_to_seconds(params[:activity][:length])
-    perms = params.require(:activity).permit(:start, :length, :description)
+    perms = params.require(:activity).permit(:start, :length, :name)
     perms
   end
 end

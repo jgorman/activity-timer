@@ -12,7 +12,7 @@ class TimerController < ApplicationController
   def create
     fields = timer_params
     project_id = fields[:project_id].to_i
-    description = fields[:description]
+    name = fields[:name]
 
     if project_id == 0
       project = Project.no_project(current_user)
@@ -25,7 +25,7 @@ class TimerController < ApplicationController
     @timer.user = current_user
     @timer.project = project
     @timer.start = Time.now
-    @timer.description = description
+    @timer.name = name
     @timer.save!
 
     respond_to do |format|
@@ -55,7 +55,7 @@ class TimerController < ApplicationController
       project: project,
       start: timer.start,
       length: Time.now - timer.start,
-      description: timer.description
+      name: timer.name
     })
     activity.save!
     timer.destroy
@@ -66,10 +66,10 @@ class TimerController < ApplicationController
     render 'index'
   end
 
-  # timer_description_path: POST /timer/description
-  def description
+  # timer_name_path: POST /timer/name
+  def name
     timer = current_user.timer
-    timer.description = params[:description] || ''
+    timer.name = params[:name] || ''
     timer.save!
   end
 
@@ -94,6 +94,6 @@ class TimerController < ApplicationController
   end
 
   def timer_params
-    params.require(:timer).permit(:description, :project_id)
+    params.require(:timer).permit(:name, :project_id)
   end
 end

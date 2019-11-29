@@ -5,7 +5,7 @@ import Rails from '@rails/ujs'
 var sc_id = 0
 
 class StimulusDebug extends Controller {
-  static targets = [ 'desc', 'project' ]
+  static targets = [ 'name', 'project' ]
 
   initialize() {
     this.sc_id = ++sc_id
@@ -26,7 +26,7 @@ class StimulusDebug extends Controller {
     }
 
     // Listen for field updates
-    this.descTarget.addEventListener('change', this.saveDesc, true)
+    this.nameTarget.addEventListener('change', this.saveName, true)
     this.projectTarget.addEventListener('change', this.saveProject, true)
   }
 
@@ -34,20 +34,20 @@ class StimulusDebug extends Controller {
     this.debug('disconnect', { sc: this })
 
     clearInterval(this.ticker)
-    this.descTarget.removeEventListener('change', this.saveDesc)
+    this.nameTarget.removeEventListener('change', this.saveName)
     this.projectTarget.removeEventListener('change', this.saveProject)
   }
 
-  saveDesc = event => {
+  saveName = event => {
     // const value = event.target.value
-    const name = this.descTarget.value
+    const name = this.nameTarget.value
     const project = this.projectTarget.value
-    this.debug('^^^ saveDesc', { name, project_name: project.value })
+    this.debug('^^^ saveName', { name, project_name: project.value })
     if (project) {
       Rails.ajax({
-        url: "/timer/description",
+        url: "/timer/name",
         type: "POST",
-        data: `description=${name}`,
+        data: `name=${name}`,
       });
     }
   }

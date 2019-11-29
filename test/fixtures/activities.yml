@@ -2,12 +2,12 @@
 
 one:
   project: one
-  description: Working hard
+  name: Working hard
   start: 2019-11-08 12:50:54
   length: 600
 
 two:
   project: two
-  description: Or hardly working
+  name: Or hardly working
   start: 2019-11-08 12:60:54
   length: 3600

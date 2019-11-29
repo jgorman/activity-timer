@@ -34,10 +34,10 @@
 
   <div class="row my-2">
     <div class="col-sm-3">
-      <%= form.label :description, 'Description' %><br />
+      <%= form.label :name, 'Activity' %><br />
     </div>
     <div class="col-sm-9">
-      <%= form.text_field :description, class: 'w-75' %>
+      <%= form.text_field :name, class: 'w-75' %>
     </div>
   </div>
 
@@ -49,7 +49,7 @@
 
         <%= link_to 'Delete activity', activity_path(@activity),
           method: :delete,
-          data: { confirm: "Delete #{@activity.description}?" },
+          data: { confirm: "Delete #{@activity.name}?" },
           class: 'btn btn-secondary my-1 mr-1'
         %>
 

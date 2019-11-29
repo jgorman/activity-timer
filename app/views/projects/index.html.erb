@@ -8,7 +8,7 @@
       <th>Client - Project</th>
     </tr>
 
-    <% @projects.order('updated_at desc').each do |project| %>
+    <% @projects.order(updated_at: :desc).each do |project| %>
       <tr>
         <td>
           <%= project_links(project) %>
