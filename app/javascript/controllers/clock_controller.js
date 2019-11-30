@@ -39,10 +39,8 @@ class Clock extends Controller {
   }
 
   saveName = event => {
-    // const value = event.target.value
     const name = this.nameTarget.value
-    const started = this.startTarget.innerHTML.trim()
-    if (started) {
+    if (this.started()) {
       Rails.ajax({
         url: "/timer/name",
         type: "POST",
@@ -52,8 +50,17 @@ class Clock extends Controller {
   }
 
   saveProject = event => {
-    this.debug('^^^ saveProject', { field: event.target })
+    const project_id = this.projectTarget.value
+    if (this.started()) {
+      Rails.ajax({
+        url: "/timer/project",
+        type: "POST",
+        data: `project_id=${project_id}`,
+      });
+    }
   }
+
+  started = () => this.startTarget.innerHTML.trim()
 
   get_start_time = () => {
     const start = this.startTarget.innerHTML

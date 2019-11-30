@@ -5,10 +5,11 @@ Rails.application.routes.draw do
 
   get '/timer', to: 'timer#index'
   post '/timer', to: 'timer#create'
-  patch '/timer', to: 'timer#update'
+  #patch '/timer', to: 'timer#update'
   delete '/timer', to: 'timer#destroy'
   post '/timer/finish', to: 'timer#finish', as: 'timer_finish'
   post '/timer/name', to: 'timer#name', as: 'timer_name'
+  post '/timer/project', to: 'timer#project', as: 'timer_project'
 
   namespace :admin do
     resources :users
