@@ -20,23 +20,24 @@ require('bootstrap')
 import { Application } from 'stimulus'
 const application = Application.start()
 
+// See https://github.com/jgorman/rails-form-validation
+import Form from 'rails-form-validation'
+application.register('form', Form)
+
 // Custom controllers.
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 const controllers = require.context('../controllers', true, /\.js$/)
 application.load(definitionsFromContext(controllers))
 
-// See https://github.com/jgorman/rails-form-validation
-import Form from 'rails-form-validation'
-application.register('form', Form)
-
 /*
  * App setup.
  */
 
-// https://github.com/webpack/docs/wiki/context
-const requireAll = context => context.keys().map(context)
-requireAll(require.context('../javascript', false, /\.(js|jsx)$/i))
+const javascripts = require.context('../javascript', false, /\.(js|jsx)$/i)
+javascripts.keys().forEach(javascripts)
+
+require.context('../images', false, /\.(png|svg|jpg)$/i)
 
 require('../stylesheets')
 
-const images = require.context('../images', false, /\.(png|svg|jpg)$/i)
+// require('../channels')
