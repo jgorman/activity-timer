@@ -50,6 +50,16 @@ class ApplicationController < ActionController::Base
     sprintf('%2d:%02d', hours, minutes)
   end
 
+  helper_method :show_elapsed
+  def show_elapsed(start_time)
+    return '' unless start_time
+    seconds = Time.now - start_time
+    hh = seconds / (60 * 60)
+    mm = (seconds / 60) % 60
+    ss = seconds % 60
+    sprintf('%d:%02d:%02d', hh, mm, ss)
+  end
+
   def hm_to_seconds(hhmm)
     hhmm ||= ''
     if hhmm.include?(':')

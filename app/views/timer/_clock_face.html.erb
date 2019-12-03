@@ -1,7 +1,7 @@
 <div
   id="clock-works"
   data-controller="clock"
-  data-clock-debug="on"
+  data-clock-debug="off"
 >
 
   <%= form_with(model: @timer, url: timer_path, data: {controller: 'form'}) do |form| %>
@@ -19,11 +19,8 @@
 
   <% end %>
 
-  <div id="timer_start" class="d-none" data-target="clock.start">
-    <%= @timer.start %>
-  </div>
-
-  <div id="ticker" data-target="clock.ticker"></div>
+  <div id="ticker"><%= show_elapsed(@timer.start) %></div>
+  <div id="timer_id" class="d-none"><%= @timer.id %></div>
 
   <% if @timer.persisted? %>
 

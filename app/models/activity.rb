@@ -11,7 +11,5 @@ class Activity < ApplicationRecord
   private
 
   # Sort projects by latest activity.
-  after_save do
-    project.touch
-  end
+  after_save { project.touch }
 end

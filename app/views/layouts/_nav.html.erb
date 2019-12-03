@@ -4,30 +4,30 @@
     <% if user_signed_in? %>
 
       <%= link_to image_pack_tag('jg-logo.svg', id: 'logo', size: '50'),
-        timer_path, class: "nav-link" %>
+        timer_path, class: 'nav-link' %>
 
-      <%= link_to('Timer', timer_path, class: "nav-link") %>
+      <%= link_to('Timer', timer_path, class: 'nav-link', id: 'nav-timer-link') %>
 
-      <%= link_to('Clients', clients_path, class: "nav-link") %>
-      <%= link_to('Projects', projects_path, class: "nav-link") %>
+      <%= link_to('Clients', clients_path, class: 'nav-link') %>
+      <%= link_to('Projects', projects_path, class: 'nav-link') %>
 
       <% if is_admin? %>
-        <%= link_to('Users', admin_users_path, class: "nav-link") %>
+        <%= link_to('Users', admin_users_path, class: 'nav-link') %>
       <% end %>
 
       <%= link_to('Account', edit_user_registration_path,
-                  class: "nav-link") %>
+                  class: 'nav-link') %>
       <%= link_to('Logout', destroy_user_session_path,
-                  method: :delete, class: "nav-link") %>
+                  method: :delete, class: 'nav-link') %>
 
     <% else %>
 
       <%= image_pack_tag 'jg-logo.svg', id: 'logo', size: '50' %>
 
       <%= link_to('Login', new_user_session_path,
-                  class: "nav-link") %>
+                  class: 'nav-link') %>
       <%= link_to('Register', new_user_registration_path,
-                  class: "nav-link") %>
+                  class: 'nav-link') %>
     <% end %>
 
 

@@ -27,5 +27,4 @@ class Project < ApplicationRecord
     end
     no_project
   end
-
 end
