@@ -14,7 +14,8 @@ class TimerController < ApplicationController
       format.json do
         # Fetch the current timer object as json.
         timer = current_user.timer
-        #sleep 20 - test dropped response
+        puts "@@@@@ sending the timer..."
+        TimerChannel.broadcast_to(current_user.id, timer || { name: 'No Timer' })
         render json: timer
       end
     end

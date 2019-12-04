@@ -9,6 +9,7 @@
 
     <title><%= page_title %></title>
     <meta name="description" content="<%= page_title %>"/>
+    <meta name="current-user" id="<%= current_user.try(:id) %>">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

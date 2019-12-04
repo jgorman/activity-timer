@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/timer/replace_page', to: 'timer#replace_page', as: 'timer_replace_page'
   get '/timer/replace_clock', to: 'timer#replace_clock', as: 'timer_replace_clock'
 
+  mount ActionCable.server => '/cable'
+
   namespace :admin do
     resources :users
   end

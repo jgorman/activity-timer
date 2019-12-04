@@ -12,7 +12,7 @@ import Rails from '@rails/ujs'
 import { sprintf } from 'sprintf-js'
 
 const tick_interval = 1000
-const ticks_per_get = 10
+const ticks_per_get = 5
 
 let start_time = undefined
 let current_timer = undefined
@@ -55,7 +55,7 @@ const call_home = () => {
   }
   getting_timer = true
 
-  // console.log(`<<<<< global_ticker ${getting_id}`)
+  console.log(`<<<<< global_ticker ${getting_id}`)
   Rails.ajax({
     url: '/timer.json',
     type: 'GET',
