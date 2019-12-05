@@ -3,6 +3,8 @@ class TimerController < ApplicationController
 
   # timer_path: GET /timer
   def index
+    #session.keys.each {|key| puts sprintf('^^^^^ %-25s %s', key, session[key]) }
+
     respond_to do |format|
       format.html do
         # Display the timer page.
