@@ -9,14 +9,15 @@ module ApplicationCable
     end
 
     protected
-      def find_verified_user
-        if warden = request.env['warden']
-          if user = warden.authenticate(scope: :user)
-            return user
-          end
-        end
 
-        reject_unauthorized_connection
+    def find_verified_user
+      if warden = request.env['warden']
+        if user = warden.authenticate(scope: :user)
+          return user
+        end
       end
+
+      reject_unauthorized_connection
+    end
   end
 end

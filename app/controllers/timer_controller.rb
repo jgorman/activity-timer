@@ -16,8 +16,6 @@ class TimerController < ApplicationController
       format.json do
         # Fetch the current timer object as json.
         timer = current_user.timer
-        puts "@@@@@ sending the timer..."
-        TimerChannel.broadcast_to(current_user.id, timer || { name: 'No Timer' })
         render json: timer
       end
     end
@@ -42,6 +40,7 @@ class TimerController < ApplicationController
     @timer.start = Time.now
     @timer.name = name
     @timer.save!
+    send_timer(@timer)
 
     replace_clock
   end
@@ -72,6 +71,7 @@ class TimerController < ApplicationController
       )
     activity.save!
     timer.destroy
+    send_timer
 
     # Call replace_clock for fast feedback.
     # replace_page will get called by the js global_ticker later on.
@@ -98,6 +98,7 @@ class TimerController < ApplicationController
     return unless timer = current_user.timer
     timer.name = params[:name] || ''
     timer.save!
+    send_timer(timer)
   end
 
   # timer_project_path: POST /timer/project
@@ -106,17 +107,24 @@ class TimerController < ApplicationController
     return unless timer = current_user.timer
     timer.project_id = params[:project_id].to_i
     timer.save!
+    send_timer(timer)
   end
 
   # timer_path: DELETE /timer
   def destroy
     current_user.timer.destroy
+    send_timer
     @timer = Timer.new
     @project_options = project_options
     respond_to { |format| format.js { render 'replace_clock' } }
   end
 
   private
+
+  def send_timer(timer = nil)
+    puts "@@@@@ sending the timer(#{timer.inspect})"
+    TimerChannel.broadcast_to(current_user.id, timer)
+  end
 
   def get_activities
     current_user.activities.select(

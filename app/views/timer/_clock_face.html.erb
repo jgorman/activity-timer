@@ -4,7 +4,7 @@
   data-clock-debug="off"
 >
 
-  <%= form_with(model: @timer, url: timer_path, data: {controller: 'form'}) do |form| %>
+  <%= form_with(model: @timer, url: timer_path) do |form| %>
 
     <%= form.text_field :name,
         data: { target: 'clock.name' },
@@ -20,7 +20,6 @@
   <% end %>
 
   <div id="ticker"><%= show_elapsed(@timer.start) %></div>
-  <div id="timer_id" class="d-none"><%= @timer.id %></div>
 
   <% if @timer.persisted? %>
 
