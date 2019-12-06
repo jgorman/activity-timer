@@ -1,5 +1,4 @@
 class TimerController < ApplicationController
-  # TODO: https://api.rubyonrails.org/v6.0.1/classes/ActionView/Helpers/FormTagHelper.html#method-i-image_submit_tag
 
   # timer_path: GET /timer
   def index
@@ -31,7 +30,6 @@ class TimerController < ApplicationController
       project = Project.no_project(current_user)
     else
       project = Project.find(project_id)
-      # TODO: check that project.user == current_user
     end
 
     @timer = Timer.new
@@ -55,7 +53,6 @@ class TimerController < ApplicationController
 
   # timer_finish_path: POST /timer/finish
   def finish
-    # TODO: check that project.user == current_user
     return unless timer = current_user.timer
     project = timer.project
     activity =
@@ -103,7 +100,6 @@ class TimerController < ApplicationController
 
   # timer_project_path: POST /timer/project
   def project
-    # TODO: check that project.user == current_user
     return unless timer = current_user.timer
     timer.project_id = params[:project_id].to_i
     timer.save!

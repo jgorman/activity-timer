@@ -19,13 +19,12 @@ class ActivitiesController < ApplicationController
   # edit_activity_path: GET /activities/9/edit
   def edit; end
 
+  # TODO: cleaner POST /projects/:project_id/activities
   # activity_path: POST /activities
   def create
     # <%= form.hidden_field :project_id, value: @activity.project_id %>
     project = Project.find(params[:activity][:project_id])
     client = project.client
-
-    # TODO: oops("Internal error") unless client.user.id == current_user.id
 
     @activity = Activity.new(activity_params)
     @activity.user = current_user

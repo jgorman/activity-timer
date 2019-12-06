@@ -1,4 +1,8 @@
+class ProjectValidator < ActiveModel::Validator; end
+
 class Project < ApplicationRecord
+  include ActiveModel::Validations
+
   belongs_to :user
   belongs_to :client
   has_many :activities, dependent: :destroy
@@ -7,6 +11,7 @@ class Project < ApplicationRecord
   validates :client, presence: true
   validates :name,
             uniqueness: { scope: :client, message: '"%{value}" has been used.' }
+  validates_with ProjectValidator
 
   def display_name
     name.empty? ? 'No Project' : name
@@ -26,5 +31,13 @@ class Project < ApplicationRecord
       no_project.save!
     end
     no_project
+  end
+end
+
+class ProjectValidator < ActiveModel::Validator
+  def validate(project)
+    unless project.client.user == project.user
+      project.errors[:client] << 'project.client.user != project.user'
+    end
   end
 end

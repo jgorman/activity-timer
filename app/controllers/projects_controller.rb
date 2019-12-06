@@ -20,12 +20,11 @@ class ProjectsController < ApplicationController
   # edit_project_path: GET /projects/9/edit
   def edit; end
 
+  # TODO: cleaner POST /clients/:client_id/projects
   # project_path: POST /projects
   def create
     @project = Project.new(project_params)
     @project.user = current_user
-
-    # TODO: oops("Internal error") unless client.user.id == current_user.id
 
     # <%= form.hidden_field :client_id, value: @project.client_id %>
     @project.client_id = params[:project][:client_id]
