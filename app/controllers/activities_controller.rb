@@ -8,31 +8,23 @@ class ActivitiesController < ApplicationController
 
   # new_project_activity_path: GET /projects/12/activities/new
   def new
-    project = Project.find(params[:project_id])
     @activity = Activity.new
     @activity.start = Time.now
-
-    # <%= form.hidden_field :project_id, value: @activity.project_id %>
-    @activity.project = project
+    @activity.project = Project.find(params[:project_id])
   end
 
   # edit_activity_path: GET /activities/9/edit
   def edit; end
 
-  # TODO: cleaner POST /projects/:project_id/activities
-  # activity_path: POST /activities
+  # project_activities_path: POST /projects/12/activities
   def create
-    # <%= form.hidden_field :project_id, value: @activity.project_id %>
-    project = Project.find(params[:activity][:project_id])
-    client = project.client
-
     @activity = Activity.new(activity_params)
     @activity.user = current_user
-    @activity.client = project.client
-    @activity.project = project
+    @activity.project = Project.find(params[:project_id])
+    @activity.client = @activity.project.client
 
     if @activity.save
-      redirect_to project
+      redirect_to @activity.project
     else
       render 'new'
     end

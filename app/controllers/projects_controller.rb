@@ -10,24 +10,18 @@ class ProjectsController < ApplicationController
 
   # new_client_project_path: GET /clients/12/projects/new
   def new
-    @client = Client.find(params[:client_id])
     @project = Project.new
-
-    # <%= form.hidden_field :client_id, value: @project.client_id %>
-    @project.client = @client
+    @project.client = Client.find(params[:client_id])
   end
 
   # edit_project_path: GET /projects/9/edit
   def edit; end
 
-  # TODO: cleaner POST /clients/:client_id/projects
-  # project_path: POST /projects
+  # client_projects_path POST /clients/:client_id/projects
   def create
     @project = Project.new(project_params)
     @project.user = current_user
-
-    # <%= form.hidden_field :client_id, value: @project.client_id %>
-    @project.client_id = params[:project][:client_id]
+    @project.client = Client.find(params[:client_id])
 
     if @project.save
       redirect_to @project

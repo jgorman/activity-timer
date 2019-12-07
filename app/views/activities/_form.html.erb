@@ -6,8 +6,13 @@
   <% end %>
 </p>
 
-<%= form_with(model: @activity, data: { controller: 'form' }) do |form| %>
-  <%= form.hidden_field :project_id, value: @activity.project_id %>
+<%= form_with(
+      model: @activity,
+      url: (@activity.persisted? ?
+        activity_path(@activity) :
+        project_activities_path(@activity.project)),
+      data: { controller: 'form' }
+    ) do |form| %>
 
   <div class="row my-2">
     <div class="col-sm">

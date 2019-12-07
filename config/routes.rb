@@ -17,12 +17,12 @@ Rails.application.routes.draw do
   end
 
   resources :clients do
-    resources :projects, only: %i[new]
+    resources :projects, only: %i[new create]
   end
 
-  resources :projects do
-    resources :activities, only: %i[new]
+  resources :projects, except: %i[new create] do
+    resources :activities, only: %i[new create]
   end
 
-  resources :activities
+  resources :activities, except: %i[new create]
 end
