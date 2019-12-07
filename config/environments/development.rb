@@ -31,6 +31,16 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
+  cable_in_rails = true
+  if cable_in_rails
+    # Mount Action Cable inside rails.
+    config.action_cable.mount_path = '/cable'
+  else
+    # Run Action Cable outside rails.
+    config.action_cable.mount_path = nil
+    config.action_cable.url = 'ws://localhost:28080'
+  end
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 

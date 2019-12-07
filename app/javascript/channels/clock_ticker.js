@@ -4,7 +4,7 @@ import { sprintf } from 'sprintf-js'
 const tick_interval = 1000
 
 class ClockTicker {
-  timer = undefined
+  timer = null
 
   constructor() {
     const now = new Date()

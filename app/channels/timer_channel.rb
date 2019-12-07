@@ -18,8 +18,8 @@ class TimerChannel < ApplicationCable::Channel
   end
 
   def get_timer(data)
-    puts "%%%%% this.get_timer(#{data.inspect})"
     timer = Timer.find_by(user_id: current_user.id)
+    puts "TTTTT this.get_timer user(#{current_user.id})"
     TimerChannel.broadcast_to(current_user.id, timer)
   end
 

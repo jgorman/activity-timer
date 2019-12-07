@@ -29,4 +29,4 @@ REAL_production:
 
 production:
   <<: *default
-  database: activity_timer_dev
+  database: activity_timer_prod

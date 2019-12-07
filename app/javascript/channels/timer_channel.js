@@ -19,7 +19,7 @@ const sub = consumer.subscriptions.create(
     },
 
     received(timer) {
-      // console.log(`##### received ${user_id}`, { timer })
+      console.log(`##### received ${user_id}`, { timer })
       clock.new_timer(timer)
     },
 
