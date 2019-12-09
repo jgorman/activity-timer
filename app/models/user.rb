@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  extend GuestHistory
+
   has_many :clients, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :activities, dependent: :destroy

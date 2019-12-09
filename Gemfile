@@ -27,6 +27,7 @@ gem 'devise'
 # gem 'omniauth' # https://github.com/advisories/GHSA-ww4x-rwq6-qpgf
 gem 'turbolinks_render'
 gem 'octicons_helper'
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
