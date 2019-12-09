@@ -4,6 +4,8 @@
 
 @import '../variables';
 
+$img-height: 25px;
+
 .timer-page {
 
   .clock-space {
@@ -23,7 +25,6 @@
       box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.13);
 
       #clock-works {
-
         display: flex;
         margin-left: $content-margin;
 
@@ -31,15 +32,29 @@
           margin-left: $sep;
         }
 
-        a, button {
+        a {
           margin-left: $sep;
+          img {
+            width: $img-height;
+            height: $img-height;
+          }
         }
 
-        input {
-          border-style: none;
+        .align-form {
+          display: flex;
+          align-items: center;
+
+          input {
+            border-style: none;
+          }
+
+          input[type=image] {
+            width: $img-height;
+            height: $img-height;
+            margin-left: $sep;
+          }
         }
       }
-
     }
   }
 }

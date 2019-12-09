@@ -6,16 +6,19 @@
 
   <%= form_with(model: @timer, url: timer_path) do |form| %>
 
-    <%= form.text_field :name,
-        data: { target: 'clock.name' },
-        placeholder: 'Activity' %>
+    <div class="align-form">
+      <%= form.text_field :name,
+          size: 25,
+          data: { target: 'clock.name' },
+          placeholder: 'What are you working on?' %>
 
-    <%= form.select :project_id, @project_options, {},
-        data: { target: 'clock.project' } %>
+      <%= form.select :project_id, @project_options, {},
+          data: { target: 'clock.project' } %>
 
-    <% unless @timer.persisted? %>
-      <button type="submit"><%= octicon 'play' %></button>
-    <% end %>
+      <% unless @timer.persisted? %>
+        <input type="image" src="<%= image_path('play-button.svg') %>">
+      <% end %>
+    </div>
 
   <% end %>
 
@@ -23,10 +26,10 @@
 
   <% if @timer.persisted? %>
 
-    <%= link_to octicon('check'),
+    <%= link_to image_pack_tag('check-mark.svg'),
       timer_finish_path, method: :post, remote: true %>
 
-    <%= link_to octicon('trashcan'),
+    <%= link_to image_pack_tag('trash-can.svg'),
       timer_path, method: :delete, remote: true %>
 
   <% end %>
