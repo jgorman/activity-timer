@@ -1,10 +1,8 @@
 <% @page_title = 'Clients' %>
 <%= render 'layouts/page-top' %>
 
-<div class="container-fluid">
-  <%= link_to 'New client', new_client_path, class: 'row mb-3' %>
+<%= link_to 'New client', new_client_path, class: 'd-block mb-2' %>
 
-  <% @clients.each do |client| %>
-    <%= link_to client.display_name, client_path(client), class: 'row mb-2' %>
-  <% end %>
-</div>
+<% @clients.each do |client| %>
+  <%= link_to client.display_name, client_path(client), class: 'd-block mb-2' %>
+<% end %>

@@ -4,8 +4,10 @@
 
 @import '../variables';
 
-.page-layout {
+$nav-background: #222;
+$nav-color: #ddd;
 
+.page-layout {
   display: flex;
   margin-right: $page-margin;
   margin-left: $page-margin;
@@ -13,25 +15,27 @@
 
   .nav-space {
     width: $left-nav-width;
+    min-width: $left-nav-width;
 
     .nav-panel {
-      background-color: #222;
-      height: 100vh;
       position: fixed;
       top: 0;
+      width: $left-nav-width;
+      height: 100vh;
+      background-color: $nav-background;
 
       .nav-link {
-        color: #ddd;
+        color: $nav-color;
 
         &:hover {
-          color: #fff;
+          color: white;
         }
       }
     }
   }
 
   .content-panel {
-    margin-left: $content-margin;
+    padding-left: $content-padding;
     width: 100%;
   }
 

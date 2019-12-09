@@ -26,7 +26,7 @@ $img-height: 25px;
 
       #clock-works {
         display: flex;
-        margin-left: $content-margin;
+        padding-left: $content-padding;
 
         #ticker {
           margin-left: $sep;
