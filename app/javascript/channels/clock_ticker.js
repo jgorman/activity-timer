@@ -9,7 +9,7 @@ class ClockTicker {
   constructor() {
     const now = new Date()
     this.created = sprintf('%d:%02d', now.getHours(), now.getMinutes())
-    console.log(`CLOCK(${this.created}) created`)
+    // console.log(`CLOCK(${this.created}) created`)
     setInterval(this.ticker, tick_interval)
   }
 
@@ -18,10 +18,12 @@ class ClockTicker {
   }
 
   new_timer = timer => {
+    /*
     console.log(`CLOCK(${this.created}) new_timer()`, {
       old: this.timer,
       new: timer,
     })
+    */
 
     if (timer) timer.start_t = Date.parse(timer.start)
     const current_timer = this.timer
@@ -31,14 +33,14 @@ class ClockTicker {
     if (current_timer && timer) {
       if (current_timer.id !== timer.id) {
         // New timer. Probably saved an activity. Replace page.
-        console.log('===== id', { current_timer, timer })
+        // console.log('===== id', { current_timer, timer })
         this.replace_page()
       } else if (
         current_timer.name !== timer.name ||
         current_timer.project_id !== timer.project_id
       ) {
         // The name or project changed. Replace clock.
-        console.log('===== name', { current_timer, timer })
+        // console.log('===== name', { current_timer, timer })
         this.replace_clock()
       } else {
         // console.log('===== unchanged', { current_timer, timer })
@@ -47,14 +49,14 @@ class ClockTicker {
 
     // The timer disappeared. Probably saved an activity. Replace page.
     if (current_timer && !timer) {
-      console.log('===== disappeared', { current_timer, timer })
+      // console.log('===== disappeared', { current_timer, timer })
       this.replace_page()
       this.erase_time()
     }
 
     // A new timer appeared. Replace clock.
     if (!current_timer && timer) {
-      console.log('===== appeared', { current_timer, timer })
+      // console.log('===== appeared', { current_timer, timer })
       this.replace_clock()
     }
 
@@ -65,12 +67,12 @@ class ClockTicker {
   }
 
   replace_clock = () => {
-    console.log('^^^^^ replace_clock')
+    // console.log('^^^^^ replace_clock')
     Rails.ajax({ type: 'GET', url: '/timer/replace_clock.js' })
   }
 
   replace_page = () => {
-    console.log('^^^^^ replace_page')
+    // console.log('^^^^^ replace_page')
     Rails.ajax({ type: 'GET', url: '/timer/replace_page.js' })
   }
 
@@ -84,7 +86,7 @@ class ClockTicker {
   }
 
   erase_time = () => {
-    console.log('~~~~~ erase_time')
+    // console.log('~~~~~ erase_time')
     document.title = 'Timer'
     $('#nav-timer-link').html('Timer')
     $('#ticker').html('')

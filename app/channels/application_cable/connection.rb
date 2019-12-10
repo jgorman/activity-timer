@@ -4,8 +4,7 @@ module ApplicationCable
 
     def connect
       self.current_user = find_verified_user
-      puts "$$$$$ Connection.connect current_user(#{current_user.inspect})"
-      logger.add_tags 'ActionCable', current_user.id
+      logger.add_tags sprintf('%6d', current_user.id)
     end
 
     protected
@@ -19,13 +18,13 @@ module ApplicationCable
       end
     end
 
-    def find_verified_user_from_warden
-      if warden = request.env['warden']
-        if user = warden.user
-          return user
-        end
-      end
-      reject_unauthorized_connection
-    end
+    # def find_verified_user_from_warden
+    #   if warden = request.env['warden']
+    #     if user = warden.user
+    #       return user
+    #     end
+    #   end
+    #   reject_unauthorized_connection
+    # end
   end
 end
