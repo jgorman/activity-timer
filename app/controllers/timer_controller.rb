@@ -1,5 +1,4 @@
 class TimerController < ApplicationController
-
   # timer_path: GET /timer
   def index
     #session.keys.each {|key| puts sprintf('^^^^^ %-25s %s', key, session[key]) }

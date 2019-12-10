@@ -12,7 +12,7 @@ module GuestHistory
     clients: 5,
     projects: 5,
     days: 90,
-    sessions: 8,
+    sessions: 8
   }
 
   def guest_history(config = {})
@@ -34,9 +34,7 @@ module GuestHistory
     @clients = []
     @config[:clients].times do
       client = Client.new(user: @guest, name: Faker::Company.name)
-      if client.save
-        @clients << [client, create_projects(client)]
-      end
+      @clients << [client, create_projects(client)] if client.save
     end
   end
 
@@ -45,9 +43,7 @@ module GuestHistory
     @config[:projects].times do
       name = Faker::Company.catch_phrase
       project = Project.new(user: @guest, client: client, name: name)
-      if project.save
-        projects << project
-      end
+      projects << project if project.save
     end
     projects
   end
@@ -64,17 +60,18 @@ module GuestHistory
         project = projects[rand(projects.length)]
         length = (rand(23) + 1) * 5
         name = Faker::Marketing.buzzwords
-        activity = Activity.new(
-          user: @guest,
-          client: client,
-          project: project,
-          start: start,
-          length: length * 60,
-          name: name,
-        ).save!
+        activity =
+          Activity.new(
+            user: @guest,
+            client: client,
+            project: project,
+            start: start,
+            length: length * 60,
+            name: name
+          )
+            .save!
         start = start.advance(minutes: length)
       end
     end
   end
-
 end
