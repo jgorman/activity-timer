@@ -9,12 +9,12 @@ $logo-green: #00bb00;
 $logo-blue: #6666ff;
 
 $sep: 10px;
-$sep5: 5px;
+$sep2: calc(#{$sep} * 2);
+$sep5: calc(#{$sep} / 2);
 
 $left-nav-width: 90px;
 $top-nav-height: 70px;
 
-$page-margin: $sep;
 $content-padding: $sep;
 
 // Customize Bootstrap variables.

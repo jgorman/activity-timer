@@ -4,7 +4,7 @@
 
 @import '../variables';
 
-$img-height: 25px;
+$img-height: 20px;
 
 .timer-page {
 
@@ -14,9 +14,10 @@ $img-height: 25px;
     .clock-face {
       position: fixed;
       top: 0;
-      left: calc(#{$page-margin} + #{$left-nav-width});
+      left: $left-nav-width;
 
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
 
       width: 100%;
@@ -26,7 +27,8 @@ $img-height: 25px;
 
       #clock-works {
         display: flex;
-        padding-left: $content-padding;
+        flex-wrap: wrap;
+        padding: $content-padding;
 
         #ticker {
           margin-left: $sep;
@@ -42,6 +44,7 @@ $img-height: 25px;
 
         .align-form {
           display: flex;
+          flex-wrap: wrap;
           align-items: center;
 
           input {
