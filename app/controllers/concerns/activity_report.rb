@@ -1,11 +1,11 @@
 module ActivityReport
-  Defaults = { days: 10 }
+  Defaults = { days: 20 }
 
   Day = Struct.new(:date, :length, :tasks)
   Task = Struct.new(:id, :start, :finish, :length, :project, :name, :sessions)
   Session = Struct.new(:start, :finish, :length)
   ClientStruct = Struct.new(:id, :name)
-  ProjectStruct = Struct.new(:id, :client, :name)
+  ProjectStruct = Struct.new(:id, :client, :name, :color)
 
   def activity_report(config = {})
     @config = Defaults.deep_merge(config)
@@ -26,10 +26,11 @@ module ActivityReport
 
   def get_projects(clients)
     projects = {}
-    Project.where(user_id: current_user.id).pluck(:id, :client_id, :name)
-      .each do |id, client_id, name|
+    Project.where(user_id: current_user.id).pluck(:id, :client_id, :name, :color)
+      .each do |id, client_id, name, color|
       if client = clients[client_id]
-        projects[id] = ProjectStruct.new(id, client, name)
+        hexcolor = sprintf('#%06x', color)
+        projects[id] = ProjectStruct.new(id, client, name, hexcolor)
       end
     end
     projects

@@ -20,7 +20,10 @@
             </div>
           <% end %>
           <%= task.name %> &bull;
-          <%= task.project.name %> &bull;
+          <span style="color: <%= task.project.color %>;">
+            <%= task.project.name %>
+          </span>
+          &bull;
           <%= task.project.client.name %>
         </div>
         <div>
@@ -43,7 +46,10 @@
             <div class="inline-center">
               <div class="session-box"></div>
               <%= task.name %> &bull;
-              <%= task.project.name %> &bull;
+              <span style="color: <%= task.project.color %>;">
+                <%= task.project.name %>
+              </span>
+              &bull;
               <%= task.project.client.name %>
             </div>
             <div>

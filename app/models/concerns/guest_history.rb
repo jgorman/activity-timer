@@ -44,7 +44,9 @@ module GuestHistory
     projects = []
     @config[:projects_per_client].times do
       name = Faker::Company.catch_phrase
-      project = Project.new(user: @guest, client: client, name: name)
+      color = Project.random_color
+      project =
+        Project.new(user: @guest, client: client, name: name, color: color)
       projects << project if project.save
     end
     projects
