@@ -26,10 +26,10 @@
 
   <% if @timer.persisted? %>
 
-    <%= link_to image_pack_tag('check-mark.svg'),
+    <%= link_to image_pack_tag('check-mark.svg', size: '23'),
       timer_finish_path, method: :post, remote: true %>
 
-    <%= link_to image_pack_tag('trash-can.svg'),
+    <%= link_to image_pack_tag('cross.svg', size: '20'),
       timer_path, method: :delete, remote: true %>
 
   <% end %>
