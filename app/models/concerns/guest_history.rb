@@ -10,7 +10,9 @@ module GuestHistory
       password: 'guest123'
     },
     clients: 5,
-    projects: 5,
+    projects_per_client: 5,
+    project_reuse: 0.80,
+    name_reuse: 0.80,
     days: 90,
     sessions: 8
   }
@@ -40,7 +42,7 @@ module GuestHistory
 
   def create_projects(client)
     projects = []
-    @config[:projects].times do
+    @config[:projects_per_client].times do
       name = Faker::Company.catch_phrase
       project = Project.new(user: @guest, client: client, name: name)
       projects << project if project.save
@@ -56,10 +58,17 @@ module GuestHistory
       next if day.on_weekend?
       start = day.to_time.advance(hours: 9)
 
-      8.times do
-        project = projects[rand(projects.length)]
+      project = nil
+      name = nil
+      @config[:sessions].times do
+        if !project || @config[:project_reuse] < rand
+          project = projects[rand(projects.length)]
+          name = Faker::Marketing.buzzwords
+        end
+        if !name || @config[:name_reuse] < rand
+          name = Faker::Marketing.buzzwords
+        end
         length = (rand(23) + 1) * 5
-        name = Faker::Marketing.buzzwords
         activity =
           Activity.new(
             user: @guest,

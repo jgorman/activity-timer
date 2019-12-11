@@ -1,23 +1,68 @@
-<div class="table-responsive">
-  <table class="table">
-    <tr>
-      <th>Start</th>
-      <th class="text-right">Length</th>
-      <th>Activity</th>
-      <th>Client</th>
-      <th>Project</th>
-    </tr>
 
-    <% @activities.each do |activity| %>
-      <tr>
-        <td>
-          <%= link_to(datetime_to_s(activity.start), edit_activity_path(activity)) %>
-        </td>
-        <td class="text-right"><%= seconds_to_hm(activity.length) %></td>
-        <td><%= activity.name %></td>
-        <td><%= activity.client_name %></td>
-        <td><%= activity.project_name %></td>
-      </tr>
+<% @days.each do |day| %>
+  <div class="all-day">
+
+    <div class="day-line">
+      <div><%= day.date %></div>
+      <div><%= seconds_to_hms(day.length) %></div>
+    </div>
+
+    <% day.tasks.each do |task| %>
+
+      <div class="task-line">
+        <div>
+          <% if task.sessions.length > 1 %>
+            <div
+              class="session-count"
+              data-toggle="collapse"
+              data-target="#task-<%= task.id %>">
+              <%= task.sessions.length %>
+            </div>
+          <% end %>
+          <%= task.name %> &bull;
+          <%= task.project.name %> &bull;
+          <%= task.project.client.name %>
+        </div>
+        <div>
+          <div class="start-finish">
+            <%= datetime_to_time_s(task.start) %> -
+            <%= datetime_to_time_s(task.finish) %>
+          </div>
+          <div class="length-box">
+            <%= seconds_to_hms(task.length) %>
+          </div>
+        </div>
+      </div>
+
+      <% if task.sessions.length > 1 %>
+        <div class="collapse" id="task-<%= task.id %>">
+
+        <% task.sessions.each do |session| %>
+
+          <div class="task-line">
+            <div class="inline-center">
+              <div class="session-box"></div>
+              <%= task.name %> &bull;
+              <%= task.project.name %> &bull;
+              <%= task.project.client.name %>
+            </div>
+            <div>
+              <div class="start-finish">
+                <%= datetime_to_time_s(session.start) %> -
+                <%= datetime_to_time_s(session.finish) %>
+              </div>
+              <div class="length-box">
+                <%= seconds_to_hms(session.length) %>
+              </div>
+            </div>
+
+          </div>
+        <% end %>
+
+        </div>
+      <% end %>
+
     <% end %>
-  </table>
-</div>
+
+  </div>
+<% end %>

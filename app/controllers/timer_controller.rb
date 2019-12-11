@@ -1,13 +1,16 @@
 class TimerController < ApplicationController
+  include ActivityReport
+
   # timer_path: GET /timer
   def index
-    #session.keys.each {|key| puts sprintf('^^^^^ %-25s %s', key, session[key]) }
+    # session.keys.each {|key|
+    #   puts sprintf('^^^^^ %-25s %s', key, session[key]) }
 
     respond_to do |format|
       format.html do
         # Display the timer page.
         @timer = current_user.timer || Timer.new
-        @activities = get_activities
+        @days = activity_report
         @project_options = project_options
       end
 
@@ -78,7 +81,7 @@ class TimerController < ApplicationController
   def replace_page
     # Redisplay the page with the updated report.
     @timer = Timer.find_by_id(current_user.id) || Timer.new
-    @activities = get_activities
+    @days = activity_report
     @project_options = project_options
 
     respond_to do |format|
@@ -117,17 +120,8 @@ class TimerController < ApplicationController
   private
 
   def send_timer(timer = nil)
-    puts "@@@@@ sending the timer(#{timer.inspect})"
+    # puts "@@@@@ sending the timer(#{timer.inspect})"
     TimerChannel.broadcast_to(current_user.id, timer)
-  end
-
-  def get_activities
-    current_user.activities.select(
-      'activities.*, projects.name as project_name, clients.name as client_name'
-    )
-      .where('start >= ?', 10.days.ago.midnight)
-      .order(start: :desc)
-      .joins(:project, :client)
   end
 
   def project_options

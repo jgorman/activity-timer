@@ -42,24 +42,6 @@ class ApplicationController < ActionController::Base
   # Controller and view helpers
   #
 
-  helper_method :seconds_to_hm
-  def seconds_to_hm(seconds)
-    seconds ||= 0
-    hours = seconds / (60 * 60)
-    minutes = (seconds / 60) % 60
-    sprintf('%2d:%02d', hours, minutes)
-  end
-
-  helper_method :show_elapsed
-  def show_elapsed(start_time)
-    return '' unless start_time
-    seconds = Time.now - start_time
-    hh = seconds / (60 * 60)
-    mm = (seconds / 60) % 60
-    ss = seconds % 60
-    sprintf('%d:%02d:%02d', hh, mm, ss)
-  end
-
   def hm_to_seconds(hhmm)
     hhmm ||= ''
     if hhmm.include?(':')

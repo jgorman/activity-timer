@@ -11,16 +11,12 @@ module ApplicationHelper
     @page_header || page_title
   end
 
-  def is_admin?
-    current_user && current_user.is_admin?
-  end
-
-  def datetime_to_s(datetime)
-    datetime.strftime('%Y-%m-%d %I:%M %p')
-  end
-
   def image_path(name)
     asset_pack_path("media/images/#{name}")
+  end
+
+  def is_admin?
+    current_user && current_user.is_admin?
   end
 
   def project_links(project)
@@ -32,6 +28,41 @@ module ApplicationHelper
           escape(project.display_name)
         }</a>"
     links.html_safe
+  end
+
+  def datetime_to_s(datetime)
+    datetime.strftime('%Y-%m-%d %I:%M %p')
+  end
+
+  def datetime_to_time_s(datetime)
+    datetime.strftime('%I:%M %p')
+  end
+
+  def seconds_to_parts(seconds)
+    seconds ||= 0
+    hh = seconds / (60 * 60)
+    mm = (seconds / 60) % 60
+    ss = seconds % 60
+    [hh, mm, ss]
+  end
+
+  def seconds_to_hm(seconds)
+    hh, mm = seconds_to_parts(seconds)
+    sprintf('%2d:%02d', hh, mm)
+  end
+
+  def seconds_to_hms(seconds)
+    hh, mm, ss = seconds_to_parts(seconds)
+    sprintf('%2d:%02d:%02d', hh, mm, ss)
+  end
+
+  def show_elapsed(start_time)
+    return '' unless start_time
+    seconds = Time.now - start_time
+    hh = seconds / (60 * 60)
+    mm = (seconds / 60) % 60
+    ss = seconds % 60
+    sprintf('%d:%02d:%02d', hh, mm, ss)
   end
 
   module NoArgument; end
