@@ -32,12 +32,7 @@ class ActivitiesController < ApplicationController
 
   # activity_path: PATCH /activities/9
   def update
-    ap = activity_params
-    if length = ap[:length]
-      ap[:finish] = @activity.start + length
-    end
-
-    if @activity.update(ap)
+    if @activity.update(activity_params)
       redirect_to @activity.project
     else
       render 'edit'

@@ -6,7 +6,6 @@ one:
   project: one
   name: Working hard
   start: 2019-11-08 12:50:54
-  finish: 2019-11-08 13:00:54
   length: 600
 
 two:
@@ -15,5 +14,4 @@ two:
   project: two
   name: Or hardly working
   start: 2019-11-08 13:45:56
-  finish: 2019-11-08 14:45:56
   length: 3600

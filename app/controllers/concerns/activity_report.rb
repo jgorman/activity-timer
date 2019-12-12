@@ -39,15 +39,15 @@ module ActivityReport
   def get_raw_days
     first_day = Date.today.beginning_of_day.advance(days: -Defaults[:days])
     acts =
-      Activity.where('user_id = ? and finish >= ?', current_user.id, first_day)
-        .pluck(:id, :start, :finish, :length, :project_id, :name)
+      Activity.where('user_id = ? and start >= ?', current_user.id, first_day)
+        .pluck(:id, :start, :length, :project_id, :name)
         .to_a
 
     # Gather the activities by date, focus.
     raw_days = {}
     acts.each do |act|
-      id, start, finish, length, project_id, name = act
-      date = finish.to_date
+      id, start, length, project_id, name = act
+      date = start.to_date
       task_key = [project_id, name]
 
       raw_days[date] ||= {}
@@ -78,7 +78,8 @@ module ActivityReport
 
         # Gather and sort the task sessions.
         sessions = []
-        acts.each do |id, start, finish, length, project_id, name|
+        acts.each do |id, start, length, project_id, name|
+          finish = start + length
           task_id = id
           task_start = start if !task_start || start < task_start
           task_finish = finish if !task_finish || finish > task_finish
@@ -86,7 +87,7 @@ module ActivityReport
           day_length += length
           sessions << Session.new(id, start, finish, length)
         end
-        sessions.sort! { |a, b| b.finish <=> a.finish }
+        sessions.sort! { |a, b| b.start <=> a.start }
 
         tasks <<
           Task.new(
@@ -99,7 +100,7 @@ module ActivityReport
             sessions
           )
       end
-      tasks.sort! { |a, b| b.finish <=> a.finish }
+      tasks.sort! { |a, b| b.start <=> a.start }
 
       date_s =
         if date == Date.current
