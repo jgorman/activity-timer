@@ -99,6 +99,16 @@ $line-highlight: #f4f4f4;
       border-radius: 25%;
     }
 
+    input {
+      border-style: none;
+      max-width: 150px;
+      /*
+      &:hover {
+        background-color: $line-highlight;
+      }
+      */
+    }
+
     .length-box {
       @extend .inline-center;
       justify-content: flex-end;

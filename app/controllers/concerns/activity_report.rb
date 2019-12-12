@@ -3,7 +3,7 @@ module ActivityReport
 
   Day = Struct.new(:date, :length, :tasks)
   Task = Struct.new(:id, :start, :finish, :length, :project, :name, :sessions)
-  Session = Struct.new(:start, :finish, :length)
+  Session = Struct.new(:id, :start, :finish, :length)
   ClientStruct = Struct.new(:id, :name)
   ProjectStruct = Struct.new(:id, :client, :name, :color)
 
@@ -84,7 +84,7 @@ module ActivityReport
           task_finish = finish if !task_finish || finish > task_finish
           task_length += length
           day_length += length
-          sessions << Session.new(start, finish, length)
+          sessions << Session.new(id, start, finish, length)
         end
         sessions.sort! { |a, b| b.finish <=> a.finish }
 

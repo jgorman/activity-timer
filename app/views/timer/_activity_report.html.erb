@@ -45,7 +45,15 @@
           <div class="task-line">
             <div class="inline-center">
               <div class="session-box"></div>
-              <%= task.name %> &bull;
+
+              <input
+                data-target="activity.name"
+                data-id="<%= session.id %>"
+                placeholder="Add description"
+                type="text"
+                value="<%= task.name %>">
+
+              &bull;
               <span style="color: <%= task.project.color %>;">
                 <%= task.project.name %>
               </span>

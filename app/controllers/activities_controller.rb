@@ -32,7 +32,12 @@ class ActivitiesController < ApplicationController
 
   # activity_path: PATCH /activities/9
   def update
-    if @activity.update(activity_params)
+    ap = activity_params
+    if length = ap[:length]
+      ap[:finish] = @activity.start + length
+    end
+
+    if @activity.update(ap)
       redirect_to @activity.project
     else
       render 'edit'
@@ -52,8 +57,10 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params[:activity][:length] = hm_to_seconds(params[:activity][:length])
     perms = params.require(:activity).permit(:start, :length, :name)
+    if length_s = perms[:length]
+      perms[:length] = hm_to_seconds(length_s)
+    end
     perms
   end
 end

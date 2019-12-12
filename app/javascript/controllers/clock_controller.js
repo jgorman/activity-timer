@@ -1,22 +1,23 @@
 import { Controller } from 'stimulus'
-import { sprintf } from 'sprintf-js'
 import Rails from '@rails/ujs'
 
-let cc_id = 0
+let sc_id = 0
 
 class Clock extends Controller {
   static targets = ['name', 'project']
 
   initialize() {
-    this.cc_id = ++cc_id
-    const debug = this.data.get('debug').toLowerCase()
-    this.debugOn = debug === 'on' || debug === 'true' || debug === '1'
+    this.sc_id = ++sc_id
+    if (this.data.has('debug')) {
+      const debug = this.data.get('debug').toLowerCase()
+      this.debugOn = debug === 'on' || debug === 'true' || debug === '1'
+    }
 
-    this.debug('initialize', { cc: this })
+    this.debug('initialize', { this: this })
   }
 
   connect() {
-    this.debug('connect', { cc: this })
+    this.debug('connect', { this: this })
 
     // Listen for field updates
     this.nameTarget.addEventListener('change', this.saveName, true)
@@ -24,7 +25,7 @@ class Clock extends Controller {
   }
 
   disconnect() {
-    this.debug('disconnect', { cc: this })
+    this.debug('disconnect', { this: this })
 
     this.nameTarget.removeEventListener('change', this.saveName)
     this.projectTarget.removeEventListener('change', this.saveProject)
