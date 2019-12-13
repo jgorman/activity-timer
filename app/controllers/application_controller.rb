@@ -39,7 +39,19 @@ class ApplicationController < ActionController::Base
   end
 
   #####
-  # Controller and view helpers
+  #
+  # Controller and view helpers.
+  #
+  # To use ApplicationHelpers in controllers:
+  #
+  #   helpers.seconds_to_hm(length)
+  #
+  # To use controller helpers in views:
+  #
+  #   helper_method :menu_label_for
+  #   def menu_label_for(tag)
+  #     label, title = t(tag)
+  #   end
   #
 
   def hm_to_seconds(hhmm)

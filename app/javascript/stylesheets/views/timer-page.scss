@@ -36,7 +36,7 @@ $line-highlight: #f4f4f4;
           flex-wrap: wrap;
           align-items: center;
 
-          input {
+          input, select {
             border-style: none;
           }
 
@@ -101,12 +101,11 @@ $line-highlight: #f4f4f4;
 
     input {
       border-style: none;
-      max-width: 150px;
-      /*
-      &:hover {
-        background-color: $line-highlight;
+      background-color: inherit;
+
+      &:focus {
+        width: 250px;
       }
-      */
     }
 
     .length-box {

@@ -36,7 +36,7 @@ class Clock extends Controller {
     Rails.ajax({
       url: '/timer/name',
       type: 'POST',
-      data: `name=${name}`,
+      data: $.param({ name }),
     })
   }
 
@@ -45,7 +45,7 @@ class Clock extends Controller {
     Rails.ajax({
       url: '/timer/project',
       type: 'POST',
-      data: `project_id=${project_id}`,
+      data: $.param({ project_id }),
     })
   }
 

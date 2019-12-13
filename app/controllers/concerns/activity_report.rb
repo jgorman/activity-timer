@@ -26,7 +26,12 @@ module ActivityReport
 
   def get_projects(clients)
     projects = {}
-    Project.where(user_id: current_user.id).pluck(:id, :client_id, :name, :color)
+    Project.where(user_id: current_user.id).pluck(
+      :id,
+      :client_id,
+      :name,
+      :color
+    )
       .each do |id, client_id, name, color|
       if client = clients[client_id]
         hexcolor = sprintf('#%06x', color)

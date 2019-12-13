@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post '/timer/project', to: 'timer#project', as: 'timer_project'
   get '/timer/replace_page', to: 'timer#replace_page', as: 'timer_replace_page'
   get '/timer/replace_clock', to: 'timer#replace_clock', as: 'timer_replace_clock'
+  patch '/timer/activity/:id', to: 'timer#activity', as: 'timer_activity'
 
   namespace :admin do
     resources :users

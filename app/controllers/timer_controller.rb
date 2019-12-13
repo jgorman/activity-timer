@@ -72,8 +72,8 @@ class TimerController < ApplicationController
     timer.destroy
     send_timer
 
-    # Call replace_clock for fast feedback.
-    # replace_page will get called by the js global_ticker later on.
+    # Call replace_clock now for fast feedback.
+    # timer_channel call replace_page when it gets the empty timer.
     replace_clock
   end
 
@@ -106,6 +106,42 @@ class TimerController < ApplicationController
     timer.project_id = params[:project_id].to_i
     timer.save!
     send_timer(timer)
+  end
+
+  # timer_activity_path: PATCH /timer/activity/:id
+  def activity
+    puts "##### timer_activity params(#{params.inspect})"
+    id = params[:id]
+    target = params[:target]
+    name = params[:name]
+    project_id = params[:project_id]
+
+    if target.include?('activity.names')
+      # Update all names with the same project, date and name.
+      return unless activity = Activity.find_by_id(params[:id])
+      return unless name
+      project_id = activity.project_id
+      start = activity.start
+      old_name = activity.name
+
+      Activity.where(
+        'project_id = ? and ? <= start and start < ? and name = ?',
+        project_id,
+        start.beginning_of_day,
+        start.end_of_day,
+        old_name
+      )
+        .update_all(name: name)
+
+      replace_page
+    elsif target.include?('activity.name')
+      # Update a single activity name.
+      return unless activity = Activity.find_by_id(params[:id])
+      return unless name
+      activity.name = name
+      activity.save!
+      replace_page
+    end
   end
 
   # timer_path: DELETE /timer

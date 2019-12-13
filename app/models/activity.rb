@@ -16,7 +16,7 @@ class Activity < ApplicationRecord
   private
 
   # Sort projects by latest activity.
-  after_save { project.touch }
+  after_create { project.touch }
 end
 
 class ActivityValidator < ActiveModel::Validator

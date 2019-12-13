@@ -30,6 +30,13 @@ module ApplicationHelper
     links.html_safe
   end
 
+  def input_size(text)
+    len = text.length.to_i
+    len = 5 if len < 5
+    len = 16 if len > 16
+    len
+  end
+
   def datetime_to_s(datetime)
     datetime.strftime('%Y-%m-%d %I:%M %p')
   end

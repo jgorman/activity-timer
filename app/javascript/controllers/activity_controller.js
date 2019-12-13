@@ -4,7 +4,6 @@ import Rails from '@rails/ujs'
 let sc_id = 0
 
 class Activity extends Controller {
-
   initialize() {
     this.sc_id = ++sc_id
     if (this.data.has('debug')) {
@@ -30,13 +29,14 @@ class Activity extends Controller {
     const target = input.dataset.target
     const id = input.dataset.id
     this.debug('saveChange', { input, value, target, id })
-    if (target !== 'activity.name') return
 
-    Rails.ajax({
-      url: `/activities/${id}`,
-      type: 'PATCH',
-      data: `activity[name]=${value}`,
-    })
+    if (target.includes('activity.name')) {
+      Rails.ajax({
+        url: `/timer/activity/${id}`,
+        type: 'PATCH',
+        data: $.param({ target, name: value }),
+      })
+    }
   }
 
   debug = (msg, extra = '') => {

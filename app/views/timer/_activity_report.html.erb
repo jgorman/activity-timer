@@ -19,7 +19,15 @@
               <%= task.sessions.length %>
             </div>
           <% end %>
-          <%= task.name %> &bull;
+
+          <%= text_field_tag(:name, task.name,
+            'data-target': 'activity.names',
+            'data-id': task.id,
+            placeholder: 'Add description',
+            size: input_size(task.name)
+          ) %>
+
+          &bull;
           <span style="color: <%= task.project.color %>;">
             <%= task.project.name %>
           </span>
@@ -46,12 +54,12 @@
             <div class="inline-center">
               <div class="session-box"></div>
 
-              <input
-                data-target="activity.name"
-                data-id="<%= session.id %>"
-                placeholder="Add description"
-                type="text"
-                value="<%= task.name %>">
+                <%= text_field_tag(:name, task.name,
+                  'data-target': 'activity.name',
+                  'data-id': task.id,
+                  placeholder: 'Add description',
+                  size: input_size(task.name)
+                ) %>
 
               &bull;
               <span style="color: <%= task.project.color %>;">
