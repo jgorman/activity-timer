@@ -1,4 +1,4 @@
-<% @page_title = "#{@project.client.name} - New Project" %>
-<%= render 'layouts/page-top' %>
+<% @page_title = @project.client.display_name %>
+<% @page_header = client_link(@project.client) + ' - New Project' %>
 
 <%= render 'form' %>

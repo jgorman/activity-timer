@@ -33,7 +33,18 @@
       </div>
 
       <div class="page-right">
-        <%= yield %>
+        <% if @custom_page %>
+          <%= yield %>
+        <% else %>
+          <nav class="top-menu">
+            <span><%= page_header %></span>
+            <%= render 'layouts/alerts' %>
+            <%= yield :top_menu %>
+          </nav>
+          <div class="content-panel">
+            <%= yield %>
+          </div>
+        <% end %>
       </div>
 
     </div>

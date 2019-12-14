@@ -1,12 +1,12 @@
 <% @page_title = @project.display_title %>
 <% @page_header = project_links(@project) %>
-<%= render 'layouts/page-top' %>
 
-<p>
-  <%= link_to 'Client', client_path(@project.client) %> |
-  <%= link_to 'Edit project', edit_project_path(@project) %> |
-  <%= link_to 'New activity', new_project_activity_path(@project) %>
-</p>
+<% content_for :top_menu do %>
+  <span>
+    <%= link_to 'Edit project', edit_project_path(@project) %> |
+    <%= link_to 'New activity', new_project_activity_path(@project) %>
+  </span>
+<% end %>
 
 <div class="table-responsive">
   <table class="table">

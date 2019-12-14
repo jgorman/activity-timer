@@ -1,25 +1,19 @@
 <% @page_title = 'Projects' %>
 
-<nav class="top-menu">
-  <span class="lead"><%= page_header %></span>
-  <%= render 'layouts/alerts' %>
+<% content_for :top_menu do %>
   <%= link_to 'New project', new_client_path %>
-</nav>
+<% end %>
 
-<div class="content-panel">
+<table class="table">
+  <tr>
+    <th>Client - Project</th>
+  </tr>
 
-  <table class="table">
+  <% @projects.order(updated_at: :desc).each do |project| %>
     <tr>
-      <th>Client - Project</th>
+      <td>
+        <%= project_links(project) %>
+      </td>
     </tr>
-
-      <% @projects.order(updated_at: :desc).each do |project| %>
-        <tr>
-          <td>
-            <%= project_links(project) %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-
-</div>
+  <% end %>
+</table>

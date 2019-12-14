@@ -1,4 +1,7 @@
 <% @page_title = 'New Client' %>
-<%= render 'layouts/page-top' %>
+
+<% content_for :top_menu do %>
+  <%= link_to 'All clients', clients_path %>
+<% end %>
 
 <%= render 'form' %>

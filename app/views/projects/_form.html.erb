@@ -11,11 +11,11 @@
       <%= form.label :name %>
     </div>
     <div class="col-sm">
-      <%= form.text_field :name, autofocus: true %>
+      <%= form.text_field :name, autofocus: true, size: 40 %>
     </div>
   </div>
 
-  <% if @project.id %>
+  <% if @project.persisted? %>
     <input type="submit"
            value="Update project"
            class="btn btn-secondary my-1 mr-1">

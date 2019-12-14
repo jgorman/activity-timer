@@ -1,11 +1,3 @@
-<p>
-  <%= link_to 'Client', client_path(@activity.project.client) %> |
-  <%= link_to 'Project', project_path(@activity.project) %>
-  <% if @activity.id %> |
-    <%= link_to 'New activity', new_project_activity_path(@activity.project) %>
-  <% end %>
-</p>
-
 <%= form_with(
       model: @activity,
       url: (@activity.persisted? ?
@@ -48,7 +40,7 @@
 
   <div class="row my-2">
     <div class="col">
-      <% if @activity.id %>
+      <% if @activity.persisted? %>
 
         <input class="btn btn-secondary my-1 mr-1" type="submit" value="Update activity">
 

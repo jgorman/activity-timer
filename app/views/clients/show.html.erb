@@ -1,11 +1,12 @@
 <% @page_title = @client.display_name %>
-<%= render 'layouts/page-top' %>
 
-<p>
-  <%= link_to 'All clients', clients_path %> |
-  <%= link_to 'Edit client', edit_client_path(@client) %> |
-  <%= link_to 'New project', new_client_project_path(@client) %>
-</p>
+<% content_for :top_menu do %>
+  <span>
+    <%= link_to 'All clients', clients_path %> |
+    <%= link_to 'Edit client', edit_client_path(@client) %> |
+    <%= link_to 'New project', new_client_project_path(@client) %>
+  </span>
+<% end %>
 
 <h5 class="mb-3"><%= (@client.projects.count == 0) ? 'No ' : '' %>Projects</h5>
 

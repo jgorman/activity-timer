@@ -1,31 +1,22 @@
 <% @page_title = 'Welcome to Activity Timer' %>
 
-<nav class="top-menu">
-  <span class="lead"><%= page_header %></span>
-  <%= render 'layouts/alerts' %>
-</nav>
+<p>This is a personal activity timer built for the fun of it.</p>
 
-<div class="content-panel">
-
-  <p>This is a personal activity timer built for the fun of it.</p>
-
-  <% if current_user.try(:email) != 'guest@guest.com' %>
-    <p>Check it out as the
-      <%= link_to guest_welcome_index_path, method: :post, remote: true do %>
-        <button class="btn btn-sm btn-outline-success">Guest Account</button>
-      <% end %>
-      user.
-    </p>
-  <% else %>
-    <p>You are logged in as the Guest Account user!</p>
-  <% end %>
-
-  <p>
-    As the Guest Account user you can see some sample history data
-    and run a timer. You will be sharing the timer and sample data
-    with anyone else who is logged in as the Guest Account user.
-    At the end of the day, the sample data will be cleared out
-    and recreated.
+<% if current_user.try(:email) != 'guest@guest.com' %>
+  <p>Check it out as the
+    <%= link_to guest_welcome_index_path, method: :post, remote: true do %>
+      <button class="btn btn-sm btn-outline-success">Guest Account</button>
+    <% end %>
+    user.
   </p>
+<% else %>
+  <p>You are logged in as the Guest Account user!</p>
+<% end %>
 
-</div>
+<p>
+  As the Guest Account user you can see some sample history data
+  and run a timer. You will be sharing the timer and sample data
+  with anyone else who is logged in as the Guest Account user.
+  At the end of the day, the sample data will be cleared out
+  and recreated.
+</p>

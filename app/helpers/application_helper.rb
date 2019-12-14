@@ -20,14 +20,19 @@ module ApplicationHelper
   end
 
   def project_links(project)
-    links =
-      "<a href=\"#{client_path(project.client)}\">#{
-        escape(project.client.display_name)
-      }</a> - " +
-        "<a href=\"#{project_path(project)}\">#{
-          escape(project.display_name)
-        }</a>"
-    links.html_safe
+    client_link(project.client) + ' - ' + project_link(project)
+  end
+
+  def project_link(project)
+    link =
+      "<a href=\"#{project_path(project)}\">#{escape(project.display_name)}</a>"
+    link.html_safe
+  end
+
+  def client_link(client)
+    link =
+      "<a href=\"#{client_path(client)}\">#{escape(client.display_name)}</a>"
+    link.html_safe
   end
 
   def input_size(text)

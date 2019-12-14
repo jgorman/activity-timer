@@ -1,6 +1,7 @@
 <% @page_title = 'New User' %>
-<%= render 'layouts/page-top' %>
+
+<% content_for :top_menu do %>
+  <%= link_to 'Users', admin_users_path %>
+<% end %>
 
 <%= render "form" %>
-
-<%= link_to "Back", admin_users_path %>

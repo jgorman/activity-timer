@@ -1,5 +1,8 @@
 <% @page_title = @project.display_title %>
 <% @page_header = project_links(@project) %>
-<%= render 'layouts/page-top' %>
+
+<% content_for :top_menu do %>
+  <%= link_to 'New project', new_client_project_path(@project.client) %>
+<% end %>
 
 <%= render 'form' %>

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :with_timezone
+  #before_action :notice_me
 
   # TODO: security check violatons will go here.
   def oops_page
@@ -13,6 +14,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def notice_me
+    #flash[:notice] = "Notice me now!"
+    flash[:alert] = "Notice me or else!"
+  end
 
   def after_sign_in_path_for(user)
     timer_path

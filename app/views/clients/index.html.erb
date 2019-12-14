@@ -1,14 +1,10 @@
 <% @page_title = 'Clients' %>
 
-<nav class="top-menu">
-  <span class="lead"><%= page_header %></span>
-  <%= render 'layouts/alerts' %>
+<% content_for :top_menu do %>
   <%= link_to 'New client', new_client_path %>
-</nav>
+<% end %>
 
-<div class="content-panel">
-  <% @clients.each do |client| %>
-    <%= link_to client.display_name, client_path(client),
-        class: 'd-block mb-2' %>
-  <% end %>
-</div>
+<% @clients.each do |client| %>
+  <%= link_to client.display_name, client_path(client),
+      class: 'd-block mb-2' %>
+<% end %>
