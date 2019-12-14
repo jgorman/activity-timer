@@ -43,6 +43,10 @@ class Project < ApplicationRecord
     Colors[rand(Colors.length)]
   end
 
+  def hex_color
+    sprintf('#%06x', color)
+  end
+
   def self.no_project(user)
     no_client = Client.no_client(user)
     no_project = no_client.projects.find_by_name('')

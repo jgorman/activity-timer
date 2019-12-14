@@ -1,15 +1,11 @@
 <% @page_title = 'Projects' %>
 
-<% content_for :top_menu do %>
-  <%= link_to 'New project', new_client_path %>
-<% end %>
-
 <table class="table">
   <tr>
     <th>Client - Project</th>
   </tr>
 
-  <% @projects.order(updated_at: :desc).each do |project| %>
+  <% @projects.each do |project| %>
     <tr>
       <td>
         <%= project_links(project) %>

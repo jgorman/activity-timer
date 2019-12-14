@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   # projects_path: GET /projects
   def index
-    @projects = current_user.projects
+    @projects = current_user.projects.order(updated_at: :desc)
   end
 
   def show; end
@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.client = Client.find(params[:client_id])
+    @project.color = Project.random_color
   end
 
   # edit_project_path: GET /projects/9/edit
@@ -52,6 +53,14 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
+
     params.require(:project).permit(:name)
+
+    perms = params.require(:project).permit(:name, :color)
+    if color_s = perms[:color]
+      perms[:color] = color_s.gsub(/\H/, '').to_i(16)
+    end
+    perms
+
   end
 end

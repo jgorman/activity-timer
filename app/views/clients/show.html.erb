@@ -11,5 +11,5 @@
 <h5 class="mb-3"><%= (@client.projects.count == 0) ? 'No ' : '' %>Projects</h5>
 
 <% @client.projects.order(updated_at: :desc).each do |project| %>
-  <p><%= link_to project.display_name, project_path(project) %></p>
+  <p><%= project_link(project) %></p>
 <% end %>

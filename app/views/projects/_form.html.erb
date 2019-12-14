@@ -7,11 +7,21 @@
     ) do |form| %>
 
   <div class="row my-2">
-    <div class="col-sm-auto">
+    <div class="col-sm-3">
       <%= form.label :name %>
     </div>
-    <div class="col-sm">
+    <div class="col-sm-9">
       <%= form.text_field :name, autofocus: true, size: 40 %>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-sm-3">
+      <%= form.label :color %>
+    </div>
+    <div class="col-sm-9">
+      <%= form.text_field :color,
+          value: sprintf('#%06x', @project.color), size: 40 %>
     </div>
   </div>
 

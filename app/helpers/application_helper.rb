@@ -23,15 +23,15 @@ module ApplicationHelper
     client_link(project.client) + ' - ' + project_link(project)
   end
 
-  def project_link(project)
-    link =
-      "<a href=\"#{project_path(project)}\">#{escape(project.display_name)}</a>"
-    link.html_safe
-  end
-
   def client_link(client)
     link =
       "<a href=\"#{client_path(client)}\">#{escape(client.display_name)}</a>"
+    link.html_safe
+  end
+
+  def project_link(project)
+    link =
+      "<a href=\"#{project_path(project)}\" style=\"color:#{project.hex_color}\">#{escape(project.display_name)}</a>"
     link.html_safe
   end
 
