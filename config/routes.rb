@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  # TODO Convert these to a nice syntax.
   get '/timer', to: 'timer#index'
   post '/timer', to: 'timer#create'
   delete '/timer', to: 'timer#destroy'
@@ -13,8 +14,18 @@ Rails.application.routes.draw do
   get '/timer/replace_clock', to: 'timer#replace_clock', as: 'timer_replace_clock'
   patch '/timer/activity/:id', to: 'timer#activity', as: 'timer_activity'
 
+  resources :welcome, only: [] do
+    collection do
+      post :guest
+    end
+  end
+
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        post :become
+      end
+    end
   end
 
   resources :clients do

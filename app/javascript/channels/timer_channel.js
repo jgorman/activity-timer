@@ -16,5 +16,10 @@ const sub = consumer.subscriptions.create(
       console.log(`TimerChannel(${user_id}) received`, { timer })
       clock.new_timer(timer)
     },
+
+    disconnected(info) {
+      console.log(`TimerChannel(${user_id}) disconnected`, { info })
+    },
+
   }
 )

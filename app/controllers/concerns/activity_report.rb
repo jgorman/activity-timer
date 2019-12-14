@@ -1,6 +1,8 @@
 module ActivityReport
   Defaults = { days: 20 }
 
+  # We bin activities into days by start and we show them by descending finish.
+
   Day = Struct.new(:date, :length, :tasks)
   Task = Struct.new(:id, :start, :finish, :length, :project, :name, :sessions)
   Session = Struct.new(:id, :start, :finish, :length)
@@ -92,7 +94,7 @@ module ActivityReport
           day_length += length
           sessions << Session.new(id, start, finish, length)
         end
-        sessions.sort! { |a, b| b.start <=> a.start }
+        sessions.sort! { |a, b| b.finish <=> a.finish }
 
         tasks <<
           Task.new(
@@ -105,7 +107,7 @@ module ActivityReport
             sessions
           )
       end
-      tasks.sort! { |a, b| b.start <=> a.start }
+      tasks.sort! { |a, b| b.finish <=> a.finish }
 
       date_s =
         if date == Date.current

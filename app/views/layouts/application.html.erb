@@ -12,6 +12,9 @@
 
     <%= action_cable_meta_tag %>
     <meta name="current-user" id="<%= current_user.try(:id) %>">
+    <% if flash[:reload_page] %>
+      <meta name="turbolinks-visit-control" content="reload">
+    <% end %>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

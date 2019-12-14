@@ -172,7 +172,7 @@ class TimerController < ApplicationController
         cn = project.client_name
         pn = pn.empty? ? 'No Project' : pn
         cn = cn.empty? ? 'No Client' : cn
-        ["#{cn} - #{pn}", project.id]
+        ["#{pn} - #{cn}", project.id]
       end
     opts.unshift(['Select project', ''])
   end

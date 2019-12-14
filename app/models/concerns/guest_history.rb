@@ -4,8 +4,8 @@ module GuestHistory
   Defaults = {
     guest: {
       email: 'guest@guest.com',
-      first_name: 'Roger',
-      last_name: 'Guest',
+      first_name: 'Guest',
+      last_name: 'Account',
       roles: 'guest',
       password: 'guest123'
     },
