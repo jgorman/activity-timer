@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def after_sign_in_path_for(user)
+    timer_path
+  end
+
   # Extra fields for Devise Users.
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |u|
@@ -39,20 +43,16 @@ class ApplicationController < ActionController::Base
   end
 
   #####
-  #
   # Controller and view helpers.
   #
   # To use ApplicationHelpers in controllers:
-  #
   #   helpers.seconds_to_hm(length)
   #
   # To use controller helpers in views:
-  #
   #   helper_method :menu_label_for
   #   def menu_label_for(tag)
   #     label, title = t(tag)
   #   end
-  #
 
   def hm_to_seconds(hhmm)
     hhmm ||= ''

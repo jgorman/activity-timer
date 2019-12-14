@@ -80,13 +80,12 @@ class TimerController < ApplicationController
   # timer_replace_page_path: GET /timer/replace_page
   def replace_page
     # Redisplay the page with the updated report.
-    @timer = Timer.find_by_id(current_user.id) || Timer.new
+    @timer = Timer.find_by_user_id(current_user.id) || Timer.new
     @days = activity_report
     @project_options = project_options
 
     respond_to do |format|
       format.js do
-        # puts "%%% replace_page.js"
         render 'replace_page'
       end
     end
