@@ -54,6 +54,7 @@ class Project < ApplicationRecord
       no_project = Project.new
       no_project.user = user
       no_project.client = no_client
+      no_project.color = ColorMap[:grey]
       no_project.save!
     end
     no_project

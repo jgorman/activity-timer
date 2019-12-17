@@ -10,7 +10,7 @@ class TimerController < ApplicationController
       format.html do
         # Display the timer page.
         @timer = current_user.timer || Timer.new
-        @days = activity_report
+        @activity_report = activity_report
         @project_options = project_options
       end
 
@@ -81,14 +81,10 @@ class TimerController < ApplicationController
   def replace_page
     # Redisplay the page with the updated report.
     @timer = Timer.find_by_user_id(current_user.id) || Timer.new
-    @days = activity_report
+    @activity_report = activity_report
     @project_options = project_options
 
-    respond_to do |format|
-      format.js do
-        render 'replace_page'
-      end
-    end
+    respond_to { |format| format.js { render 'replace_page' } }
   end
 
   # timer_name_path: POST /timer/name
@@ -109,38 +105,60 @@ class TimerController < ApplicationController
 
   # timer_activity_path: PATCH /timer/activity/:id
   def activity
-    puts "##### timer_activity params(#{params.inspect})"
-    id = params[:id]
-    target = params[:target]
-    name = params[:name]
-    project_id = params[:project_id]
+    return unless id = params[:id]
+    new_name = params[:name]
+    new_project_id = params[:project_id]
+    return unless scope = params[:scope]
+    return unless activity = Activity.find_by_id(id)
+    redisplay = true
 
-    if target.include?('activity.names')
-      # Update all names with the same project, date and name.
-      return unless activity = Activity.find_by_id(params[:id])
-      return unless name
-      project_id = activity.project_id
+    if scope.include?('activity.name.task')
+      # Update all activity names with the same project, date and name.
+      return unless new_name
+      Activity.where(
+        'project_id = ? and ? <= start and start < ? and name = ?',
+        activity.project_id,
+        activity.start.beginning_of_day,
+        activity.start.end_of_day,
+        activity.name
+      )
+        .update_all(name: new_name)
+
+    elsif scope.include?('activity.name.session')
+      # Update a single activity name.
+      return unless new_name
+      activity.name = new_name
+      activity.save!
+
+    elsif scope.include?('activity.project.task')
+      # Update all activity projects with the same project, date and name.
+      return unless new_project_id
+      return unless new_project = Project.find_by_id(new_project_id)
       start = activity.start
-      old_name = activity.name
 
       Activity.where(
         'project_id = ? and ? <= start and start < ? and name = ?',
-        project_id,
-        start.beginning_of_day,
-        start.end_of_day,
-        old_name
+        activity.project_id,
+        activity.start.beginning_of_day,
+        activity.start.end_of_day,
+        activity.name
       )
-        .update_all(name: name)
+        .update_all(client_id: new_project.client_id,
+                    project_id: new_project_id)
 
-      replace_page
-    elsif target.include?('activity.name')
-      # Update a single activity name.
-      return unless activity = Activity.find_by_id(params[:id])
-      return unless name
-      activity.name = name
+    elsif scope.include?('activity.project.session')
+      # Update a single activity project_id.
+      return unless new_project_id
+      return unless new_project = Project.find_by_id(new_project_id)
+      activity.client_id = new_project.client_id
+      activity.project_id = new_project_id
       activity.save!
-      replace_page
+
+    else
+      redisplay = false
     end
+    replace_page if redisplay
+
   end
 
   # timer_path: DELETE /timer

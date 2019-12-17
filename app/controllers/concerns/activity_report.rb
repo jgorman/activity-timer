@@ -3,31 +3,62 @@ module ActivityReport
 
   # We bin activities into days by start and we show them by descending finish.
 
-  Day = Struct.new(:date, :length, :tasks)
-  Task = Struct.new(:id, :start, :finish, :length, :project, :name, :sessions)
-  Session = Struct.new(:id, :start, :finish, :length)
-  ClientStruct = Struct.new(:id, :name)
-  ProjectStruct = Struct.new(:id, :client, :name, :color)
+  Report = Struct.new(:days, :clients, keyword_init: true)
+
+  Day = Struct.new(:date, :length, :tasks, keyword_init: true)
+
+  Task =
+    Struct.new(
+      :id,
+      :start,
+      :finish,
+      :length,
+      :project,
+      :name,
+      :sessions,
+      keyword_init: true
+    )
+
+  Session = Struct.new(:id, :start, :finish, :length, keyword_init: true)
+
+  AR_Client =
+    Struct.new(:id, :name, :projects, keyword_init: true) do
+      def initialize(*args)
+        super(*args)
+        self.projects = []
+      end
+    end
+
+  AR_Project = Struct.new(:id, :client, :name, :color, keyword_init: true)
 
   def activity_report(config = {})
     @config = Defaults.deep_merge(config)
-    clients = get_clients
-    projects = get_projects(clients)
+    client_h = get_client_h
+    project_h = get_project_h(client_h)
     raw_days = get_raw_days
-    days = get_days(projects, raw_days)
-    days
+    days = get_days(raw_days, project_h)
+    clients = get_clients(client_h)
+    activity_report = Report.new(days: days, clients: clients)
+    activity_report
   end
 
-  def get_clients
-    clients = {}
-    Client.where(user_id: current_user.id).pluck(:id, :name).each do |id, name|
-      clients[id] = ClientStruct.new(id, name)
-    end
+  def get_clients(client_h)
+    clients = client_h.values
+    clients.sort! { |a, b| a.name <=> b.name }
+    clients.each { |client| client.projects.sort! { |a, b| a.name <=> b.name } }
     clients
   end
 
-  def get_projects(clients)
-    projects = {}
+  def get_client_h
+    client_h = {}
+    Client.where(user_id: current_user.id).pluck(:id, :name).each do |id, name|
+      client_h[id] = AR_Client.new(id: id, name: name)
+    end
+    client_h
+  end
+
+  def get_project_h(client_h)
+    project_h = {}
     Project.where(user_id: current_user.id).pluck(
       :id,
       :client_id,
@@ -35,12 +66,15 @@ module ActivityReport
       :color
     )
       .each do |id, client_id, name, color|
-      if client = clients[client_id]
+      if client = client_h[client_id]
         hexcolor = sprintf('#%06x', color)
-        projects[id] = ProjectStruct.new(id, client, name, hexcolor)
+        project =
+          AR_Project.new(id: id, client: client, name: name, color: hexcolor)
+        project_h[id] = project
+        client.projects << project
       end
     end
-    projects
+    project_h
   end
 
   def get_raw_days
@@ -68,7 +102,7 @@ module ActivityReport
     raw_days
   end
 
-  def get_days(projects, raw_days)
+  def get_days(raw_days, project_h)
     # Pack the raw days into nice structures.
     days = []
 
@@ -77,7 +111,7 @@ module ActivityReport
       tasks = []
       raw_day.each do |task_key, acts|
         task_project_id, task_name = task_key
-        next unless project = projects[task_project_id]
+        next unless project = project_h[task_project_id]
         task_id = nil
         task_start = nil
         task_finish = nil
@@ -92,19 +126,20 @@ module ActivityReport
           task_finish = finish if !task_finish || finish > task_finish
           task_length += length
           day_length += length
-          sessions << Session.new(id, start, finish, length)
+          sessions <<
+            Session.new(id: id, start: start, finish: finish, length: length)
         end
         sessions.sort! { |a, b| b.finish <=> a.finish }
 
         tasks <<
           Task.new(
-            task_id,
-            task_start,
-            task_finish,
-            task_length,
-            project,
-            task_name,
-            sessions
+            id: task_id,
+            start: task_start,
+            finish: task_finish,
+            length: task_length,
+            project: project,
+            name: task_name,
+            sessions: sessions
           )
       end
       tasks.sort! { |a, b| b.finish <=> a.finish }
@@ -118,7 +153,7 @@ module ActivityReport
           date.strftime('%a, %-d %b')
         end
 
-      days << Day.new(date_s, day_length, tasks)
+      days << Day.new(date: date_s, length: day_length, tasks: tasks)
     end
 
     days.reverse!

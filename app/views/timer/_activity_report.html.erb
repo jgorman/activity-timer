@@ -1,5 +1,4 @@
-
-<% @days.each do |day| %>
+<% @activity_report.days.each do |day| %>
   <div class="all-day">
 
     <div class="day-line">
@@ -9,77 +8,17 @@
 
     <% day.tasks.each do |task| %>
 
-      <div class="task-line">
-        <div>
-          <% if task.sessions.length > 1 %>
-            <div
-              class="session-count"
-              data-toggle="collapse"
-              data-target="#task-<%= task.id %>">
-              <%= task.sessions.length %>
-            </div>
-          <% end %>
-
-          <%= text_field_tag(:name, task.name,
-            'data-target': 'activity.names',
-            'data-id': task.id,
-            placeholder: 'Add description',
-            size: input_size(task.name)
-          ) %>
-
-          &bull;
-          <span style="color: <%= task.project.color %>;">
-            <%= task.project.name %>
-          </span>
-          &bull;
-          <%= task.project.client.name %>
-        </div>
-        <div>
-          <div class="start-finish">
-            <%= datetime_to_time_s(task.start) %> -
-            <%= datetime_to_time_s(task.finish) %>
-          </div>
-          <div class="length-box">
-            <%= seconds_to_hms(task.length) %>
-          </div>
-        </div>
-      </div>
+      <%= render partial: 'time_line',
+          locals: { line_type: 'task', task: task, session: task } %>
 
       <% if task.sessions.length > 1 %>
         <div class="collapse" id="task-<%= task.id %>">
 
-        <% task.sessions.each do |session| %>
-
-          <div class="task-line">
-            <div class="inline-center">
-              <div class="session-box"></div>
-
-                <%= text_field_tag(:name, task.name,
-                  'data-target': 'activity.name',
-                  'data-id': task.id,
-                  placeholder: 'Add description',
-                  size: input_size(task.name)
-                ) %>
-
-              &bull;
-              <span style="color: <%= task.project.color %>;">
-                <%= task.project.name %>
-              </span>
-              &bull;
-              <%= task.project.client.name %>
-            </div>
-            <div>
-              <div class="start-finish">
-                <%= datetime_to_time_s(session.start) %> -
-                <%= datetime_to_time_s(session.finish) %>
-              </div>
-              <div class="length-box">
-                <%= seconds_to_hms(session.length) %>
-              </div>
-            </div>
-
-          </div>
-        <% end %>
+          <% task.sessions.each do |session| %>
+            <%= render partial: 'time_line',
+              locals: { line_type: 'session', task: task, session: session }
+            %>
+          <% end %>
 
         </div>
       <% end %>

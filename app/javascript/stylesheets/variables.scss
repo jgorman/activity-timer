@@ -18,6 +18,7 @@ $top-nav-height: 70px;
 // Customize Bootstrap variables.
 $secondary: $headers;
 $link-color: #5555cc;
+$modal-backdrop-opacity: 0 !default;
 
 // Recompile Bootstrap using the customized variables.
 @import '~bootstrap/scss/functions';

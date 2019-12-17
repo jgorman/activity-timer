@@ -4,21 +4,60 @@
 
 @import '../variables';
 
-$img-height: 20px;
-$day-height: 60px;
+$line-height: 60px;
 $line-highlight: #f4f4f4;
+$project-height: 2em;
 
 .timer-page {
 
+  .inline-center {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  // The project selection modal.
+  #project-select {
+
+    .client-line {
+      color: $label;
+      height: $project-height;
+      margin-top: $sep;
+    }
+
+    .project-line {
+      display: flex;
+      align-items: center;
+      border-radius: 0.5em;
+      height: $project-height;
+
+      &:hover {
+        background-color: $line-highlight;
+      }
+
+      .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-left: $sep;
+        margin-right: $sep;
+      }
+    }
+
+  }
+
+  // The timer clock at the top of the page.
   .clock-space {
     height: $top-nav-height;
 
+    // The clock stays at the top and does not scroll.
     .top-menu {
       position: fixed;
       top: 0;
       left: $left-nav-width;
       background-color: white;
 
+      // This part gets replaced for clock changes.
       #clock-works {
         display: flex;
         flex-wrap: wrap;
@@ -41,36 +80,42 @@ $line-highlight: #f4f4f4;
           }
 
           input[type=image] {
-            width: $img-height;
-            height: $img-height;
+            width: 20px;
+            height: 20px;
             margin-left: $sep;
           }
         }
+
       }
     }
   }
 
+  // The list of recent activities below the clock gets replaced on changes.
   #activity-report {
 
+    // Entire day contains the task lines.
     .all-day {
       border-bottom: 30px solid $line-highlight;
     }
 
+    // Generic line shape.
     %line {
-      height: $day-height;
+      min-height: $line-height;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 $sep;
+      padding: $sep;
 
     }
 
+    // Date line.
     .day-line {
       @extend %line;
       font-weight: 600;
     }
 
-    .task-line {
+    // Task or session line.
+    .time-line {
       @extend %line;
       box-shadow: rgb(232, 232, 232) 0px -1px 0px 0px inset;
 
@@ -79,11 +124,7 @@ $line-highlight: #f4f4f4;
       }
     }
 
-    .inline-center {
-      display: inline-flex;
-      align-items: center;
-    }
-
+    // Empty count box for individual activity sessions.
     .session-box {
       @extend .inline-center;
       height: 30px;
@@ -91,6 +132,7 @@ $line-highlight: #f4f4f4;
       margin: $sep;
     }
 
+    // Task activity session count box.
     .session-count {
       @extend .session-box;
       justify-content: center;
@@ -99,6 +141,7 @@ $line-highlight: #f4f4f4;
       border-radius: 25%;
     }
 
+    // Activity name text input.
     input {
       border-style: none;
       background-color: inherit;
@@ -108,12 +151,14 @@ $line-highlight: #f4f4f4;
       }
     }
 
+    // Session length: 3:05:38
     .length-box {
       @extend .inline-center;
       justify-content: flex-end;
       width: 90px;
     }
 
+    // Session times: 12:47 PM - 12:57 PM
     .start-finish {
       color: $label;
       @extend .inline-center;

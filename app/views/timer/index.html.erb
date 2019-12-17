@@ -2,6 +2,9 @@
 
 <div class="timer-page">
 
+  <%= render partial: 'project_select',
+            locals: { clients: @activity_report.clients } %>
+
   <div class="clock-space">
     <div class="top-menu">
       <div id="clock-face" class="clock-face">
@@ -12,7 +15,7 @@
 
   <div id="activity-report"
     data-controller="activity"
-    data-activity-debug="off">
+    data-activity-debug="on">
     <%= render 'activity_report' %>
   </div>
 

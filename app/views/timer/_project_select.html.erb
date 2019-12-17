@@ -1,0 +1,39 @@
+<div class="modal fade" id="project-select"
+  tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        Select project
+      </div>
+      <div class="modal-body">
+
+        <% clients.each do |client| %>
+          <% next if client.projects.length == 0 %>
+          <% client_name =
+             client.name.present? ? client.name : 'NO CLIENT' %>
+          <div class="client-line"><%= client_name %></div>
+
+          <% client.projects.each do |project| %>
+            <% project_name =
+               project.name.present? ? project.name : 'No Project' %>
+             <div
+               class="project-line"
+               data-project_id="<%= project.id %>"
+              >
+               <div class="dot" style="background-color: <%= project.color %>;"></div>
+               <%= project_name %>
+             </div>
+          <% end %>
+
+        <% end %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Close</button>
+
+        <span>+ Create a new project</span>
+      </div>
+    </div>
+  </div>
+</div>

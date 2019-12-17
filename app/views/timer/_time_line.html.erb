@@ -1,0 +1,47 @@
+<div class="time-line">
+  <div>
+    <% if task.sessions.length > 1 %>
+      <% if line_type == 'task' %>
+        <div
+          class="session-count"
+          data-toggle="collapse"
+          data-target="#task-<%= task.id %>">
+          <%= task.sessions.length %>
+        </div>
+      <% else %>
+        <div class="session-box">&nbsp;</div>
+      <% end %>
+    <% end %>
+
+    <%= text_field_tag(:name, task.name,
+      'data-scope': "activity.name.#{line_type}",
+      'data-id': task.id,
+      placeholder: 'Add description',
+      size: input_size(task.name)
+    ) %>
+
+    <span
+      data-toggle="modal"
+      data-target="#project-select"
+      data-scope="activity.project.<%= line_type %>"
+      data-activity_id="<%= session.id %>"
+      data-project_id="<%= task.project.id %>"
+    >
+      <span style="color: <%= task.project.color %>;">
+        <%= task.project.name %>
+      </span>
+      &bull;
+      <%= task.project.client.name %>
+    </span>
+  </div>
+
+  <div>
+    <div class="start-finish">
+      <%= datetime_to_time_s(session.start) %> -
+      <%= datetime_to_time_s(session.finish) %>
+    </div>
+    <div class="length-box">
+      <%= seconds_to_hms(session.length) %>
+    </div>
+  </div>
+</div>
