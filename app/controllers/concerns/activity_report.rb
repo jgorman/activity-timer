@@ -1,5 +1,5 @@
 module ActivityReport
-  Defaults = { days: 20 }
+  Defaults = { days: 12 }
 
   # We bin activities into days by start and we show them by descending finish.
 
@@ -52,7 +52,8 @@ module ActivityReport
   def get_client_h
     client_h = {}
     Client.where(user_id: current_user.id).pluck(:id, :name).each do |id, name|
-      client_h[id] = AR_Client.new(id: id, name: name)
+      display_name = name.present? ? name : 'No client'
+      client_h[id] = AR_Client.new(id: id, name: display_name)
     end
     client_h
   end
@@ -67,9 +68,10 @@ module ActivityReport
     )
       .each do |id, client_id, name, color|
       if client = client_h[client_id]
+        display_name = name.present? ? name : 'No project'
         hexcolor = sprintf('#%06x', color)
         project =
-          AR_Project.new(id: id, client: client, name: name, color: hexcolor)
+          AR_Project.new(id: id, client: client, name: display_name, color: hexcolor)
         project_h[id] = project
         client.projects << project
       end

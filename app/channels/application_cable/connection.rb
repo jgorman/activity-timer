@@ -4,7 +4,7 @@ module ApplicationCable
 
     def connect
       self.current_user = find_verified_user
-      logger.add_tags sprintf('%6d', current_user.id)
+      logger.add_tags current_user.id
     end
 
     protected

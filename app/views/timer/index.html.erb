@@ -1,6 +1,8 @@
 <% @page_title = 'Timer'; @custom_page = true %>
 
-<div class="timer-page">
+<div class="timer-page"
+    data-controller="activity-name"
+    data-activity-debug="on">
 
   <%= render partial: 'project_select',
             locals: { clients: @activity_report.clients } %>
@@ -13,9 +15,7 @@
     </div>
   </div>
 
-  <div id="activity-report"
-    data-controller="activity"
-    data-activity-debug="on">
+  <div id="activity-report">
     <%= render 'activity_report' %>
   </div>
 

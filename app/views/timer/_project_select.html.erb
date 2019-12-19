@@ -1,6 +1,8 @@
 <div class="modal fade" id="project-select"
+  data-controller="project-select"
+  data-project-select-debug="on"
   tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         Select project
@@ -19,6 +21,9 @@
              <div
                class="project-line"
                data-project_id="<%= project.id %>"
+               data-client_name="<%= client_name %>"
+               data-project_name="<%= project_name %>"
+               data-project_color="<%= project.color %>"
               >
                <div class="dot" style="background-color: <%= project.color %>;"></div>
                <%= project_name %>

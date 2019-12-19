@@ -13,11 +13,17 @@
       <% end %>
     <% end %>
 
+    <%
+      name_size = task.name.length.to_i
+      name_size = 14 if name_size < 14
+      name_size = 20 if name_size > 20
+    %>
+
     <%= text_field_tag(:name, task.name,
       'data-scope': "activity.name.#{line_type}",
       'data-id': task.id,
       placeholder: 'Add description',
-      size: input_size(task.name)
+      size: name_size
     ) %>
 
     <span

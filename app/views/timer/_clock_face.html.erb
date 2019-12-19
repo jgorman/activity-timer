@@ -1,7 +1,7 @@
 <div
   id="clock-works"
   data-controller="clock"
-  data-clock-debug="off"
+  data-clock-debug="on"
 >
 
   <%= form_with(model: @timer, url: timer_path) do |form| %>
@@ -9,11 +9,31 @@
     <div class="align-form">
       <%= form.text_field :name,
           size: 25,
-          data: { target: 'clock.name' },
+          'data-scope': 'timer.name',
+          'data-timer_id': @timer.id,
           placeholder: 'What are you working on?' %>
 
-      <%= form.select :project_id, @project_options, {},
-          data: { target: 'clock.project' } %>
+      <%= form.hidden_field :project_id %>
+
+      <span
+        id="timer_project_display"
+        data-toggle="modal"
+        data-target="#project-select"
+        data-scope="timer.project"
+        data-timer_id="<%= @timer.id %>"
+      >
+
+        <% if @timer.persisted? %>
+          <span style="color: <%= @timer.project.hex_color %>;">
+            <%= @timer.project.display_name %>
+          </span>
+          &bull;
+          <%= @timer.project.client.display_name %>
+        <% else %>
+            Select project
+        <% end %>
+
+      </span>
 
       <% unless @timer.persisted? %>
         <input type="image" src="<%= image_path('play-button.svg') %>">
