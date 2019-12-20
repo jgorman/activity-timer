@@ -27,17 +27,19 @@
     ) %>
 
     <span
+      class="project-io"
       data-toggle="modal"
       data-target="#project-select"
       data-scope="activity.project.<%= line_type %>"
       data-activity_id="<%= session.id %>"
       data-project_id="<%= task.project.id %>"
     >
+
       <span style="color: <%= task.project.color %>;">
         <%= task.project.name %>
       </span>
-      &bull;
-      <%= task.project.client.name %>
+      &bull; <%= task.project.client.name %>
+
     </span>
   </div>
 

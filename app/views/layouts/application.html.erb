@@ -38,9 +38,11 @@
         <% else %>
           <nav class="top-menu">
             <span><%= page_header %></span>
-            <%= render 'layouts/alerts' %>
             <%= yield :top_menu %>
           </nav>
+
+          <%= render 'layouts/alert_notices' %>
+
           <div class="content-panel">
             <%= yield %>
           </div>

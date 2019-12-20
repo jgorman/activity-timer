@@ -1,59 +1,52 @@
-<div
-  id="clock-works"
-  data-controller="clock"
-  data-clock-debug="on"
->
 
-  <%= form_with(model: @timer, url: timer_path) do |form| %>
+<%= form_with(model: @timer, url: timer_path, class: 'timer-form') do |form| %>
 
-    <div class="align-form">
-      <%= form.text_field :name,
-          size: 25,
-          'data-scope': 'timer.name',
-          'data-timer_id': @timer.id,
-          placeholder: 'What are you working on?' %>
+  <div class='left-side'>
+    <%= form.text_field :name,
+        size: 25,
+        'data-scope': 'timer.name',
+        'data-timer_id': @timer.id,
+        placeholder: 'What are you working on?' %>
+  </div>
 
-      <%= form.hidden_field :project_id %>
+  <div class="right-side">
 
-      <span
-        id="timer_project_display"
-        data-toggle="modal"
-        data-target="#project-select"
-        data-scope="timer.project"
-        data-timer_id="<%= @timer.id %>"
-      >
+    <%= form.hidden_field :project_id %>
 
-        <% if @timer.persisted? %>
-          <span style="color: <%= @timer.project.hex_color %>;">
-            <%= @timer.project.display_name %>
-          </span>
-          &bull;
-          <%= @timer.project.client.display_name %>
-        <% else %>
-            Select project
-        <% end %>
-
-      </span>
-
-      <% unless @timer.persisted? %>
-        <input type="image" src="<%= image_path('play-button.svg') %>">
+    <span
+      id="timer_project_display"
+      class="project-io"
+      data-toggle="modal"
+      data-target="#project-select"
+      data-scope="timer.project"
+      data-timer_id="<%= @timer.id %>"
+    >
+      <% if @timer.persisted? %>
+        <span style="color: <%= @timer.project.hex_color %>;">
+          <%= @timer.project.display_name %>
+        </span>
+        &bull; <%= @timer.project.client.display_name %>
+      <% else %>
+        Select project
       <% end %>
-    </div>
+    </span>
 
-  <% end %>
+    <% unless @timer.persisted? %>
+      <input type="image" src="<%= image_path('play-button.svg') %>">
+    <% end %>
 
-  <div id="ticker"><%= show_elapsed(@timer.start) %></div>
+    <div id="ticker"><%= show_elapsed(@timer.start) %></div>
 
-  <% if @timer.persisted? %>
+    <% if @timer.persisted? %>
 
-    <%= link_to image_pack_tag('check-mark.svg', size: '23'),
-      timer_finish_path, method: :post, remote: true %>
+      <%= link_to image_pack_tag('check-mark.svg', size: '18'),
+        timer_finish_path, method: :post, remote: true %>
 
-    <%= link_to image_pack_tag('cross.svg', size: '20'),
-      timer_path, method: :delete, remote: true %>
+      <%= link_to image_pack_tag('cross.svg', size: '15'),
+        timer_path, method: :delete, remote: true %>
 
-  <% end %>
+    <% end %>
 
-  <%= render 'layouts/alerts' %>
+  </div>
 
-</div>
+<% end %>

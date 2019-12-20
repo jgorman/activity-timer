@@ -7,6 +7,7 @@
 $line-height: 60px;
 $line-highlight: #f4f4f4;
 $project-height: 2em;
+$panel-width: calc(100vw - #{$left-nav-width});
 
 .timer-page {
 
@@ -55,38 +56,42 @@ $project-height: 2em;
       position: fixed;
       top: 0;
       left: $left-nav-width;
+      width: $panel-width;
       background-color: white;
 
-      // This part gets replaced for clock changes.
-      #clock-works {
-        display: flex;
-        flex-wrap: wrap;
+      .clock-face {
+        width: 100%;
+      }
 
-        #ticker {
-          margin-left: $sep;
-        }
-
-        a {
-          margin-left: $sep;
-        }
-
-        .align-form {
+      .timer-form {
+        width: 100%;
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-
-          input, select {
-            border-style: none;
-          }
-
-          input[type=image] {
-            width: 20px;
-            height: 20px;
-            margin-left: $sep;
-          }
-        }
-
+          justify-content: space-between;
       }
+
+      #ticker, a, .project-io {
+        margin-left: $sep;
+      }
+
+      .right-side {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      input, select {
+        border-style: none;
+      }
+
+      input[type=image] {
+        width: 20px;
+        height: 20px;
+        margin-left: $sep;
+      }
+
     }
   }
 
@@ -145,6 +150,7 @@ $project-height: 2em;
     input {
       border-style: none;
       background-color: inherit;
+      margin-right: $sep;
 
       &:focus {
         width: 250px;
