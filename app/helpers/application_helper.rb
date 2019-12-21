@@ -31,7 +31,9 @@ module ApplicationHelper
 
   def project_link(project)
     link =
-      "<a href=\"#{project_path(project)}\" style=\"color:#{project.hex_color}\">#{escape(project.display_name)}</a>"
+      "<a href=\"#{project_path(project)}\" style=\"color:#{
+        project.hex_color
+      }\">#{escape(project.display_name)}</a>"
     link.html_safe
   end
 

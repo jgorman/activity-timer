@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   def notice_me
     #flash[:notice] = "Notice me now!"
-    flash[:alert] = "Notice me or else!"
+    flash[:alert] = 'Notice me or else!'
   end
 
   def after_sign_in_path_for(user)

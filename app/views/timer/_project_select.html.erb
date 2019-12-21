@@ -23,16 +23,16 @@
           <% client.projects.each do |project| %>
             <% project_name =
                project.name.present? ? project.name : 'No Project' %>
-             <div
-               class="project-line"
-               data-project_id="<%= project.id %>"
-               data-client_name="<%= client_name %>"
-               data-project_name="<%= project_name %>"
-               data-project_color="<%= project.color %>"
-              >
-               <div class="project-dot" style="background-color: <%= project.color %>;"></div>
-               <%= project_name %>
-             </div>
+            <div
+              class="project-line"
+              data-project_id="<%= project.id %>"
+              data-client_name="<%= client_name %>"
+              data-project_name="<%= project_name %>"
+              data-project_color="<%= project.color %>"
+            >
+              <div class="project-dot" style="background-color: <%= project.color %>;"></div>
+              <%= project_name %>
+            </div>
           <% end %>
 
         <% end %>

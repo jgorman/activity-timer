@@ -69,9 +69,11 @@ module ActivityReport
       .each do |id, client_id, name, color|
       if client = client_h[client_id]
         display_name = name.present? ? name : 'No project'
-        hexcolor = sprintf('#%06x', color)
+        hex_color = sprintf('#%06x', color)
         project =
-          AR_Project.new(id: id, client: client, name: display_name, color: hexcolor)
+          AR_Project.new(
+            id: id, client: client, name: display_name, color: hex_color
+          )
         project_h[id] = project
         client.projects << project
       end

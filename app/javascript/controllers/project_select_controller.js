@@ -46,7 +46,7 @@ class ProjectSelect extends Controller {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;')
       .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+      .replace(/>/g, '&gt;')
   }
 
   // Save selected project.
@@ -67,8 +67,7 @@ class ProjectSelect extends Controller {
         type: 'PATCH',
         data: $.param({ scope, project_id }),
       })
-    }
-    else if (scope.includes('timer.project')) {
+    } else if (scope.includes('timer.project')) {
       const client_name = this.htmlEscape(ds.client_name || '')
       const project_name = this.htmlEscape(ds.project_name || '')
       const project_color = this.htmlEscape(ds.project_color || '')

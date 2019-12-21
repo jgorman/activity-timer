@@ -40,8 +40,7 @@ class ActivityName extends Controller {
         type: 'PATCH',
         data: $.param({ scope, name }),
       })
-    }
-    else if (scope.includes('timer.name')) {
+    } else if (scope.includes('timer.name')) {
       if (!ds.timer_id) return
       Rails.ajax({
         url: '/timer/name',

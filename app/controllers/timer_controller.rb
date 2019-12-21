@@ -123,13 +123,11 @@ class TimerController < ApplicationController
         activity.name
       )
         .update_all(name: new_name)
-
     elsif scope.include?('activity.name.session')
       # Update a single activity name.
       return unless new_name
       activity.name = new_name
       activity.save!
-
     elsif scope.include?('activity.project.task')
       # Update all activity projects with the same project, date and name.
       return unless new_project_id
@@ -143,9 +141,9 @@ class TimerController < ApplicationController
         activity.start.end_of_day,
         activity.name
       )
-        .update_all(client_id: new_project.client_id,
-                    project_id: new_project_id)
-
+        .update_all(
+        client_id: new_project.client_id, project_id: new_project_id
+      )
     elsif scope.include?('activity.project.session')
       # Update a single activity project_id.
       return unless new_project_id
@@ -153,12 +151,10 @@ class TimerController < ApplicationController
       activity.client_id = new_project.client_id
       activity.project_id = new_project_id
       activity.save!
-
     else
       redisplay = false
     end
     replace_page if redisplay
-
   end
 
   # timer_path: DELETE /timer

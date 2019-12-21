@@ -53,7 +53,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-
     params.require(:project).permit(:name)
 
     perms = params.require(:project).permit(:name, :color)
@@ -61,6 +60,5 @@ class ProjectsController < ApplicationController
       perms[:color] = color_s.gsub(/\H/, '').to_i(16)
     end
     perms
-
   end
 end
