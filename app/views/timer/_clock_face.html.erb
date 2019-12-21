@@ -22,10 +22,14 @@
       data-timer_id="<%= @timer.id %>"
     >
       <% if @timer.persisted? %>
+        <div
+          class="project-dot"
+          style="background-color: <%= @timer.project.hex_color %>;">
+        </div>
         <span style="color: <%= @timer.project.hex_color %>;">
           <%= @timer.project.display_name %>
         </span>
-        &bull; <%= @timer.project.client.display_name %>
+        &nbsp;&bull; <%= @timer.project.client.display_name %>
       <% else %>
         Select project
       <% end %>

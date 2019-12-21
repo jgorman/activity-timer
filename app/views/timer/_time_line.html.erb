@@ -35,10 +35,14 @@
       data-project_id="<%= task.project.id %>"
     >
 
+      <div
+        class="project-dot"
+        style="background-color: <%= task.project.color %>;">
+      </div>
       <span style="color: <%= task.project.color %>;">
         <%= task.project.name %>
       </span>
-      &bull; <%= task.project.client.name %>
+      &nbsp;&bull; <%= task.project.client.name %>
 
     </span>
   </div>

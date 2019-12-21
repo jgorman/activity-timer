@@ -11,9 +11,17 @@ $panel-width: calc(100vw - #{$left-nav-width});
 
 .timer-page {
 
-  .inline-center {
+  .project-io {
     display: inline-flex;
     align-items: center;
+  }
+
+  .project-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: $sep5;
   }
 
   // The project selection modal.
@@ -35,14 +43,6 @@ $panel-width: calc(100vw - #{$left-nav-width});
         background-color: $line-highlight;
       }
 
-      .dot {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin-left: $sep;
-        margin-right: $sep;
-      }
     }
 
   }
@@ -65,14 +65,20 @@ $panel-width: calc(100vw - #{$left-nav-width});
 
       .timer-form {
         width: 100%;
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: space-between;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
       }
 
-      #ticker, a, .project-io {
+      a {
         margin-left: $sep;
+      }
+
+      // Session length: 3:05:38
+      #ticker {
+        margin-left: $sep;
+        width: 60px;
       }
 
       .right-side {
@@ -91,7 +97,6 @@ $panel-width: calc(100vw - #{$left-nav-width});
         height: 20px;
         margin-left: $sep;
       }
-
     }
   }
 
@@ -131,7 +136,8 @@ $panel-width: calc(100vw - #{$left-nav-width});
 
     // Empty count box for individual activity sessions.
     .session-box {
-      @extend .inline-center;
+      display: inline-flex;
+      align-items: center;
       height: 30px;
       width: 30px;
       margin: $sep;
@@ -159,15 +165,18 @@ $panel-width: calc(100vw - #{$left-nav-width});
 
     // Session length: 3:05:38
     .length-box {
-      @extend .inline-center;
+      display: inline-flex;
+      align-items: center;
       justify-content: flex-end;
-      width: 90px;
+      margin-left: $sep; 
+      width: 60px;
     }
 
     // Session times: 12:47 PM - 12:57 PM
     .start-finish {
+      display: inline-flex;
+      align-items: center;
       color: $label;
-      @extend .inline-center;
     }
 
   }

@@ -53,12 +53,12 @@ module ApplicationHelper
 
   def seconds_to_hm(seconds)
     hh, mm = seconds_to_parts(seconds)
-    sprintf('%2d:%02d', hh, mm)
+    sprintf('%d:%02d', hh, mm)
   end
 
   def seconds_to_hms(seconds)
     hh, mm, ss = seconds_to_parts(seconds)
-    sprintf('%2d:%02d:%02d', hh, mm, ss)
+    sprintf('%d:%02d:%02d', hh, mm, ss)
   end
 
   def show_elapsed(start_time)

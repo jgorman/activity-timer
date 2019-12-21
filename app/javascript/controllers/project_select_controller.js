@@ -79,8 +79,12 @@ class ProjectSelect extends Controller {
       // Update the project display span.
       const $timer_project_display = $('#timer_project_display')
       $timer_project_display.html(`
+        <div
+          class="project-dot"
+          style="background-color: ${project_color};">
+        </div>
         <span style="color: ${project_color};">${project_name}</span>
-        &bull; ${client_name}
+        &nbsp;&bull; ${client_name}
       `)
 
       // Update the current timer if there is one.
