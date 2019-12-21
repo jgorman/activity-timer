@@ -182,5 +182,14 @@ $time-box-size: 60px;
       color: $label;
     }
 
+    .load-more {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
   }
 }

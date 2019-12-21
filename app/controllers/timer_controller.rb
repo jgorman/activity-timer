@@ -11,7 +11,6 @@ class TimerController < ApplicationController
         # Display the timer page.
         @timer = current_user.timer || Timer.new
         @activity_report = activity_report
-        @project_options = project_options
       end
 
       format.json do
@@ -45,14 +44,6 @@ class TimerController < ApplicationController
     replace_clock
   end
 
-  def replace_clock
-    @timer = Timer.find_by_user_id(current_user.id) || Timer.new
-    # puts "===== replace_clock #{@timer.inspect}"
-    @project_options = project_options
-
-    respond_to { |format| format.js { render 'replace_clock' } }
-  end
-
   # timer_finish_path: POST /timer/finish
   def finish
     return unless timer = current_user.timer
@@ -77,14 +68,30 @@ class TimerController < ApplicationController
     replace_clock
   end
 
+  def replace_clock
+    @timer = Timer.find_by_user_id(current_user.id) || Timer.new
+    # puts "===== replace_clock #{@timer.inspect}"
+    respond_to { |format| format.js { render 'replace_clock' } }
+  end
+
   # timer_replace_page_path: GET /timer/replace_page
   def replace_page
     # Redisplay the page with the updated report.
     @timer = Timer.find_by_user_id(current_user.id) || Timer.new
     @activity_report = activity_report
-    @project_options = project_options
-
     respond_to { |format| format.js { render 'replace_page' } }
+  end
+
+  #####
+  #
+  #  <%= button_to 'Load more', timer_load_more_path,
+  #      params: { show_days: @activity_report.show_days + 10 },
+  #      method: :post, remote: true,
+  #      form_class: 'btn btn-outline-primary' %>
+  #
+  def load_more
+    @activity_report = activity_report(show_days: params[:show_days].to_i)
+    respond_to { |format| format.js { render 'replace_activity' } }
   end
 
   # timer_name_path: POST /timer/name
@@ -162,7 +169,6 @@ class TimerController < ApplicationController
     current_user.timer.destroy
     send_timer
     @timer = Timer.new
-    @project_options = project_options
     respond_to { |format| format.js { render 'replace_clock' } }
   end
 
@@ -171,23 +177,6 @@ class TimerController < ApplicationController
   def send_timer(timer = nil)
     # puts "@@@@@ sending the timer(#{timer.inspect})"
     TimerChannel.broadcast_to(current_user.id, timer)
-  end
-
-  def project_options
-    opts =
-      current_user.projects.select(
-        'projects.id, projects.name as project_name, clients.name as client_name'
-      )
-        .order(updated_at: :desc)
-        .joins(:client)
-        .map do |project|
-        pn = project.project_name
-        cn = project.client_name
-        pn = pn.empty? ? 'No Project' : pn
-        cn = cn.empty? ? 'No Client' : cn
-        ["#{pn} - #{cn}", project.id]
-      end
-    opts.unshift(['Select project', ''])
   end
 
   def timer_params

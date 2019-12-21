@@ -1,9 +1,9 @@
 module ActivityReport
-  Defaults = { days: 12 }
+  Defaults = { show_days: 10 }
 
   # We bin activities into days by start and we show them by descending finish.
 
-  Report = Struct.new(:days, :clients, keyword_init: true)
+  Report = Struct.new(:days, :clients, :show_days, keyword_init: true)
 
   Day = Struct.new(:date, :length, :tasks, keyword_init: true)
 
@@ -38,7 +38,8 @@ module ActivityReport
     raw_days = get_raw_days
     days = get_days(raw_days, project_h)
     clients = get_clients(client_h)
-    activity_report = Report.new(days: days, clients: clients)
+    activity_report =
+      Report.new(days: days, clients: clients, show_days: @config[:show_days])
     activity_report
   end
 
@@ -82,7 +83,7 @@ module ActivityReport
   end
 
   def get_raw_days
-    first_day = Date.today.beginning_of_day.advance(days: -Defaults[:days])
+    first_day = Date.today.beginning_of_day.advance(days: -@config[:show_days])
     acts =
       Activity.where('user_id = ? and start >= ?', current_user.id, first_day)
         .pluck(:id, :start, :length, :project_id, :name)
