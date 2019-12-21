@@ -4,10 +4,12 @@
 
 @import '../variables';
 
-$line-height: 60px;
+$line-height: 50px;
 $line-highlight: #f4f4f4;
 $project-height: 2em;
 $panel-width: calc(100vw - #{$left-nav-width});
+$session-box-size: 30px;
+$time-box-size: 60px;
 
 .timer-page {
 
@@ -78,7 +80,7 @@ $panel-width: calc(100vw - #{$left-nav-width});
       // Session length: 3:05:38
       #ticker {
         margin-left: $sep;
-        width: 60px;
+        width: $time-box-size;
       }
 
       .right-side {
@@ -88,8 +90,9 @@ $panel-width: calc(100vw - #{$left-nav-width});
         justify-content: flex-end;
       }
 
-      input, select {
+      input {
         border-style: none;
+        font-size: $font-bigger;
       }
 
       input[type=image] {
@@ -138,9 +141,9 @@ $panel-width: calc(100vw - #{$left-nav-width});
     .session-box {
       display: inline-flex;
       align-items: center;
-      height: 30px;
-      width: 30px;
-      margin: $sep;
+      height: $session-box-size;
+      width: $session-box-size;
+      margin-right: $sep5;
     }
 
     // Task activity session count box.
@@ -168,8 +171,8 @@ $panel-width: calc(100vw - #{$left-nav-width});
       display: inline-flex;
       align-items: center;
       justify-content: flex-end;
-      margin-left: $sep; 
-      width: 60px;
+      margin-left: $sep5; 
+      width: $time-box-size;
     }
 
     // Session times: 12:47 PM - 12:57 PM

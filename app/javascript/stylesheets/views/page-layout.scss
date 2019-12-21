@@ -7,6 +7,10 @@
 $nav-background: #222;
 $nav-color: #ddd;
 
+body {
+  font-size: $font-size;
+}
+
 .page-layout {
   display: flex;
   position: relative;
