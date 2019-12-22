@@ -1,4 +1,4 @@
-class WelcomeController < ApplicationController
+class HomeController < ApplicationController
   def guest
     if guest_user = User.find_by_email(GuestHistory::Defaults[:guest][:email])
       bypass_sign_in(guest_user)

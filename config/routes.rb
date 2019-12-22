@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'welcome#index'
+  root 'home#index'
 
   devise_for :users
 
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/timer/replace_clock', to: 'timer#replace_clock'
   patch '/timer/activity/:id', to: 'timer#activity', as: 'timer_activity'
 
-  resources :welcome, only: [] do
+  resources :home, only: [] do
     collection do
       post :guest
     end

@@ -4,7 +4,7 @@
 
 <% if current_user.try(:email) != 'guest@guest.com' %>
   <p>Check it out as the
-    <%= link_to guest_welcome_index_path, method: :post, remote: true do %>
+    <%= link_to guest_home_index_path, method: :post, remote: true do %>
       <button class="btn btn-sm btn-outline-success">Guest Account</button>
     <% end %>
     user.
