@@ -71,6 +71,7 @@ $time-box-size: 60px;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
+        font-size: $font-bigger;
       }
 
       a {
@@ -92,7 +93,6 @@ $time-box-size: 60px;
 
       input {
         border-style: none;
-        font-size: $font-bigger;
       }
 
       input[type=image] {
