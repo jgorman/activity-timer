@@ -11,7 +11,7 @@
 
     <%= link_to('Projects', projects_path, class: 'nav-link') %>
 
-    <% if is_admin? %>
+    <% if admin? %>
       <%= link_to('Users', admin_users_path, class: 'nav-link') %>
     <% end %>
 

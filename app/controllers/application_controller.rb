@@ -3,12 +3,14 @@ class ApplicationController < ActionController::Base
   around_action :with_timezone
   #before_action :notice_me
 
-  # TODO: security check violatons will go here.
-  def oops_page
+  # Security check voilatons will go here.
+  # TODO: pass all of flash, including :alert
+  def oops_page(msg)
+    flash[:notice] = msg if msg
     if flash[:notice]
-      redirect_to '/user_session/oops', notice: flash[:notice]
+      redirect_to root_path, notice: flash[:notice]
     else
-      redirect_to '/user_session/oops'
+      redirect_to root_path
     end
     return false
   end

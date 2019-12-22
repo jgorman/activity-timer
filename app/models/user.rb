@@ -19,8 +19,16 @@ class User < ApplicationRecord
          :timeoutable,
          :trackable
 
-  def is_admin?
+  def admin?
     roles == 'admin'
+  end
+
+  def guest?
+    roles == 'guest'
+  end
+
+  def has_role?(role)
+    roles == role
   end
 
   def display_name

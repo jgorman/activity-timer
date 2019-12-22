@@ -15,8 +15,12 @@ module ApplicationHelper
     asset_pack_path("media/images/#{name}")
   end
 
-  def is_admin?
-    current_user && current_user.is_admin?
+  def admin?
+    current_user && current_user.admin?
+  end
+
+  def guest?
+    current_user && current_user.guest?
   end
 
   def project_links(project)
