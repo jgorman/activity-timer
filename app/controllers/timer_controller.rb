@@ -1,5 +1,6 @@
 class TimerController < ApplicationController
   include ActivityReport
+  before_action :authenticate_user!
 
   # timer_path: GET /timer
   def index
