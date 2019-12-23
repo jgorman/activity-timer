@@ -21,8 +21,9 @@
 
     <%= text_field_tag(:name, task.name,
       'data-scope': "activity.name.#{line_type}",
-      'data-id': task.id,
+      'data-id': session.id,
       placeholder: 'Add description',
+      id: "#{line_type}-#{session.id}",
       size: name_size
     ) %>
 
