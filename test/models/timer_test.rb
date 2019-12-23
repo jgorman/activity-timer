@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TimerTest < ActiveSupport::TestCase
   test 'ownership' do
-    u1 = users(:one)
+    u1 = users(:user1)
     p1 = projects(:one)
     p2 = projects(:two)
 

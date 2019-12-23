@@ -19,8 +19,14 @@ class User < ApplicationRecord
          :timeoutable,
          :trackable
 
+  validates :roles, presence: true
+
   def admin?
     roles == 'admin'
+  end
+
+  def user?
+    roles == 'user'
   end
 
   def guest?
@@ -36,4 +42,10 @@ class User < ApplicationRecord
     return last_name unless last_name.empty?
     email.sub(/@.*/, '')
   end
+
+  private
+
+  before_validation {
+    write_attribute(:roles, 'user') if !persisted? && roles.blank?
+  }
 end

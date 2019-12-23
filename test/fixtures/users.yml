@@ -1,17 +1,32 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+#
+# password == 'guest123'
 
-one:
+admin:
+  email: neo@gmail.com
+  encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
+  roles: user
+  first_name: Thomas A.
+  last_name: Anderson
+
+user1:
   email: james.bond@gmail.com
-  encrypted_password: $2a$11$SjRpwuPmmqnw2l5vOdh9ZeA5tWx87WgOiwAFbfWjtKtGl.BFFt7FS
-  roles: admin
+  encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
+  roles: user
   first_name: James
   last_name: Bond
 
-
-two:
+user2:
   email: bilbo.baggins@gmail.com
-  encrypted_password: $2a$11$SjRpwuPmmqnw2l5vOdh9ZeA5tWx87WgOiwAFbfWjtKtGl.BFFt7FS
-  roles: admin
+  encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
+  roles: user
   first_name: Bilbo
   last_name: Baggins
+
+guest:
+  email: guest@guest.com
+  encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
+  roles: guest
+  first_name: Guest
+  last_name: Account
 

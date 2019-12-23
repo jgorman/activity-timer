@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ActivityTest < ActiveSupport::TestCase
   test 'ownership' do
-    u1 = users(:one)
+    u1 = users(:user1)
     c1 = clients(:one)
     p1 = projects(:one)
     np1 = Project.no_project(u1)

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProjectTest < ActiveSupport::TestCase
   test 'ownership' do
-    u1 = users(:one)
+    u1 = users(:user1)
     c1 = clients(:one)
     c2 = clients(:two)
 
@@ -17,7 +17,7 @@ class ProjectTest < ActiveSupport::TestCase
   end
 
   test 'no_project' do
-    u1 = users(:one)
+    u1 = users(:user1)
     no_project = Project.no_project(u1)
     assert_equal u1, no_project.user, 'No project user'
     assert_equal '', no_project.name, 'No project no name'

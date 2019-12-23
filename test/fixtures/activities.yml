@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: one
+  user: user1
   client: one
   project: one
   name: Working hard
@@ -9,7 +9,7 @@ one:
   length: 600
 
 two:
-  user: two
+  user: user2
   client: two
   project: two
   name: Or hardly working
