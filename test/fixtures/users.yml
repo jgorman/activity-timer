@@ -5,28 +5,28 @@
 admin:
   email: neo@gmail.com
   encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
-  roles: user
+  role_s: admin
   first_name: Thomas A.
   last_name: Anderson
 
 user1:
   email: james.bond@gmail.com
   encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
-  roles: user
+  role_s: user
   first_name: James
   last_name: Bond
 
 user2:
   email: bilbo.baggins@gmail.com
   encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
-  roles: user
+  role_s: user
   first_name: Bilbo
   last_name: Baggins
 
 guest:
   email: guest@guest.com
   encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
-  roles: guest
+  role_s: guest
   first_name: Guest
   last_name: Account
 

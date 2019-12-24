@@ -13,10 +13,10 @@ class UserTest < ActiveSupport::TestCase
       password: 'beingness'
     )
     assert no_role_user.save!
-    assert no_role_user.roles == 'user'
+    assert no_role_user.role_s == 'user'
 
     # Catch missing role.
-    no_role_user.roles = ''
+    no_role_user.role_s = ''
     assert_not no_role_user.save
   end
 
@@ -26,10 +26,10 @@ class UserTest < ActiveSupport::TestCase
       first_name: 'Admin',
       last_name: 'Dude',
       password: 'knowingness',
-      roles: 'admin'
+      role_s: 'admin'
     )
     assert admin_user.save!
-    assert admin_user.roles == 'admin'
+    assert admin_user.role_s == 'admin'
   end
 
 end

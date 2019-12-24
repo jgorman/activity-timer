@@ -8,7 +8,7 @@ admin = User.new(
   email: 'admin@admin.com',
   first_name: 'Super',
   last_name: 'Admin',
-  roles: 'admin',
+  role_s: 'admin',
   password: 'changeme'
 )
 admin.save

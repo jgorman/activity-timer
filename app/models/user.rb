@@ -19,22 +19,22 @@ class User < ApplicationRecord
          :timeoutable,
          :trackable
 
-  validates :roles, presence: true
+  validates :role_s, presence: true
 
   def admin?
-    roles == 'admin'
+    role_s == 'admin'
   end
 
   def user?
-    roles == 'user'
+    role_s == 'user'
   end
 
   def guest?
-    roles == 'guest'
+    role_s == 'guest'
   end
 
   def has_role?(role)
-    roles == role
+    role_s == role
   end
 
   def display_name
@@ -46,6 +46,6 @@ class User < ApplicationRecord
   private
 
   before_validation {
-    write_attribute(:roles, 'user') if !persisted? && roles.blank?
+    self[:role_s] = 'user' if !persisted? && role_s.blank?
   }
 end

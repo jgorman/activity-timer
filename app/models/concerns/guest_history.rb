@@ -6,7 +6,7 @@ module GuestHistory
       email: 'guest@guest.com',
       first_name: 'Guest',
       last_name: 'Account',
-      roles: 'guest',
+      role_s: 'guest',
       password: 'guest123'
     },
     clients: 5,
