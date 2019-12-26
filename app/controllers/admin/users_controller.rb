@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_permissions
 
   def index
     @users = User.all.order(:email)
@@ -20,7 +21,6 @@ class Admin::UsersController < ApplicationController
   # https://github.com/plataformatec/devise/wiki/How-To:-Sign-in-as-another-user-if-you-are-an-admin
   # sign_in(:user, User.find(params[:id])) # tracks logins.
   def become
-    return unless current_user.is_admin? # TODO: whole controller is_admin?
     bypass_sign_in(User.find(params[:id]))
     flash[:reload_page] = true
     redirect_to timer_path
@@ -54,6 +54,10 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
+  def check_permissions
+    return oops_page('Unauthorized access') unless current_user.admin?
+  end
 
   def user_params
     params.require(:user).permit(:email, :first_name, :last_name, :role_s)

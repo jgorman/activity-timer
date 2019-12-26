@@ -9,14 +9,14 @@ admin:
   first_name: Thomas A.
   last_name: Anderson
 
-user1:
+u1:
   email: james.bond@gmail.com
   encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
   role_s: user
   first_name: James
   last_name: Bond
 
-user2:
+u2:
   email: bilbo.baggins@gmail.com
   encrypted_password: $2a$11$cGMNSl3TzPf0qZ8fpFOMCeTj2zg7Clzn5RXod7Uq.ZhEdzHi0yiTG
   role_s: user

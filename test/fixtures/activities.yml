@@ -1,17 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: user1
-  client: one
-  project: one
+a1:
+  user: u1
+  client: c1
+  project: p1
   name: Working hard
   start: 2019-11-08 12:50:54
   length: 600
 
-two:
-  user: user2
-  client: two
-  project: two
+a2:
+  user: u2
+  client: c2
+  project: p2
   name: Or hardly working
   start: 2019-11-08 13:45:56
   length: 3600

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  get '/error', to: 'home#error'
+
   devise_for :users
 
   # TODO Convert these to a nice syntax.

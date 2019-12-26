@@ -2,9 +2,9 @@ require 'test_helper'
 
 class TimerTest < ActiveSupport::TestCase
   test 'ownership' do
-    u1 = users(:user1)
-    p1 = projects(:one)
-    p2 = projects(:two)
+    u1 = users(:u1)
+    p1 = projects(:p1)
+    p2 = projects(:p2)
 
     t1 = Timer.new(user: u1, project: p1, start: Time.now, name: 'name')
     assert t1.save, 'Correct ownership'

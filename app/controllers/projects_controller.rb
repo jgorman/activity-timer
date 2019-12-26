@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_client, only: %i[new create]
   before_action :set_project, only: %i[show edit update destroy]
 
   # projects_path: GET /projects
@@ -12,7 +13,8 @@ class ProjectsController < ApplicationController
   # new_client_project_path: GET /clients/12/projects/new
   def new
     @project = Project.new
-    @project.client = Client.find(params[:client_id])
+    @project.user = current_user
+    @project.client = @client
     @project.color = Project.random_color
   end
 
@@ -23,7 +25,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user = current_user
-    @project.client = Client.find(params[:client_id])
+    @project.client = @client
 
     if @project.save
       redirect_to @project
@@ -49,8 +51,18 @@ class ProjectsController < ApplicationController
 
   private
 
+  def set_client
+    @client = Client.find(params[:client_id])
+    unless @client.user_id == current_user.id
+      return oops_page('Unauthorized access')
+    end
+  end
+
   def set_project
     @project = Project.find(params[:id])
+    unless @project.user_id == current_user.id
+      return oops_page('Unauthorized access')
+    end
   end
 
   def project_params

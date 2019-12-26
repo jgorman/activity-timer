@@ -1,17 +1,14 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_project, only: %i[new create]
   before_action :set_activity, only: %i[edit update destroy]
-
-  # activities_path: GET /activities
-  def index
-    @activities = current_user.activities
-  end
 
   # new_project_activity_path: GET /projects/12/activities/new
   def new
     @activity = Activity.new
     @activity.start = Time.now
-    @activity.project = Project.find(params[:project_id])
+    @activity.project = @project
+    @activity.client = @project.client
   end
 
   # edit_activity_path: GET /activities/9/edit
@@ -21,8 +18,8 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @activity.user = current_user
-    @activity.project = Project.find(params[:project_id])
-    @activity.client = @activity.project.client
+    @activity.project = @project
+    @activity.client = @project.client
 
     if @activity.save
       redirect_to @activity.project
@@ -50,6 +47,16 @@ class ActivitiesController < ApplicationController
 
   def set_activity
     @activity = Activity.find(params[:id])
+    unless @activity.user_id == current_user.id
+      return oops_page('Unauthorized access')
+    end
+  end
+
+  def set_project
+    @project = Project.find(params[:project_id])
+    unless @project.user_id == current_user.id
+      return oops_page('Unauthorized access')
+    end
   end
 
   def activity_params

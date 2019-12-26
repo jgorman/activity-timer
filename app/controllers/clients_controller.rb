@@ -42,6 +42,9 @@ class ClientsController < ApplicationController
 
   def set_client
     @client = Client.find(params[:id])
+    unless @client.user_id == current_user.id
+      return oops_page('Unauthorized access')
+    end
   end
 
   def client_params

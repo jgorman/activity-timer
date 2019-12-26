@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
   def oops_page(msg)
     flash[:notice] = msg if msg
     if flash[:notice]
-      redirect_to root_path, notice: flash[:notice]
+      redirect_to error_path, notice: flash[:notice]
     else
-      redirect_to root_path
+      redirect_to error_path
     end
     return false
   end
