@@ -91,6 +91,12 @@ $time-box-size: 60px;
         justify-content: flex-end;
       }
 
+      #timer_name {
+        &:focus {
+          width: 250px;
+        }
+      }
+
       input {
         border-style: none;
       }

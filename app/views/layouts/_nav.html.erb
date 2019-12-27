@@ -3,6 +3,8 @@
   <%= link_to image_pack_tag('jg-logo.svg', id: 'logo', size: '50'),
     root_path, class: 'nav-link' %>
 
+  <%= link_to('Home', root_path, class: 'nav-link') %>
+
   <% if user_signed_in? %>
 
     <%= link_to('Timer', timer_path, class: 'nav-link', id: 'nav-timer-link') %>
