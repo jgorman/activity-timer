@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index; end
 
-  def error; end
+  def alert; end
 
   def guest
     if guest_user = User.find_by_email(GuestHistory::Defaults[:guest][:email])

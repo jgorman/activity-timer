@@ -21,7 +21,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     get project_path(@p2)
-    assert_redirected_to error_path
+    assert_redirected_to alert_path
   end
 
   test 'create projects under my clients' do
@@ -29,6 +29,6 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     get new_client_project_path(@c2)
-    assert_redirected_to error_path
+    assert_redirected_to alert_path
   end
 end

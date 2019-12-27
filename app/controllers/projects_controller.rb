@@ -54,14 +54,14 @@ class ProjectsController < ApplicationController
   def set_client
     @client = Client.find(params[:client_id])
     unless @client.user_id == current_user.id
-      return oops_page('Unauthorized access')
+      return alert_page('Unauthorized access.')
     end
   end
 
   def set_project
     @project = Project.find(params[:id])
     unless @project.user_id == current_user.id
-      return oops_page('Unauthorized access')
+      return alert_page('Unauthorized access.')
     end
   end
 

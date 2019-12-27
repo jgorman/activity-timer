@@ -21,7 +21,7 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     get edit_activity_path(@a2)
-    assert_redirected_to error_path
+    assert_redirected_to alert_path
   end
 
   test 'create activities under my projects' do
@@ -29,6 +29,6 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     get new_project_activity_path(@p2)
-    assert_redirected_to error_path
+    assert_redirected_to alert_path
   end
 end

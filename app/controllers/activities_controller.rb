@@ -48,14 +48,14 @@ class ActivitiesController < ApplicationController
   def set_activity
     @activity = Activity.find(params[:id])
     unless @activity.user_id == current_user.id
-      return oops_page('Unauthorized access')
+      return alert_page('Unauthorized access.')
     end
   end
 
   def set_project
     @project = Project.find(params[:project_id])
     unless @project.user_id == current_user.id
-      return oops_page('Unauthorized access')
+      return alert_page('Unauthorized access.')
     end
   end
 

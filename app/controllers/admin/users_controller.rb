@@ -56,7 +56,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def check_permissions
-    return oops_page('Unauthorized access') unless current_user.admin?
+    return alert_page('Unauthorized access.') unless current_user.admin?
   end
 
   def user_params

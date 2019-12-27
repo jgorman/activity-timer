@@ -6,8 +6,8 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'error page' do
-    get error_path
+  test 'alert page' do
+    get alert_path
     assert_response :success
   end
 end

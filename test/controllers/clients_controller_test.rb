@@ -19,6 +19,6 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     get client_path(@c2)
-    assert_redirected_to error_path
+    assert_redirected_to alert_path
   end
 end

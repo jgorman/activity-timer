@@ -1,24 +1,24 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :with_timezone
-  #before_action :notice_me
+  # before_action :test_notices
 
   # Security check voilatons will go here.
   # TODO: pass all of flash, including :alert
-  def oops_page(msg)
+  def alert_page(msg)
     flash[:notice] = msg if msg
     if flash[:notice]
-      redirect_to error_path, notice: flash[:notice]
+      redirect_to alert_path, notice: flash[:notice]
     else
-      redirect_to error_path
+      redirect_to alert_path
     end
     return false
   end
 
   private
 
-  def notice_me
-    #flash[:notice] = "Notice me now!"
+  def test_notices
+    flash[:notice] = 'Notice me now!'
     flash[:alert] = 'Notice me or else!'
   end
 

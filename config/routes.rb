@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  get '/error', to: 'home#error'
+  get '/alert', to: 'home#alert'
 
   devise_for :users
 
