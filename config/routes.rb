@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/alert', to: 'home#alert'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   # TODO Convert these to a nice syntax.
   get '/timer', to: 'timer#index'

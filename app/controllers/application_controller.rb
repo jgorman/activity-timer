@@ -3,15 +3,8 @@ class ApplicationController < ActionController::Base
   around_action :with_timezone
   # before_action :test_notices
 
-  # Security check voilatons will go here.
-  # TODO: pass all of flash, including :alert
   def alert_page(msg)
-    flash[:notice] = msg if msg
-    if flash[:notice]
-      redirect_to alert_path, notice: flash[:notice]
-    else
-      redirect_to alert_path
-    end
+    redirect_to alert_path, notice: msg
     return false
   end
 
@@ -19,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def test_notices
     flash[:notice] = 'Notice me now!'
-    flash[:alert] = 'Notice me or else!'
+    flash[:alert] = 'Alert me or else!'
   end
 
   def after_sign_in_path_for(user)
