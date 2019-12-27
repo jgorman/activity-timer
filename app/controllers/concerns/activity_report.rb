@@ -3,7 +3,7 @@ module ActivityReport
 
   # We bin activities into days by start and we show them by descending finish.
 
-  Report = Struct.new(:days, :clients, :show_days, keyword_init: true)
+  Report = Struct.new(:days, :clients, :show_days, :more, keyword_init: true)
 
   Day = Struct.new(:date, :length, :tasks, keyword_init: true)
 
@@ -35,11 +35,13 @@ module ActivityReport
     @config = Defaults.deep_merge(config)
     client_h = get_client_h
     project_h = get_project_h(client_h)
-    raw_days = get_raw_days
+    raw_days, more = get_raw_days
     days = get_days(raw_days, project_h)
     clients = get_clients(client_h)
     activity_report =
-      Report.new(days: days, clients: clients, show_days: @config[:show_days])
+      Report.new(
+        days: days, clients: clients, show_days: @config[:show_days], more: more
+      )
     activity_report
   end
 
@@ -84,10 +86,15 @@ module ActivityReport
 
   def get_raw_days
     first_day = Date.today.beginning_of_day.advance(days: -@config[:show_days])
+
     acts =
       Activity.where('user_id = ? and start >= ?', current_user.id, first_day)
         .pluck(:id, :start, :length, :project_id, :name)
         .to_a
+
+    more =
+      Activity.where('user_id = ? and start < ?', current_user.id, first_day)
+        .any?
 
     # Gather the activities by date, focus.
     raw_days = {}
@@ -104,7 +111,7 @@ module ActivityReport
       acts << act
     end
 
-    raw_days
+    [raw_days, more]
   end
 
   def get_days(raw_days, project_h)

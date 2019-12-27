@@ -1,5 +1,9 @@
 <% @page_title = 'Projects' %>
 
+<% if @projects.count == 0 %>
+  <p>No projects.</p>
+<% else %>
+
 <table class="table">
   <tr>
     <th>Client - Project</th>
@@ -13,3 +17,5 @@
     </tr>
   <% end %>
 </table>
+
+<% end %>

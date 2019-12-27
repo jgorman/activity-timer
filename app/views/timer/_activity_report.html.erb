@@ -28,9 +28,17 @@
   </div>
 <% end %>
 
-<div class="load-more">
-  <%= button_to 'Load more', timer_load_more_path,
-      params: { show_days: @activity_report.show_days + 10 },
-      method: :post, remote: true,
-      form_class: 'btn btn-outline-primary' %>
-</div>
+<% if @activity_report.days.count == 0 %>
+  <div class="content-panel">
+    <p>No activities.</p>
+  </div>
+<% end %>
+
+<% if @activity_report.more %>
+  <div class="load-more">
+    <%= button_to 'Load more', timer_load_more_path,
+        params: { show_days: @activity_report.show_days + 30 },
+        method: :post, remote: true,
+        form_class: 'btn btn-outline-primary' %>
+  </div>
+<% end %>
