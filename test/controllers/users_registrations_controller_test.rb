@@ -1,9 +1,24 @@
 require 'test_helper'
 
 class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
-
   Password = 'guest123'
+
+  test 'user registration' do
+    user_h = {
+      email: 'somebody@gmail.com',
+      password: Password,
+      role_s: 'user',
+      first_name: 'Some',
+      last_name: 'Body'
+    }
+
+    post user_registration_path, params: { user: user_h }
+    assert_redirected_to timer_path
+    user = User.find(session_user_id)
+    assert_equal user_h[:email], user.email
+    follow_redirect!
+    assert_select 'p', 'No activities.'
+  end
 
   test 'update user' do
     u1 = users(:u1)
@@ -25,8 +40,8 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     delete user_registration_path
 
     assert_redirected_to root_path
-    assert_equal 'Bye! Your account has been successfully cancelled. We hope to see you again soon.', flash[:notice]
-    assert_not User.find_by_id(u1.id), "User not deleted."
+    assert_match /successfully cancelled/, flash[:notice]
+    assert_not User.find_by_id(u1.id), 'User not deleted.'
   end
 
   test 'guest not self update' do
@@ -50,7 +65,6 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to alert_path
     assert_equal 'Guest users cannot delete themselves.', flash[:notice]
-    assert User.find_by_id(guest.id), "Guest self deleted."
+    assert User.find_by_id(guest.id), 'Guest self deleted.'
   end
-
 end

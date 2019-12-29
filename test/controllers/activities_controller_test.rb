@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class ActivitiesControllerTest < ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
-
   setup do
     sign_in users(:u1)
     @p1 = projects(:p1)

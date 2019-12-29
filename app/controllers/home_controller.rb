@@ -9,8 +9,7 @@ class HomeController < ApplicationController
       flash[:reload_page] = true
       redirect_to timer_path
     else
-      flash[:notice] = 'No guest user available now. Sorry.'
-      render :index
+      alert_page('No guest user available now. Sorry.')
     end
   end
 end

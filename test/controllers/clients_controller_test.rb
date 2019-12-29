@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
-
   setup do
     sign_in users(:u1)
     @c1 = clients(:c1)
