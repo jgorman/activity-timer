@@ -1,7 +1,7 @@
 import consumer from './consumer'
 import ClockTicker from './clock_ticker'
 
-const user_id = $('meta[name=current-user]').attr('id')
+const user_id = $('meta[name=current-user]').attr('content')
 const clock = new ClockTicker()
 
 const sub = consumer.subscriptions.create(

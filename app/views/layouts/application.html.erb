@@ -11,7 +11,7 @@
     <meta name="description" content="<%= page_title %>"/>
 
     <%= action_cable_meta_tag %>
-    <meta name="current-user" id="<%= current_user.try(:id) %>">
+    <meta name="current-user" content="<%= current_user.try(:id) %>">
     <% if flash[:reload_page] %>
       <meta name="turbolinks-visit-control" content="reload">
     <% end %>

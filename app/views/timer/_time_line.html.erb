@@ -5,7 +5,7 @@
         <div
           class="session-count"
           data-toggle="collapse"
-          data-target="#task-<%= task.id %>">
+          data-target="#collapse-<%= task.id %>">
           <%= task.sessions.length %>
         </div>
       <% else %>
@@ -21,7 +21,7 @@
       size: activity_name_input_size(task.name)
     ) %>
 
-    <span
+    <div
       class="project-io"
       data-toggle="modal"
       data-target="#project-select"
@@ -39,7 +39,7 @@
       </span>
       &nbsp;&bull; <%= task.project.client.name %>
 
-    </span>
+    </div>
   </div>
 
   <div>

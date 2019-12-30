@@ -12,7 +12,7 @@
           locals: { line_type: 'task', task: task, session: task } %>
 
       <% if task.sessions.length > 1 %>
-        <div class="collapse" id="task-<%= task.id %>">
+        <div class="collapse" id="collapse-<%= task.id %>">
 
           <% task.sessions.each do |session| %>
             <%= render partial: 'time_line',

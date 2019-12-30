@@ -1,6 +1,6 @@
 <%= form_with(model: @timer, url: timer_path, class: 'timer-form') do |form| %>
 
-  <div class='left-side'>
+  <div class="left-side">
     <%= form.text_field :name,
         size: activity_name_input_size(@timer.name),
         'data-scope': 'timer.name',
@@ -12,7 +12,7 @@
 
     <%= form.hidden_field :project_id %>
 
-    <span
+    <div
       id="timer_project_display"
       class="project-io"
       data-toggle="modal"
@@ -32,20 +32,23 @@
       <% else %>
         Select project
       <% end %>
-    </span>
+    </div>
 
     <% unless @timer.persisted? %>
-      <input type="image" src="<%= image_path('play-button.svg') %>">
+      <input type="image" src="<%= image_path('play-button.svg') %>"
+             alt="Start acitivty">
     <% end %>
 
     <div id="ticker"><%= show_elapsed(@timer.start) %></div>
 
     <% if @timer.persisted? %>
 
-      <%= link_to image_pack_tag('check-mark.svg', size: '18'),
+      <%= link_to image_pack_tag('check-mark.svg', size: 18,
+                                 alt: 'Complete activty'),
         timer_finish_path, method: :post, remote: true %>
 
-      <%= link_to image_pack_tag('cross.svg', size: '15'),
+      <%= link_to image_pack_tag('cross.svg', size: 15,
+                                 alt: 'Cancel activity'),
         timer_path, method: :delete, remote: true %>
 
     <% end %>
