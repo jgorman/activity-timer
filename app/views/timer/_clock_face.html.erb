@@ -2,9 +2,9 @@
 
   <div class="left-side">
     <%= form.text_field :name,
-        size: activity_name_input_size(@timer.name),
         'data-scope': 'timer.name',
         'data-timer_id': @timer.id,
+        class: 'name-input',
         placeholder: 'What are you working on?' %>
   </div>
 

@@ -33,13 +33,6 @@ module ApplicationHelper
     link.html_safe
   end
 
-  def activity_name_input_size(name)
-    name_size = name.length.to_i
-    name_size = 14 if name_size < 14
-    name_size = 20 if name_size > 20
-    name_size
-  end
-
   def project_link(project)
     link =
       "<a href=\"#{project_path(project)}\" style=\"color:#{

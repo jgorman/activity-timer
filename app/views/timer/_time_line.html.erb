@@ -16,9 +16,9 @@
     <%= text_field_tag(:name, task.name,
       'data-scope': "activity.name.#{line_type}",
       'data-id': session.id,
+      class: 'name-input',
       placeholder: 'Add description',
-      id: "#{line_type}-#{session.id}",
-      size: activity_name_input_size(task.name)
+      id: "#{line_type}-#{session.id}"
     ) %>
 
     <div

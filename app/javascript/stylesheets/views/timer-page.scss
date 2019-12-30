@@ -10,6 +10,7 @@ $project-height: 2em;
 $panel-width: calc(100vw - #{$left-nav-width});
 $session-box-size: 30px;
 $time-box-size: 60px;
+$activity-name-width: 25vw;
 
 .timer-page {
 
@@ -24,6 +25,10 @@ $time-box-size: 60px;
     height: 8px;
     border-radius: 50%;
     margin-right: $sep5;
+  }
+
+  input.name-input {
+    width: $activity-name-width;
   }
 
   // The project selection modal.
@@ -89,12 +94,6 @@ $time-box-size: 60px;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-      }
-
-      #timer_name {
-        &:focus {
-          width: 250px;
-        }
       }
 
       input {
@@ -166,10 +165,6 @@ $time-box-size: 60px;
       border-style: none;
       background-color: inherit;
       margin-right: $sep;
-
-      &:focus {
-        width: 250px;
-      }
     }
 
     // Session length: 3:05:38
