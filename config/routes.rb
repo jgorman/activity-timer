@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get '/alert', to: 'home#alert'
+  get '/console', to: 'home#console'
+  get '/env', to: 'home#env'
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
