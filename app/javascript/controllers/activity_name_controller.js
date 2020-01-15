@@ -35,18 +35,12 @@ class ActivityName extends Controller {
     if (scope.includes('activity.name')) {
       const id = ds.id
       if (!id) return
-      Rails.ajax({
-        url: `/timer/activity/${id}`,
-        type: 'PATCH',
-        data: $.param({ scope, name }),
-      })
+      const url = window.RailsUrl(`/timer/activity/${id}`)
+      Rails.ajax({ type: 'PATCH', url, data: $.param({ scope, name }) })
     } else if (scope.includes('timer.name')) {
       if (!ds.timer_id) return
-      Rails.ajax({
-        url: '/timer/name',
-        type: 'POST',
-        data: $.param({ name }),
-      })
+      const url = window.RailsUrl('/timer/name')
+      Rails.ajax({ type: 'POST', url, data: $.param({ name }) })
     }
   }
 

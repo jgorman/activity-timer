@@ -10,10 +10,16 @@
     <title><%= page_title %></title>
     <meta name="description" content="<%= page_title %>"/>
 
-    <%= action_cable_meta_tag %>
     <meta name="current-user" content="<%= current_user.try(:id) %>">
+
     <% if flash[:reload_page] %>
       <meta name="turbolinks-visit-control" content="reload">
+    <% end %>
+
+    <%= action_cable_meta_tag %>
+
+    <% if Rails.configuration.relative_url_root.present? %>
+      <meta name="relative-url-root" content="<%= Rails.configuration.relative_url_root %>">
     <% end %>
 
     <%= csrf_meta_tags %>

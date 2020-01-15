@@ -67,13 +67,13 @@ class ClockTicker {
   }
 
   replace_clock = () => {
-    // console.log('^^^^^ replace_clock')
-    Rails.ajax({ type: 'GET', url: '/timer/replace_clock.js' })
+    const url = window.RailsUrl('/timer/replace_clock.js')
+    Rails.ajax({ type: 'GET', url })
   }
 
   replace_page = () => {
-    // console.log('^^^^^ replace_page')
-    Rails.ajax({ type: 'GET', url: '/timer/replace_page.js' })
+    const url = window.RailsUrl('/timer/replace_page.js')
+    Rails.ajax({ type: 'GET', url })
   }
 
   show_time = () => {

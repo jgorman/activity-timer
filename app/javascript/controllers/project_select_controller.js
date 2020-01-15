@@ -62,11 +62,8 @@ class ProjectSelect extends Controller {
     if (scope.includes('activity.project')) {
       const activity_id = keep.activity_id
       if (!activity_id) return
-      Rails.ajax({
-        url: `/timer/activity/${activity_id}`,
-        type: 'PATCH',
-        data: $.param({ scope, project_id }),
-      })
+      const url = window.RailsUrl(`/timer/activity/${activity_id}`)
+      Rails.ajax({ type: 'PATCH', url, data: $.param({ scope, project_id }) })
     } else if (scope.includes('timer.project')) {
       const client_name = this.htmlEscape(ds.client_name || '')
       const project_name = this.htmlEscape(ds.project_name || '')
@@ -89,11 +86,8 @@ class ProjectSelect extends Controller {
       // Update the current timer if there is one.
       const timer_id = $timer_project_display.data('timer_id')
       if (!timer_id) return
-      Rails.ajax({
-        url: '/timer/project',
-        type: 'POST',
-        data: $.param({ project_id }),
-      })
+      const url = window.RailsUrl('/timer/project')
+      Rails.ajax({ type: 'POST', url, data: $.param({ project_id }) })
     }
   }
 
