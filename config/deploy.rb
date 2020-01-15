@@ -3,7 +3,7 @@ lock '~> 3.11.2'
 
 set :application, 'activity-timer'
 set :repo_url, 'git@github.com:jgorman/activity-timer.git'
-set :deploy_to, '/u/jgio/activity-timer-deploy'
+set :deploy_to, '/u/jgio/activity-timer'
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
 

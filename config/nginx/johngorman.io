@@ -21,14 +21,14 @@ server {
   location /activity-cable {
     passenger_app_group_name activity-cable;
     passenger_force_max_concurrent_requests_per_process 0;
-    passenger_app_root /u/jgio/activity-timer-deploy/current;
+    passenger_app_root /u/jgio/activity-timer/current;
   }
 
   location ~ ^/activity(/.*|$) {
-    alias /u/jgio/activity-timer-deploy/current/public$1;
+    alias /u/jgio/activity-timer/current/public$1;
     passenger_base_uri /activity;
-    passenger_app_root /u/jgio/activity-timer-deploy/current;
-    passenger_document_root /u/jgio/activity-timer-deploy/current/public;
+    passenger_app_root /u/jgio/activity-timer/current;
+    passenger_document_root /u/jgio/activity-timer/current/public;
   }
 
   index index.html;
