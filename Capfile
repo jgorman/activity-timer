@@ -6,9 +6,10 @@ require "capistrano/deploy"
 
 require 'capistrano/rails'
 require 'capistrano/passenger'
-require 'capistrano/chruby'
+require 'capistrano/rbenv'
 
-set :chruby_ruby, 'ruby-2.6.5'
+set :rbenv_type, :user
+set :rbenv_ruby, '2.6.5'
 
 # Set deploy variables.
 # https://github.com/capistrano/capistrano/issues/1884

@@ -2,10 +2,10 @@
 lock '~> 3.11.2'
 
 set :application, 'activity-timer'
-set :repo_url, 'git@github.com:jgorman/activity-timer.git'
-set :deploy_to, '/u/jgio/activity-timer'
+set :repo_url, 'https://github.com/jgorman/activity-timer.git'
+set :deploy_to, "/home/deploy/#{fetch :application}"
 
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
 # https://github.com/capistrano/rails
 append :linked_files, "config/master.key"
