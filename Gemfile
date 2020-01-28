@@ -28,6 +28,7 @@ gem 'devise'
 gem 'turbolinks_render'
 gem 'octicons_helper'
 gem 'faker'
+gem 'envyable'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

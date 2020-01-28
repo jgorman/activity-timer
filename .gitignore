@@ -33,3 +33,6 @@
 yarn-debug.log*
 .yarn-integrity
 dump.rdb
+
+# Don't check in credentials 
+config/env.yml
