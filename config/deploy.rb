@@ -21,6 +21,20 @@ namespace :deploy do
   end
 end
 
+# https://github.com/capistrano/rails
+append :linked_files, "config/env.yml"
+namespace :deploy do
+  namespace :check do
+    before :linked_files, :set_env_yml do
+      on roles(:app), in: :sequence, wait: 10 do
+        unless test("[ -f #{shared_path}/config/env.yml ]")
+          upload! 'config/env.yml', "#{shared_path}/config/env.yml"
+        end
+      end
+    end
+  end
+end
+
 # Fix bug using only webpacker.
 # https://makandracards.com/makandra/100898-fix-for-rails-assets-manifest-file-not-found-in-capistrano-deploy
 Rake::Task["deploy:assets:backup_manifest"].clear_actions
