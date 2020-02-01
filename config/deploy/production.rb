@@ -9,7 +9,7 @@
 
 #server "johngorman.io", user: "jg", roles: %w{app db web}
 
-server "bento16", user: "vagrant", roles: %w{app db web}
+#server "bento16", user: "vagrant", roles: %w{app db web}
 server "bento18", user: "vagrant", roles: %w{app db web}
 
 # role-based syntax
