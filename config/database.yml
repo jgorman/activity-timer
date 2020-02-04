@@ -1,34 +1,23 @@
+<%
+  adapter = ENV.fetch("DB_ADAPTER") { 'postgresql' }
+  encoding = (adapter == 'postgresql') ? 'unicode' : 'utf8mb4'
+%>
 
 default: &default
-  adapter: <%= ENV.fetch("DB_ADAPTER") { 'postgresql' } %>
-  #encoding: unicode   # postresql
-  #encoding: utf8mb4   # mysql2
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  encoding: <%= encoding %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: localhost
-  username: rails
-  password: rails123
 
 development:
   <<: *default
-  database: activity_timer_dev
+  url: <%= ENV.fetch("DATABASE_URL") {
+      "#{adapter}://rails:rails123@localhost/activity_timer_dev" } %>
 
 test:
   <<: *default
-  database: activity_timer_test
-
-# Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
-# On Heroku and other platform providers, you may have a full connection URL.
-#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-
-REAL_production:
-  <<: *default
-  database: activity_timer_prod
-  username: activity_timer
-  password: <%= ENV['RAILS6_PLAYGROUND_DATABASE_PASSWORD'] %>
+  url: <%= ENV.fetch("DATABASE_URL") {
+      "#{adapter}://rails:rails123@localhost/activity_timer_test" } %>
 
 production:
   <<: *default
-  database: activity_timer_prod
+  url: <%= ENV.fetch("DATABASE_URL") {
+      "#{adapter}://rails:rails123@localhost/activity_timer_prod" } %>
