@@ -6,6 +6,9 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  config.can_be_anything = { answer: 42 }
+  # rails console irb> Rails.application.config.can_be_anything
+
   # Do not eager load code on boot.
   config.eager_load = false
 

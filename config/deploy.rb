@@ -2,8 +2,8 @@
 lock '~> 3.11.2'
 
 set :application, 'activity-timer'
+set :deploy_to, "/home/deploy/#{fetch :application}"
 set :repo_url, 'https://github.com/jgorman/activity-timer.git'
-set :deploy_to, "/home/vagrant/#{fetch :application}"
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
