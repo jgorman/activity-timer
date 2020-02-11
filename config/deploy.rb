@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock '~> 3.11.2'
 
-# Override these as necessary in deploy/<stage>.rb
+# Override these as necessary in config/deploy/<stage>.rb
 set :application, 'activity-timer'
 set :repo_url, 'https://github.com/jgorman/activity-timer.git'
 set :user, 'vagrant'
@@ -9,7 +9,7 @@ set :deploy_to, -> { "/home/#{fetch :user}/#{fetch :application}" }
 set :rails_env, :production
 set :branch, :master
 
-# For multiple server stages, set one server to {primary: true} for db:migrate.
+# For multiple servers, set one server to {primary: true} for db:migrate
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
