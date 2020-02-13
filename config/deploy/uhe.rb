@@ -1,3 +1,3 @@
-set :user, 'uheapp'
 set :branch, :m2
-server "uhe", roles: %w{app web}
+set :rails_env, :production
+server "uhe", user: 'uheadmin', roles: %w{app web}
