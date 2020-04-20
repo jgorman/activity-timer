@@ -3,19 +3,32 @@ lock '~> 3.11.2'
 
 # Override these as necessary in config/deploy/<stage>.rb
 set :application, 'activity-timer'
-set :repo_url, 'https://github.com/jgorman/activity-timer.git'
+set :repo_url, 'git@github.com:jgorman/activity-timer.git'
+
+# Override user and deploy_to in the stage files if they differ.
+set :user, 'vagrant'
 set :deploy_to, -> { "/home/#{fetch :user}/#{fetch :application}" }
 
-set :user, 'uheadmin'
+# Set this to allow different stages to run as Rails.env = production.
 set :rails_env, :production
+
 #set :branch, :master
+#set ssh_options: { :forward_agent => true }
 
 # For multiple servers, set one server to {primary: true} for db:migrate
 
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+append :linked_dirs,
+       'log',
+       'tmp/pids',
+       'tmp/cache',
+       'tmp/sockets',
+       'vendor/bundle',
+       '.bundle',
+       'public/system',
+       'public/uploads'
 
 # https://github.com/capistrano/rails
-append :linked_files, "config/master.key"
+append :linked_files, 'config/master.key'
 namespace :deploy do
   namespace :check do
     before :linked_files, :set_master_key do
@@ -29,7 +42,7 @@ namespace :deploy do
 end
 
 # https://github.com/capistrano/rails
-append :linked_files, "config/env.yml"
+append :linked_files, 'config/env.yml'
 namespace :deploy do
   namespace :check do
     before :linked_files, :set_env_yml do
@@ -44,4 +57,4 @@ end
 
 # Fix bug using only webpacker.
 # https://makandracards.com/makandra/100898-fix-for-rails-assets-manifest-file-not-found-in-capistrano-deploy
-Rake::Task["deploy:assets:backup_manifest"].clear_actions
+Rake::Task['deploy:assets:backup_manifest'].clear_actions

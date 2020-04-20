@@ -1,1 +1,1 @@
-server "bento18", roles: %w{app web}
+server 'bento18', roles: %w{app web}
