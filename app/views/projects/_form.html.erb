@@ -3,7 +3,7 @@
       url: (@project.persisted? ?
         project_path(@project) :
         client_projects_path(@project.client)),
-      data: {controller: 'form'}
+      data: { controller: "form" }
     ) do |form| %>
 
   <div class="row my-2">
@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-9">
       <%= form.text_field :color,
-          value: sprintf('#%06x', @project.color), size: 40 %>
+          value: sprintf("#%06x", @project.color), size: 40 %>
     </div>
   </div>
 
@@ -30,15 +30,13 @@
            value="Update project"
            class="btn btn-secondary my-1 mr-1">
 
-    <%= link_to 'Delete project', project_path(@project),
+    <%= link_to "Delete project", project_path(@project),
         method: :delete,
         data: { confirm: "Delete project #{@project.display_title}?" },
-        class: "btn btn-secondary my-1 mr-1"
-      %>
+        class: "btn btn-secondary my-1 mr-1" %>
 
-    <%= link_to 'Cancel', project_path(@project),
-        class: 'btn btn-secondary my-1 mr-1'
-      %>
+    <%= link_to "Cancel", project_path(@project),
+        class: "btn btn-secondary my-1 mr-1" %>
 
   <% else %>
 
@@ -46,9 +44,8 @@
            value="Add project"
            class="btn btn-secondary my-1 mr-1">
 
-    <%= link_to 'Cancel', client_path(@project.client),
-      class: 'btn btn-secondary my-1 mr-1'
-      %>
+    <%= link_to "Cancel", client_path(@project.client),
+      class: "btn btn-secondary my-1 mr-1" %>
 
   <% end %>
 

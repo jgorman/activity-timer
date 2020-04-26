@@ -5,10 +5,10 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="<%= image_path('jg-logo-50x50.png') %>">
+    <link rel="shortcut icon" href="<%= image_path("jg-logo-50x50.png") %>">
 
     <title><%= page_title %></title>
-    <meta name="description" content="<%= page_title %>"/>
+    <meta name="description" content="<%= page_title %>">
 
     <meta name="current-user" content="<%= current_user.try(:id) %>">
 
@@ -25,8 +25,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
   </head>
 
   <body>
@@ -34,7 +34,7 @@
 
       <div class="nav-space">
         <div class="nav-panel">
-          <%= render 'layouts/nav' %>
+          <%= render "layouts/nav" %>
         </div>
       </div>
 
@@ -47,7 +47,7 @@
             <%= yield :top_menu %>
           </nav>
 
-          <%= render 'layouts/alert_notices' %>
+          <%= render "layouts/alert_notices" %>
 
           <div class="content-panel">
             <%= yield %>

@@ -8,16 +8,15 @@
 
     <% day.tasks.each do |task| %>
 
-      <%= render partial: 'time_line',
-          locals: { line_type: 'task', task: task, session: task } %>
+      <%= render partial: "time_line",
+          locals: { line_type: "task", task: task, session: task } %>
 
       <% if task.sessions.length > 1 %>
         <div class="collapse" id="collapse-<%= task.id %>">
 
           <% task.sessions.each do |session| %>
-            <%= render partial: 'time_line',
-              locals: { line_type: 'session', task: task, session: session }
-            %>
+            <%= render partial: "time_line",
+              locals: { line_type: "session", task: task, session: session } %>
           <% end %>
 
         </div>
@@ -36,9 +35,9 @@
 
 <% if @activity_report.more %>
   <div class="load-more">
-    <%= button_to 'Load more', timer_load_more_path,
+    <%= button_to "Load more", timer_load_more_path,
         params: { show_days: @activity_report.show_days + 30 },
         method: :post, remote: true,
-        form_class: 'btn btn-outline-primary' %>
+        form_class: "btn btn-outline-primary" %>
   </div>
 <% end %>

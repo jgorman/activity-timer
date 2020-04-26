@@ -2,7 +2,7 @@
 <% @page_header = project_links(@project) %>
 
 <% content_for :top_menu do %>
-  <%= link_to 'New project', new_client_project_path(@project.client) %>
+  <%= link_to "New project", new_client_project_path(@project.client) %>
 <% end %>
 
-<%= render 'form' %>
+<%= render "form" %>

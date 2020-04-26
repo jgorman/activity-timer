@@ -1,24 +1,24 @@
-<% @page_title = 'Timer'; @custom_page = true %>
+<% @page_title = "Timer"; @custom_page = true %>
 
 <div class="timer-page"
     data-controller="activity-name"
     data-activity-name-debug="off">
 
-  <%= render partial: 'project_select',
+  <%= render partial: "project_select",
             locals: { clients: @activity_report.clients } %>
 
   <div class="clock-space">
     <div class="top-menu">
       <div id="clock-face" class="clock-face">
-        <%= render 'clock_face' %>
+        <%= render "clock_face" %>
       </div>
     </div>
   </div>
 
-  <%= render 'layouts/alert_notices' %>
+  <%= render "layouts/alert_notices" %>
 
   <div id="activity-report">
-    <%= render 'activity_report' %>
+    <%= render "activity_report" %>
   </div>
 
 </div>

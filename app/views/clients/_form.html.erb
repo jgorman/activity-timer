@@ -1,4 +1,4 @@
-<%= form_with(model: @client, data: {controller: 'form'}) do |form| %>
+<%= form_with(model: @client, data: { controller: "form" }) do |form| %>
 
   <div class="row my-2">
     <div class="col-sm-auto">
@@ -12,24 +12,21 @@
   <% if @client.persisted? %>
 
     <input type="submit" value="Update client"
-                         class="btn btn-secondary my-1 mr-1" >
+                         class="btn btn-secondary my-1 mr-1">
 
-    <%= link_to 'Delete client', client_path(@client),
+    <%= link_to "Delete client", client_path(@client),
       method: :delete,
       data: { confirm: "Delete client #{@client.display_name}?" },
-      class: "btn btn-secondary my-1 mr-1"
-    %>
+      class: "btn btn-secondary my-1 mr-1" %>
 
-    <%= link_to 'Cancel', client_path(@client),
-      class: 'btn btn-secondary my-1 mr-1' %>
+    <%= link_to "Cancel", client_path(@client),
+      class: "btn btn-secondary my-1 mr-1" %>
 
   <% else %>
 
-    <input type="submit" value="Add client"
+    <input type="submit" value="Add client" class="btn btn-secondary my-1 mr-1">
 
-        class="btn btn-secondary my-1 mr-1" >
-
-    <%= link_to 'Cancel', clients_path, class: 'btn btn-secondary my-1 mr-1' %>
+    <%= link_to "Cancel", clients_path, class: "btn btn-secondary my-1 mr-1" %>
 
   <% end %>
 

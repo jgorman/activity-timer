@@ -41,6 +41,7 @@ gem "turbolinks_render"
 group :development, :test do
   # Call 'byebug' anywhere to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "erb_lint"
 end
 
 group :development do
@@ -51,7 +52,6 @@ group :development do
   gem "web-console", ">= 3.3.0"
 
   # npm install -g @prettier/plugin-ruby
-  # gem "erb_lint"
   gem "htmlbeautifier"
   gem "rubocop-rails_config"
 

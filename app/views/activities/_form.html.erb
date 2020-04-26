@@ -3,12 +3,12 @@
       url: (@activity.persisted? ?
         activity_path(@activity) :
         project_activities_path(@activity.project)),
-      data: { controller: 'form' }
+      data: { controller: "form" }
     ) do |form| %>
 
   <div class="row my-2">
     <div class="col-sm-3">
-      <%= form.label :start, 'Start time' %><br />
+      <%= form.label :start, "Start time" %><br>
     </div>
     <div class="col-sm-9">
       <%= form.datetime_field :start %>
@@ -17,23 +17,22 @@
 
   <div class="row my-2">
     <div class="col-sm-3">
-      <%= form.label :length, 'Length' %>
+      <%= form.label :length, "Length" %>
     </div>
     <div class="col-sm-9">
       <%= form.text_field :length,
-        value: (@activity.length.to_i > 0) ? seconds_to_hm(@activity.length) : '',
-        placeholder: 'H:MM', autofocus: true
-      %>
+        value: (@activity.length.to_i > 0) ? seconds_to_hm(@activity.length) : "",
+        placeholder: "H:MM", autofocus: true %>
     </div>
 
   </div>
 
   <div class="row my-2">
     <div class="col-sm-3">
-      <%= form.label :name, 'Activity' %><br />
+      <%= form.label :name, "Activity" %><br>
     </div>
     <div class="col-sm-9">
-      <%= form.text_field :name, class: 'w-75' %>
+      <%= form.text_field :name, class: "w-75" %>
     </div>
   </div>
 
@@ -43,11 +42,10 @@
 
         <input class="btn btn-secondary my-1 mr-1" type="submit" value="Update activity">
 
-        <%= link_to 'Delete activity', activity_path(@activity),
+        <%= link_to "Delete activity", activity_path(@activity),
           method: :delete,
           data: { confirm: "Delete #{@activity.name}?" },
-          class: 'btn btn-secondary my-1 mr-1'
-        %>
+          class: "btn btn-secondary my-1 mr-1" %>
 
       <% else %>
 
@@ -55,9 +53,8 @@
 
       <% end %>
 
-      <%= link_to 'Cancel', project_path(@activity.project),
-        class: 'btn btn-secondary my-1 mr-1'
-      %>
+      <%= link_to "Cancel", project_path(@activity.project),
+        class: "btn btn-secondary my-1 mr-1" %>
 
     </div>
   </div>

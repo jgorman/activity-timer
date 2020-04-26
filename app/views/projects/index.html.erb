@@ -1,21 +1,21 @@
-<% @page_title = 'Projects' %>
+<% @page_title = "Projects" %>
 
 <% if @projects.count == 0 %>
   <p>No projects.</p>
 <% else %>
 
-<table class="table">
-  <tr>
-    <th>Client - Project</th>
-  </tr>
-
-  <% @projects.each do |project| %>
+  <table class="table">
     <tr>
-      <td>
-        <%= project_links(project) %>
-      </td>
+      <th>Client - Project</th>
     </tr>
-  <% end %>
-</table>
+
+    <% @projects.each do |project| %>
+      <tr>
+        <td>
+          <%= project_links(project) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 
 <% end %>

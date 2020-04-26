@@ -1,7 +1,7 @@
 <div class="time-line">
   <div>
     <% if task.sessions.length > 1 %>
-      <% if line_type == 'task' %>
+      <% if line_type == "task" %>
         <div
           class="session-count"
           data-toggle="collapse"
@@ -14,10 +14,10 @@
     <% end %>
 
     <%= text_field_tag(:name, task.name,
-      'data-scope': "activity.name.#{line_type}",
-      'data-id': session.id,
-      class: 'name-input',
-      placeholder: 'Add description',
+      "data-scope": "activity.name.#{line_type}",
+      "data-id": session.id,
+      class: "name-input",
+      placeholder: "Add description",
       id: "#{line_type}-#{session.id}"
     ) %>
 
@@ -27,8 +27,7 @@
       data-target="#project-select"
       data-scope="activity.project.<%= line_type %>"
       data-activity_id="<%= session.id %>"
-      data-project_id="<%= task.project.id %>"
-    >
+      data-project_id="<%= task.project.id %>">
 
       <div
         class="project-dot"

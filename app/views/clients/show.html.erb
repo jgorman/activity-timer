@@ -2,13 +2,13 @@
 
 <% content_for :top_menu do %>
   <span>
-    <%= link_to 'All clients', clients_path %> |
-    <%= link_to 'Edit client', edit_client_path(@client) %> |
-    <%= link_to 'New project', new_client_project_path(@client) %>
+    <%= link_to "All clients", clients_path %> |
+    <%= link_to "Edit client", edit_client_path(@client) %> |
+    <%= link_to "New project", new_client_project_path(@client) %>
   </span>
 <% end %>
 
-<h5 class="mb-3"><%= (@client.projects.count == 0) ? 'No ' : '' %>Projects</h5>
+<h5 class="mb-3"><%= (@client.projects.count == 0) ? "No " : "" %>Projects</h5>
 
 <% @client.projects.order(updated_at: :desc).each do |project| %>
   <p><%= project_link(project) %></p>

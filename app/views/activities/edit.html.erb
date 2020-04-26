@@ -2,7 +2,7 @@
 <% @page_header = project_links(@activity.project) %>
 
 <% content_for :top_menu do %>
-  <%= link_to 'New activity', new_project_activity_path(@activity.project) %>
+  <%= link_to "New activity", new_project_activity_path(@activity.project) %>
 <% end %>
 
-<%= render 'form' %>
+<%= render "form" %>

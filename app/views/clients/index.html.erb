@@ -1,12 +1,12 @@
-<% @page_title = 'Clients' %>
+<% @page_title = "Clients" %>
 
 <% content_for :top_menu do %>
-  <%= link_to 'New client', new_client_path %>
+  <%= link_to "New client", new_client_path %>
 <% end %>
 
 <% @clients.each do |client| %>
   <%= link_to client.display_name, client_path(client),
-      class: 'd-block mb-2' %>
+      class: "d-block mb-2" %>
 <% end %>
 
 <% if @clients.count == 0 %>

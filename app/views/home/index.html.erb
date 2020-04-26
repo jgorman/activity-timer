@@ -1,8 +1,8 @@
-<% @page_title = 'Welcome to Activity Timer' %>
+<% @page_title = "Welcome to Activity Timer" %>
 
 <p>This is a personal activity timer built for the fun of it.</p>
 
-<% if current_user.try(:email) != 'guest@guest.com' %>
+<% if current_user.try(:email) != "guest@guest.com" %>
   <p>Check it out as the
     <%= link_to guest_home_index_path, method: :post, remote: true do %>
       <button class="btn btn-sm btn-outline-success">Guest Account</button>
@@ -19,8 +19,4 @@
   with anyone else who is logged in as the Guest Account user.
   At the end of the day, the sample data will be cleared out
   and recreated.
-</p>
-
-<p>
-master branch.
 </p>
