@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -7,12 +9,12 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     @c2 = clients(:c2)
   end
 
-  test 'index' do
+  test "index" do
     get clients_path
     assert_response :success
   end
 
-  test 'show my clients' do
+  test "show my clients" do
     get client_path(@c1)
     assert_response :success
 

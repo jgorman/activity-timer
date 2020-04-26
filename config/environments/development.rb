@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -17,13 +19,13 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join("tmp", "caching-dev.txt").exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -37,11 +39,11 @@ Rails.application.configure do
   cable_in_rails = true
   if cable_in_rails
     # Mount Action Cable inside rails.
-    config.action_cable.mount_path = '/cable'
+    config.action_cable.mount_path = "/cable"
   else
     # Run Action Cable outside rails.
     config.action_cable.mount_path = nil
-    config.action_cable.url = 'ws://localhost:28080'
+    config.action_cable.url = "ws://localhost:28080"
   end
 
   # Don't care if the mailer can't send.
@@ -49,7 +51,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

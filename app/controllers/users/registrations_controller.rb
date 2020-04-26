@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     if current_user.guest?
-      return alert_page('Guest users cannot update themselves.')
+      alert_page("Guest users cannot update themselves.")
     else
       super
     end
@@ -31,7 +31,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # DELETE /resource
   def destroy
     if current_user.guest?
-      return alert_page('Guest users cannot delete themselves.')
+      alert_page("Guest users cannot delete themselves.")
     else
       super
     end

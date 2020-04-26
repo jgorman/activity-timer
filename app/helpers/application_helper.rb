@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def escape(str)
     ERB::Util.html_escape(str)
   end
 
   def page_title
-    @page_title || 'Activity Timer'
+    @page_title || "Activity Timer"
   end
 
   def page_header
@@ -24,7 +26,7 @@ module ApplicationHelper
   end
 
   def project_links(project)
-    client_link(project.client) + ' - ' + project_link(project)
+    client_link(project.client) + " - " + project_link(project)
   end
 
   def client_link(client)
@@ -42,11 +44,11 @@ module ApplicationHelper
   end
 
   def datetime_to_s(datetime)
-    datetime.strftime('%Y-%m-%d %I:%M %p')
+    datetime.strftime("%Y-%m-%d %I:%M %p")
   end
 
   def datetime_to_time_s(datetime)
-    datetime.strftime('%I:%M %p')
+    datetime.strftime("%I:%M %p")
   end
 
   def seconds_to_parts(seconds)
@@ -59,21 +61,21 @@ module ApplicationHelper
 
   def seconds_to_hm(seconds)
     hh, mm = seconds_to_parts(seconds)
-    sprintf('%d:%02d', hh, mm)
+    sprintf("%d:%02d", hh, mm)
   end
 
   def seconds_to_hms(seconds)
     hh, mm, ss = seconds_to_parts(seconds)
-    sprintf('%d:%02d:%02d', hh, mm, ss)
+    sprintf("%d:%02d:%02d", hh, mm, ss)
   end
 
   def show_elapsed(start_time)
-    return '' unless start_time
+    return "" unless start_time
     seconds = Time.now - start_time
     hh = seconds / (60 * 60)
     mm = (seconds / 60) % 60
     ss = seconds % 60
-    sprintf('%d:%02d:%02d', hh, mm, ss)
+    sprintf("%d:%02d:%02d", hh, mm, ss)
   end
 
   module NoArgument; end
@@ -84,12 +86,12 @@ module ApplicationHelper
     when String
       model_name = model
     else
-      model_name = model.class.name.sub(/.*::/, '').underscore
+      model_name = model.class.name.sub(/.*::/, "").underscore
       value = model.send(field.to_sym) if value == NoArgument
     end
 
     if value == NoArgument
-      value = ''
+      value = ""
       if model = instance_variable_get("@#{model_name}")
         value = model.send(field.to_sym)
       end

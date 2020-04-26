@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ClientsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_client, only: %i[show edit update destroy]
@@ -21,7 +23,7 @@ class ClientsController < ApplicationController
     if @client.save
       redirect_to @client
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -29,7 +31,7 @@ class ClientsController < ApplicationController
     if @client.update(client_params)
       redirect_to @client
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -39,15 +41,14 @@ class ClientsController < ApplicationController
   end
 
   private
-
-  def set_client
-    @client = Client.find(params[:id])
-    unless @client.user_id == current_user.id
-      return alert_page('Unauthorized access.')
+    def set_client
+      @client = Client.find(params[:id])
+      unless @client.user_id == current_user.id
+        alert_page("Unauthorized access.")
+      end
     end
-  end
 
-  def client_params
-    params.require(:client).permit(:name)
-  end
+    def client_params
+      params.require(:client).permit(:name)
+    end
 end

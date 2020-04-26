@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TimerChannel < ApplicationCable::Channel
   def subscribed
     user_id = params[:user_id].to_i

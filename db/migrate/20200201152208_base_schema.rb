@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class BaseSchema < ActiveRecord::Migration[6.0]
   def self.up
-
     create_table "activities", force: :cascade do |t|
       t.bigint "user_id", null: false
       t.bigint "client_id", null: false
@@ -68,6 +69,5 @@ class BaseSchema < ActiveRecord::Migration[6.0]
       t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
       t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     end
-
   end
 end

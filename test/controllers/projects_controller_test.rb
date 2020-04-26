@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -9,12 +11,12 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     @p2 = projects(:p2)
   end
 
-  test 'index' do
+  test "index" do
     get projects_path
     assert_response :success
   end
 
-  test 'show my projects' do
+  test "show my projects" do
     get project_path(@p1)
     assert_response :success
 
@@ -22,7 +24,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to alert_path
   end
 
-  test 'create projects under my clients' do
+  test "create projects under my clients" do
     get new_client_project_path(@c1)
     assert_response :success
 

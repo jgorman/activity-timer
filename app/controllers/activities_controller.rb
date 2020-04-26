@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[new create]
@@ -24,7 +26,7 @@ class ActivitiesController < ApplicationController
     if @activity.save
       redirect_to @activity.project
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -33,7 +35,7 @@ class ActivitiesController < ApplicationController
     if @activity.update(activity_params)
       redirect_to @activity.project
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -44,26 +46,25 @@ class ActivitiesController < ApplicationController
   end
 
   private
-
-  def set_activity
-    @activity = Activity.find(params[:id])
-    unless @activity.user_id == current_user.id
-      return alert_page('Unauthorized access.')
+    def set_activity
+      @activity = Activity.find(params[:id])
+      unless @activity.user_id == current_user.id
+        alert_page("Unauthorized access.")
+      end
     end
-  end
 
-  def set_project
-    @project = Project.find(params[:project_id])
-    unless @project.user_id == current_user.id
-      return alert_page('Unauthorized access.')
+    def set_project
+      @project = Project.find(params[:project_id])
+      unless @project.user_id == current_user.id
+        alert_page("Unauthorized access.")
+      end
     end
-  end
 
-  def activity_params
-    perms = params.require(:activity).permit(:start, :length, :name)
-    if length_s = perms[:length]
-      perms[:length] = hm_to_seconds(length_s)
+    def activity_params
+      perms = params.require(:activity).permit(:start, :length, :name)
+      if length_s = perms[:length]
+        perms[:length] = hm_to_seconds(length_s)
+      end
+      perms
     end
-    perms
-  end
 end

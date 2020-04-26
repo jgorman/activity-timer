@@ -1,6 +1,8 @@
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
-require 'rails/test_help'
+# frozen_string_literal: true
+
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
+require "rails/test_help"
 
 class ActiveSupport::TestCase
   include Devise::Test::IntegrationHelpers
@@ -15,13 +17,13 @@ class ActiveSupport::TestCase
   def request_user
     return unless @request
     return unless env = @request.env
-    return unless warden = env['warden']
+    return unless warden = env["warden"]
     warden.user
   end
 
   def session_user_id
     return unless session
-    return unless key = session['warden.user.user.key']
+    return unless key = session["warden.user.user.key"]
     return unless key0 = key[0]
     key0[0]
   end

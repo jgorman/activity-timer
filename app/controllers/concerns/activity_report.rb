@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActivityReport
   Defaults = { show_days: 10 }
 
@@ -55,7 +57,7 @@ module ActivityReport
   def get_client_h
     client_h = {}
     Client.where(user_id: current_user.id).pluck(:id, :name).each do |id, name|
-      display_name = name.present? ? name : 'No client'
+      display_name = name.present? ? name : "No client"
       client_h[id] = AR_Client.new(id: id, name: display_name)
     end
     client_h
@@ -71,8 +73,8 @@ module ActivityReport
     )
       .each do |id, client_id, name, color|
       if client = client_h[client_id]
-        display_name = name.present? ? name : 'No project'
-        hex_color = sprintf('#%06x', color)
+        display_name = name.present? ? name : "No project"
+        hex_color = sprintf("#%06x", color)
         project =
           AR_Project.new(
             id: id, client: client, name: display_name, color: hex_color
@@ -88,18 +90,18 @@ module ActivityReport
     first_day = Date.today.beginning_of_day.advance(days: -@config[:show_days])
 
     acts =
-      Activity.where('user_id = ? and start >= ?', current_user.id, first_day)
+      Activity.where("user_id = ? and start >= ?", current_user.id, first_day)
         .pluck(:id, :start, :length, :project_id, :name)
         .to_a
 
     more =
-      Activity.where('user_id = ? and start < ?', current_user.id, first_day)
+      Activity.where("user_id = ? and start < ?", current_user.id, first_day)
         .any?
 
     # Gather the activities by date, focus.
     raw_days = {}
     acts.each do |act|
-      id, start, length, project_id, name = act
+      _id, start, _length, project_id, name = act
       date = start.to_date
       task_key = [project_id, name]
 
@@ -158,11 +160,11 @@ module ActivityReport
 
       date_s =
         if date == Date.current
-          'Today'
+          "Today"
         elsif date == Date.current - 1
-          'Yesterday'
+          "Yesterday"
         else
-          date.strftime('%a, %-d %b')
+          date.strftime("%a, %-d %b")
         end
 
       days << Day.new(date: date_s, length: day_length, tasks: tasks)

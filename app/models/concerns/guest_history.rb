@@ -1,13 +1,15 @@
-require 'faker'
+# frozen_string_literal: true
+
+require "faker"
 
 module GuestHistory
   Defaults = {
     guest: {
-      email: 'guest@guest.com',
-      first_name: 'Guest',
-      last_name: 'Account',
-      role_s: 'guest',
-      password: 'guest123'
+      email: "guest@guest.com",
+      first_name: "Guest",
+      last_name: "Account",
+      role_s: "guest",
+      password: "guest123"
     },
     clients: 5,
     projects_per_client: 5,
@@ -21,7 +23,7 @@ module GuestHistory
     @config = Defaults.deep_merge(config)
     recreate_guest
     create_clients
-    Time.use_zone('America/Halifax') { create_activities }
+    Time.use_zone("America/Halifax") { create_activities }
   end
 
   def recreate_guest
@@ -71,16 +73,15 @@ module GuestHistory
           name = Faker::Marketing.buzzwords
         end
         length = (rand(23) + 1) * 5
-        activity =
-          Activity.new(
-            user: @guest,
-            client: client,
-            project: project,
-            start: start,
-            length: length * 60,
-            name: name
-          )
-            .save!
+        Activity.new(
+          user: @guest,
+          client: client,
+          project: project,
+          start: start,
+          length: length * 60,
+          name: name
+        )
+          .save!
         start = start.advance(minutes: length)
       end
     end

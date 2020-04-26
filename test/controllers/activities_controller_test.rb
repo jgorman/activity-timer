@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class ActivitiesControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -9,12 +11,12 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
     @a2 = activities(:a2)
   end
 
-  test 'index' do
+  test "index" do
     get projects_path
     assert_response :success
   end
 
-  test 'only my activities' do
+  test "only my activities" do
     get edit_activity_path(@a1)
     assert_response :success
 
@@ -22,7 +24,7 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to alert_path
   end
 
-  test 'create activities under my projects' do
+  test "create activities under my projects" do
     get new_project_activity_path(@p1)
     assert_response :success
 

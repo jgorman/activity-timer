@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HomeController < ApplicationController
   def index; end
 
@@ -11,7 +13,7 @@ class HomeController < ApplicationController
       flash[:reload_page] = true
       redirect_to timer_path
     else
-      alert_page('No guest user available now. Sorry.')
+      alert_page("No guest user available now. Sorry.")
     end
   end
 end

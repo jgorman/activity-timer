@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TimerValidator < ActiveModel::Validator; end
 
 class Timer < ApplicationRecord
@@ -15,7 +17,7 @@ end
 class TimerValidator < ActiveModel::Validator
   def validate(timer)
     unless timer.project.user == timer.user
-      timer.errors[:project] << 'timer.project.user != timer.user'
+      timer.errors[:project] << "timer.project.user != timer.user"
     end
   end
 end

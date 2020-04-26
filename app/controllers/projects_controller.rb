@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_client, only: %i[new create]
@@ -30,7 +32,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to @project
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -39,7 +41,7 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       redirect_to @project
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -50,28 +52,27 @@ class ProjectsController < ApplicationController
   end
 
   private
-
-  def set_client
-    @client = Client.find(params[:client_id])
-    unless @client.user_id == current_user.id
-      return alert_page('Unauthorized access.')
+    def set_client
+      @client = Client.find(params[:client_id])
+      unless @client.user_id == current_user.id
+        alert_page("Unauthorized access.")
+      end
     end
-  end
 
-  def set_project
-    @project = Project.find(params[:id])
-    unless @project.user_id == current_user.id
-      return alert_page('Unauthorized access.')
+    def set_project
+      @project = Project.find(params[:id])
+      unless @project.user_id == current_user.id
+        alert_page("Unauthorized access.")
+      end
     end
-  end
 
-  def project_params
-    params.require(:project).permit(:name)
+    def project_params
+      params.require(:project).permit(:name)
 
-    perms = params.require(:project).permit(:name, :color)
-    if color_s = perms[:color]
-      perms[:color] = color_s.gsub(/\H/, '').to_i(16)
+      perms = params.require(:project).permit(:name, :color)
+      if color_s = perms[:color]
+        perms[:color] = color_s.gsub(/\H/, "").to_i(16)
+      end
+      perms
     end
-    perms
-  end
 end

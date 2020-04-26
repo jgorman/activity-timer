@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   extend GuestHistory
 
@@ -22,15 +24,15 @@ class User < ApplicationRecord
   validates :role_s, presence: true
 
   def admin?
-    role_s == 'admin'
+    role_s == "admin"
   end
 
   def user?
-    role_s == 'user'
+    role_s == "user"
   end
 
   def guest?
-    role_s == 'guest'
+    role_s == "guest"
   end
 
   def has_role?(role)
@@ -40,12 +42,11 @@ class User < ApplicationRecord
   def display_name
     return first_name unless first_name.empty?
     return last_name unless last_name.empty?
-    email.sub(/@.*/, '')
+    email.sub(/@.*/, "")
   end
 
   private
-
-  before_validation {
-    self[:role_s] = 'user' if !persisted? && role_s.blank?
-  }
+    before_validation {
+      self[:role_s] = "user" if !persisted? && role_s.blank?
+    }
 end

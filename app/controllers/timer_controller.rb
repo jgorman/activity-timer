@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TimerController < ApplicationController
   include ActivityReport
   before_action :authenticate_user!
@@ -72,7 +74,7 @@ class TimerController < ApplicationController
   def replace_clock
     @timer = Timer.find_by_user_id(current_user.id) || Timer.new
     # puts "===== replace_clock #{@timer.inspect}"
-    respond_to { |format| format.js { render 'replace_clock' } }
+    respond_to { |format| format.js { render "replace_clock" } }
   end
 
   # timer_replace_page_path: GET /timer/replace_page
@@ -80,7 +82,7 @@ class TimerController < ApplicationController
     # Redisplay the page with the updated report.
     @timer = Timer.find_by_user_id(current_user.id) || Timer.new
     @activity_report = activity_report
-    respond_to { |format| format.js { render 'replace_page' } }
+    respond_to { |format| format.js { render "replace_page" } }
   end
 
   #####
@@ -92,13 +94,13 @@ class TimerController < ApplicationController
   #
   def load_more
     @activity_report = activity_report(show_days: params[:show_days].to_i)
-    respond_to { |format| format.js { render 'replace_activity' } }
+    respond_to { |format| format.js { render "replace_activity" } }
   end
 
   # timer_name_path: POST /timer/name
   def name
     return unless timer = current_user.timer
-    timer.name = params[:name] || ''
+    timer.name = params[:name] || ""
     timer.save!
     send_timer(timer)
   end
@@ -120,39 +122,38 @@ class TimerController < ApplicationController
     return unless activity = Activity.find_by_id(id)
     redisplay = true
 
-    if scope.include?('activity.name.task')
+    if scope.include?("activity.name.task")
       # Update all activity names with the same project, date and name.
       return unless new_name
       Activity.where(
-        'project_id = ? and ? <= start and start < ? and name = ?',
+        "project_id = ? and ? <= start and start < ? and name = ?",
         activity.project_id,
         activity.start.beginning_of_day,
         activity.start.end_of_day,
         activity.name
       )
         .update_all(name: new_name)
-    elsif scope.include?('activity.name.session')
+    elsif scope.include?("activity.name.session")
       # Update a single activity name.
       return unless new_name
       activity.name = new_name
       activity.save!
-    elsif scope.include?('activity.project.task')
+    elsif scope.include?("activity.project.task")
       # Update all activity projects with the same project, date and name.
       return unless new_project_id
       return unless new_project = Project.find_by_id(new_project_id)
-      start = activity.start
 
       Activity.where(
-        'project_id = ? and ? <= start and start < ? and name = ?',
+        "project_id = ? and ? <= start and start < ? and name = ?",
         activity.project_id,
         activity.start.beginning_of_day,
         activity.start.end_of_day,
         activity.name
       )
         .update_all(
-        client_id: new_project.client_id, project_id: new_project_id
+          client_id: new_project.client_id, project_id: new_project_id
       )
-    elsif scope.include?('activity.project.session')
+    elsif scope.include?("activity.project.session")
       # Update a single activity project_id.
       return unless new_project_id
       return unless new_project = Project.find_by_id(new_project_id)
@@ -170,17 +171,16 @@ class TimerController < ApplicationController
     current_user.timer.destroy
     send_timer
     @timer = Timer.new
-    respond_to { |format| format.js { render 'replace_clock' } }
+    respond_to { |format| format.js { render "replace_clock" } }
   end
 
   private
+    def send_timer(timer = nil)
+      # puts "@@@@@ sending the timer(#{timer.inspect})"
+      TimerChannel.broadcast_to(current_user.id, timer)
+    end
 
-  def send_timer(timer = nil)
-    # puts "@@@@@ sending the timer(#{timer.inspect})"
-    TimerChannel.broadcast_to(current_user.id, timer)
-  end
-
-  def timer_params
-    params.require(:timer).permit(:name, :project_id)
-  end
+    def timer_params
+      params.require(:timer).permit(:name, :project_id)
+    end
 end

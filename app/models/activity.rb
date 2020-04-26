@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActivityValidator < ActiveModel::Validator; end
 
 class Activity < ApplicationRecord
@@ -14,19 +16,18 @@ class Activity < ApplicationRecord
   validates_with ActivityValidator
 
   private
-
-  # Sort projects by latest activity.
-  after_create { project.touch }
+    # Sort projects by latest activity.
+    after_create { project.touch }
 end
 
 class ActivityValidator < ActiveModel::Validator
   def validate(activity)
     unless activity.client.user == activity.user
-      activity.errors[:client] << 'activity.client.user != activity.user'
+      activity.errors[:client] << "activity.client.user != activity.user"
     end
 
     unless activity.project.client == activity.client
-      activity.errors[:project] << 'activity.project.client != activity.client'
+      activity.errors[:project] << "activity.project.client != activity.client"
     end
   end
 end

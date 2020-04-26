@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_permissions
@@ -32,7 +34,7 @@ class Admin::UsersController < ApplicationController
     if @user.save
       redirect_to @user
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -42,7 +44,7 @@ class Admin::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to [:admin, @user]
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -54,12 +56,11 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+    def check_permissions
+      return alert_page("Unauthorized access.") unless current_user.admin?
+    end
 
-  def check_permissions
-    return alert_page('Unauthorized access.') unless current_user.admin?
-  end
-
-  def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :role_s)
-  end
+    def user_params
+      params.require(:user).permit(:email, :first_name, :last_name, :role_s)
+    end
 end
