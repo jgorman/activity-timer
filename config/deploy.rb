@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.2"
+lock "~> 3.13"
 
 # Override these as necessary in config/deploy/<stage>.rb
 set :application, "activity-timer"
