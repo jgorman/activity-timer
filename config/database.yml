@@ -1,7 +1,5 @@
-<%
-  adapter = ENV.fetch("DB_ADAPTER") || 'postgresql'
-  encoding = (adapter == 'postgresql') ? 'unicode' : 'utf8mb4'
-%>
+<% adapter = ENV.fetch("DB_ADAPTER") { 'postgresql' }
+   encoding = (adapter == 'postgresql') ? 'unicode' : 'utf8mb4' %>
 
 default: &default
   encoding: <%= encoding %>

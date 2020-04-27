@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'test_helper'
-require 'better_html/test_helper/safe_erb_tester'
+require "test_helper"
+require "better_html/test_helper/safe_erb_tester"
 
 class ErbSafetyTest < ActiveSupport::TestCase
   include BetterHtml::TestHelper::SafeErbTester
   ERB_GLOB = Rails.root.join(
-    'app', 'views', '**', '{*.htm,*.html,*.htm.erb,*.html.erb,*.html+*.erb}'
+    "app", "views", "**", "{*.htm,*.html,*.htm.erb,*.html.erb,*.html+*.erb}"
   )
 
   Dir[ERB_GLOB].each do |filename|

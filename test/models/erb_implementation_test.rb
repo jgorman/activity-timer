@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class ErbImplementationTest < ActiveSupport::TestCase
-
   ERB_GLOB = Rails.root.join(
-    'app', 'views', '**', '{*.htm,*.html,*.htm.erb,*.html.erb,*.html+*.erb}'
+    "app", "views", "**", "{*.htm,*.html,*.htm.erb,*.html.erb,*.html+*.erb}"
   )
 
   Dir[ERB_GLOB].each do |filename|
