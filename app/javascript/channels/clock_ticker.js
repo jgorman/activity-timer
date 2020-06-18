@@ -1,5 +1,5 @@
-import Rails from '@rails/ujs'
-import { sprintf } from 'sprintf-js'
+import Rails from "@rails/ujs"
+import { sprintf } from "sprintf-js"
 
 const tick_interval = 1000
 
@@ -8,7 +8,7 @@ class ClockTicker {
 
   constructor() {
     const now = new Date()
-    this.created = sprintf('%d:%02d', now.getHours(), now.getMinutes())
+    this.created = sprintf("%d:%02d", now.getHours(), now.getMinutes())
     // console.log(`CLOCK(${this.created}) created`)
     setInterval(this.ticker, tick_interval)
   }
@@ -17,7 +17,7 @@ class ClockTicker {
     if (this.timer) this.show_time()
   }
 
-  new_timer = timer => {
+  new_timer = (timer) => {
     /*
     console.log(`CLOCK(${this.created}) new_timer()`, {
       old: this.timer,
@@ -67,13 +67,13 @@ class ClockTicker {
   }
 
   replace_clock = () => {
-    const url = window.RailsUrl('/timer/replace_clock.js')
-    Rails.ajax({ type: 'GET', url })
+    const url = window.RailsUrl("/timer/replace_clock.js")
+    Rails.ajax({ type: "GET", url })
   }
 
   replace_page = () => {
-    const url = window.RailsUrl('/timer/replace_page.js')
-    Rails.ajax({ type: 'GET', url })
+    const url = window.RailsUrl("/timer/replace_page.js")
+    Rails.ajax({ type: "GET", url })
   }
 
   show_time = () => {
@@ -81,23 +81,23 @@ class ClockTicker {
     const elapsed = Date.now() - this.timer.start_t
     const elapsed_s = this.format_ms(elapsed)
     document.title = elapsed_s
-    $('#nav-timer-link').html(elapsed_s)
-    $('#ticker').html(elapsed_s)
+    $("#nav-timer-link").html(elapsed_s)
+    $("#ticker").html(elapsed_s)
   }
 
   erase_time = () => {
     // console.log('~~~~~ erase_time')
-    document.title = 'Timer'
-    $('#nav-timer-link').html('Timer')
-    $('#ticker').html('')
+    document.title = "Timer"
+    $("#nav-timer-link").html("Timer")
+    $("#ticker").html("")
   }
 
-  format_ms = ms => {
+  format_ms = (ms) => {
     const seconds = ms / 1000
     const hh = seconds / (60 * 60)
     const mm = (seconds / 60) % 60
     const ss = seconds % 60
-    return sprintf('%d:%02d:%02d', hh, mm, ss)
+    return sprintf("%d:%02d:%02d", hh, mm, ss)
   }
 }
 

@@ -1,58 +1,58 @@
-import { Controller } from 'stimulus'
-import Rails from '@rails/ujs'
+import { Controller } from "stimulus"
+import Rails from "@rails/ujs"
 
 let sc_id = 0
 
 class ActivityName extends Controller {
   initialize() {
     this.sc_id = ++sc_id
-    if (this.data.has('debug')) {
-      const debug = this.data.get('debug').toLowerCase()
-      this.debugOn = debug === 'on' || debug === 'true' || debug === '1'
+    if (this.data.has("debug")) {
+      const debug = this.data.get("debug").toLowerCase()
+      this.debugOn = debug === "on" || debug === "true" || debug === "1"
     }
-    this.debug('initialize', { this: this })
+    this.debug("initialize", { this: this })
   }
 
   connect() {
-    this.debug('connect', { this: this })
-    this.element.addEventListener('change', this.saveName, true)
+    this.debug("connect", { this: this })
+    this.element.addEventListener("change", this.saveName, true)
   }
 
   disconnect() {
-    this.debug('disconnect', { this: this })
-    this.element.removeEventListener('change', this.saveName)
+    this.debug("disconnect", { this: this })
+    this.element.removeEventListener("change", this.saveName)
   }
 
   // Save name changes.
-  saveName = event => {
+  saveName = (event) => {
     const input = event.target
     const name = input.value
     const ds = input.dataset
     const scope = ds.scope
-    this.debug('saveName', { ds, name, scope })
+    this.debug("saveName", { ds, name, scope })
     if (!scope) return
 
-    if (scope.includes('activity.name')) {
+    if (scope.includes("activity.name")) {
       const id = ds.id
       if (!id) return
       const url = window.RailsUrl(`/timer/activity/${id}`)
-      Rails.ajax({ type: 'PATCH', url, data: $.param({ scope, name }) })
-    } else if (scope.includes('timer.name')) {
+      Rails.ajax({ type: "PATCH", url, data: $.param({ scope, name }) })
+    } else if (scope.includes("timer.name")) {
       if (!ds.timer_id) return
-      const url = window.RailsUrl('/timer/name')
-      Rails.ajax({ type: 'POST', url, data: $.param({ name }) })
+      const url = window.RailsUrl("/timer/name")
+      Rails.ajax({ type: "POST", url, data: $.param({ name }) })
     }
   }
 
-  debug = (msg, extra = '') => {
+  debug = (msg, extra = "") => {
     if (!this.debugOn) return
     this.log(msg, extra)
   }
 
-  log = (msg, extra = '') => {
+  log = (msg, extra = "") => {
     const id = this.element.id
     const pad = msg.length < 10 ? 10 - msg.length : 0
-    console.log('AN', this.sc_id || 0, msg, ' '.repeat(pad), id, extra)
+    console.log("AN", this.sc_id || 0, msg, " ".repeat(pad), id, extra)
   }
 }
 

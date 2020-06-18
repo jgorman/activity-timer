@@ -9,10 +9,10 @@
  * See app/controllers/application_controller.rb
  */
 
-var jstz = require('jstimezonedetect')
-var Cookies = require('js-cookie')
+var jstz = require("jstimezonedetect")
+var Cookies = require("js-cookie")
 
-$(function() {
+$(function () {
   var tz = jstz.determine()
-  Cookies.set('timezone', tz.name(), { path: '/' })
+  Cookies.set("timezone", tz.name(), { path: "/" })
 })
