@@ -3,10 +3,6 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  get "/alert", to: "home#alert"
-  get "/console", to: "home#console"
-  get "/env", to: "home#env"
-
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   # TODO Convert these to a nice syntax.
@@ -21,6 +17,8 @@ Rails.application.routes.draw do
   get "/timer/replace_clock", to: "timer#replace_clock"
   patch "/timer/activity/:id", to: "timer#activity", as: "timer_activity"
 
+  get "/alert", to: "home#alert"
+  get "/clock", to: "home#clock"
   resources :home, only: [] do
     collection do
       post :guest
