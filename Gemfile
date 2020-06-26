@@ -6,11 +6,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 6.0.3"
+gem "rails", "~> 6.0.3", ">= 6.0.3.2"
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
-# Use mysql as the database for Active Record
-# gem "mysql2", ">= 0.4.4"
 # Use Puma as the app server
 gem "puma", "~> 4.1"
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -39,7 +37,6 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
 
   gem "erb_lint"
-  # gem "parser", "~> 2.6.5"
 end
 
 group :development do
