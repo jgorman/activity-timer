@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'hello_world', to: 'hello_world#index'
   root "home#index"
 
   devise_for :users, controllers: { registrations: "users/registrations" }

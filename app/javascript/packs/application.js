@@ -41,3 +41,16 @@ require.context("../images", false, /\.(png|svg|jpg)$/i)
 require("../stylesheets")
 
 require("../channels")
+
+/*
+ * React on Rails
+ */
+
+import ReactOnRails from "react-on-rails"
+
+import YohWorld from "../components/YohWorld"
+
+// This is how react_on_rails can see the YohWorld in the browser.
+ReactOnRails.register({
+  YohWorld,
+})
