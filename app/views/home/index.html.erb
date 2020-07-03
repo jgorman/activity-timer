@@ -21,4 +21,11 @@
   and recreated.
 </p>
 
-<%= react_component("YohWorld", props: { name: "friend" }, prerender: false) %>
+<p>
+Here is the
+<a href="https://johngorman.io/darkest-night-clock/">Darkest Night Clock</a>
+React component running in Rails using the react_on_rails gem.
+</p>
+
+  <%= react_component("Clock", props: { maxWidth: "400px", height: "133px" },
+                     prerender: false) %>

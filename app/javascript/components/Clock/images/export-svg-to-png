@@ -1,0 +1,8 @@
+# brew install batik
+
+batik-rasterizer -dpi 2048 -h 192 -w 192 clock.svg \
+  -d ../../public/clock-192x192.png
+
+batik-rasterizer -dpi 2048 -h 512 -w 512 clock.svg \
+  -d ../../public/clock-512x512.png
+

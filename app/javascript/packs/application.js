@@ -47,10 +47,14 @@ require("../channels")
  */
 
 import ReactOnRails from "react-on-rails"
+ReactOnRails.setOptions({
+  traceTurbolinks: true,
+})
 
+import Clock from "../components/Clock"
 import YohWorld from "../components/YohWorld"
 
-// This is how react_on_rails can see the YohWorld in the browser.
 ReactOnRails.register({
+  Clock,
   YohWorld,
 })
