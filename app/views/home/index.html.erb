@@ -3,7 +3,7 @@
 <p>This is a personal activity timer built for the fun of it.</p>
 
 <% if current_user.try(:email) != "guest@guest.com" %>
-  <p>Check it out as the
+  <p>Check it out as the shared
     <%= link_to guest_home_index_path, method: :post, remote: true do %>
       <button class="btn btn-sm btn-outline-success">Guest Account</button>
     <% end %>

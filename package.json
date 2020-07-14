@@ -17,7 +17,7 @@
     "rails-form-validation": "^1.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-on-rails": "12.0.0-beta.2",
+    "react-on-rails": "^12.0",
     "sprintf-js": "^1.1.2",
     "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0"

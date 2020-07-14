@@ -1,0 +1,1 @@
+web: rm -rf public/packs/* && RAILS_ENV=production bundle exec rake assets:precompile && RAILS_SERVE_STATIC_FILES=1 bundle exec rails s -e production -p 3000

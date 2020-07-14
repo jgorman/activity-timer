@@ -12,7 +12,7 @@ gem "pg", ">= 0.18", "< 2.0"
 # Use Puma as the app server
 gem "puma", "~> 4.1"
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem "webpacker", "~> 4.0"
+gem "webpacker", "~> 5.0"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -28,7 +28,7 @@ gem "redis", "~> 4.0"
 gem "devise"
 gem "envyable"
 gem "faker"
-gem "react_on_rails", "12.0.0.pre.beta.1"
+gem "react_on_rails", "~> 12.0"
 
 # https://www.jorgemanrubia.com/2018/06/20/rails-rendering-with-turbolinks/
 gem "turbolinks_render"
