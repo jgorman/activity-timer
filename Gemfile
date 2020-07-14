@@ -26,7 +26,7 @@ gem "redis", "~> 4.0"
 # gem 'image_processing', '~> 1.2'
 
 gem "devise"
-gem "envyable"
+gem "dotenv-rails"
 gem "faker"
 gem "react_on_rails", "~> 12.0"
 

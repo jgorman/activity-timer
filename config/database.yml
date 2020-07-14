@@ -17,5 +17,4 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV.fetch("DATABASE_URL") {
-      "#{adapter}://rails:rails123@localhost/activity_timer_prod" } %>
+  url: <%= ENV.fetch("DATABASE_URL") {} %>

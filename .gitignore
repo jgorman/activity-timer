@@ -35,4 +35,5 @@ yarn-debug.log*
 dump.rdb
 
 # Don't check in credentials 
-config/env.yml
+.env
+.env.production

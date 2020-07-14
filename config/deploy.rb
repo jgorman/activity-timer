@@ -30,13 +30,13 @@ append :linked_dirs,
        "public/uploads"
 
 # https://github.com/capistrano/rails
-append :linked_files, "config/master.key"
+append :linked_files, ".env"
 namespace :deploy do
   namespace :check do
-    before :linked_files, :set_master_key do
+    before :linked_files, :set_dotenv do
       on roles(:app), in: :sequence, wait: 10 do
-        unless test("[ -f #{shared_path}/config/master.key ]")
-          upload! "config/master.key", "#{shared_path}/config/master.key"
+        unless test("[ -f #{shared_path}/.env]")
+          upload! ".env", "#{shared_path}/.env"
         end
       end
     end
@@ -44,13 +44,13 @@ namespace :deploy do
 end
 
 # https://github.com/capistrano/rails
-append :linked_files, "config/env.yml"
+append :linked_files, ".env.production"
 namespace :deploy do
   namespace :check do
-    before :linked_files, :set_env_yml do
+    before :linked_files, :set_dotenv_production do
       on roles(:app), in: :sequence, wait: 10 do
-        unless test("[ -f #{shared_path}/config/env.yml ]")
-          upload! "config/env.yml", "#{shared_path}/config/env.yml"
+        unless test("[ -f #{shared_path}/.env.production]")
+          upload! ".env.production", "#{shared_path}/.env.production"
         end
       end
     end
