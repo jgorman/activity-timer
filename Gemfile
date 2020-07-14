@@ -29,6 +29,7 @@ gem "devise"
 gem "dotenv-rails"
 gem "faker"
 gem "react_on_rails", "~> 12.0"
+gem "recaptcha"
 
 # https://www.jorgemanrubia.com/2018/06/20/rails-rendering-with-turbolinks/
 gem "turbolinks_render"

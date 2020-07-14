@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-creds = Rails.application.credentials
-ENV["RECAPTCHA_SITE_KEY"] = creds.dig(:recaptcha, :site_key)
-ENV["RECAPTCHA_SECRET_KEY"] = creds.dig(:recaptcha, :secret_key)
+config = Rails.application.credentials.config
+ENV["RECAPTCHA_SITE_KEY"] = config.dig(:recaptcha, :site_key)
+ENV["RECAPTCHA_SECRET_KEY"] = config.dig(:recaptcha, :secret_key)
 

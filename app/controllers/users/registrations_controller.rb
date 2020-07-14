@@ -10,9 +10,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    if verify_recaptcha
+      super
+    else
+      flash[:alert] = "Verify that you are human."
+      redirect_to new_user_registration_path
+    end
+  end
 
   # GET /resource/edit
   # def edit
